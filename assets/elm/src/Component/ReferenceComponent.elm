@@ -11,6 +11,7 @@ import Update exposing (..)
 import Component.RadioComponent exposing (..)
 import Component.SearchComponent exposing (..)
 import Component.PopupComponent exposing (..)
+import Component.FinishComponent exposing (..)
 
 
 referenceComponent : Model -> Html Msg
@@ -18,7 +19,11 @@ referenceComponent model =
   case model.applicationStatus of 
       Start ->
         div [ class "reference__tool__start" ]
-            [ popupComponent model ]
+            [ popupNavbar model
+            , popupLeftbar model
+            , popupMiddlebar model
+            , popupBottombar model
+            ]
   
       Stop -> 
         div [ class "reference__tool__stop"]
@@ -28,18 +33,20 @@ referenceComponent model =
             , submitComponent
             ]
 
+      Finish -> 
+        div [ class "reference__tool__finish"]
+            [ displayDrawnImages model ]
+
       Loading ->
         div [ class "reference__tool__loading"]
             [ text "Fetching images, please wait" ]
 
 
 
-
-
 submitComponent : Html Msg 
 submitComponent = 
   div [] 
-      [ button [ onClick (ChangeStatus Start) ] [ text "hellothere" ]]
+      [ button [ onClick (ChangeStatus Start) ] [ text "Start" ]]
 
 
 

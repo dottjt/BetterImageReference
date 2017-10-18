@@ -17,10 +17,20 @@
 .reference__tool__start {
     width: 100vw;
     height: 100vh; 
-    position: fixed;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+
+    // position: fixed;
     background: white; // put an opacity in, perhaps. 
+    border: 1px solid black;
 
     .popup__navbar {
+        grid-column: 1;
+        grid-row: 1;
+    
+    border: 1px solid black;
 
         .draw__button {
             
@@ -29,16 +39,27 @@
     }
 
     .popup__leftbar {
-
+        border: 1px solid black;
+        background: green;
     }
 
     .popup__middlebar {
+        grid-column: 1;
+        grid-row: 1;
+        background: green;
+        
+        border: 1px solid black;
+        
         .image__container {
             
         }
     }
 
     .popup__bottombar {
+        grid-column: 1;
+        grid-row: 1;
+       
+        border: 1px solid black;
         
         .skip__pause__stop__container {
             
@@ -65,5 +86,9 @@
 }
 
 .reference__tool__loading {
+    
+}
+
+.reference__tool__finish {
     
 }

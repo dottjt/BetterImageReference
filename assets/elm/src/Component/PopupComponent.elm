@@ -8,10 +8,6 @@ import Msg exposing (..)
 import Model exposing (..)
 import Update exposing (..)
 
-popupComponent : Model -> Html Msg
-popupComponent model =
-    div [] []
-
 
 popupNavbar : Model -> Html Msg
 popupNavbar model =

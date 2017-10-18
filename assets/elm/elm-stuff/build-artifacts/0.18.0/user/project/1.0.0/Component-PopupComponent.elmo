@@ -251,9 +251,3 @@ var _user$project$Component_PopupComponent$popupNavbar = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Component_PopupComponent$popupComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{ctor: '[]'});
-};

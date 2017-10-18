@@ -13,7 +13,7 @@ var _user$project$Component_ReferenceComponent$submitComponent = A2(
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('hellothere'),
+				_0: _elm_lang$html$Html$text('Start'),
 				_1: {ctor: '[]'}
 			}),
 		_1: {ctor: '[]'}
@@ -31,8 +31,20 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_PopupComponent$popupComponent(model),
-					_1: {ctor: '[]'}
+					_0: _user$project$Component_PopupComponent$popupNavbar(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_PopupComponent$popupLeftbar(model),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Component_PopupComponent$popupBottombar(model),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
 				});
 		case 'Stop':
 			return A2(
@@ -59,6 +71,15 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 						}
 					}
 				});
+		case 'Finish':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__finish'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'});
 		default:
 			return A2(
 				_elm_lang$html$Html$div,

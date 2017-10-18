@@ -13270,9 +13270,10 @@ var _user$project$Model$Model = function (a) {
 		};
 	};
 };
-var _user$project$Model$Start = {ctor: 'Start'};
-var _user$project$Model$Loading = {ctor: 'Loading'};
+var _user$project$Model$Finish = {ctor: 'Finish'};
 var _user$project$Model$Stop = {ctor: 'Stop'};
+var _user$project$Model$Loading = {ctor: 'Loading'};
+var _user$project$Model$Start = {ctor: 'Start'};
 var _user$project$Model$Resume = {ctor: 'Resume'};
 var _user$project$Model$Pause = {ctor: 'Pause'};
 var _user$project$Model$Draw = {ctor: 'Draw'};
@@ -13772,27 +13773,12 @@ var _user$project$Component_PopupComponent$popupNavbar = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Component_PopupComponent$popupComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{ctor: '[]'});
-};
 
 var _user$project$Component_RadioComponent$radio = F3(
 	function (value, isChecked, msg) {
 		return A2(
 			_elm_lang$html$Html$label,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$style(
-					{
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'padding', _1: '20px'},
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			},
+			{ctor: '[]'},
 			{
 				ctor: '::',
 				_0: A2(
@@ -13824,7 +13810,7 @@ var _user$project$Component_RadioComponent$radio = F3(
 	});
 var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
 	return A2(
-		_elm_lang$html$Html$fieldset,
+		_elm_lang$html$Html$form,
 		{ctor: '[]'},
 		{
 			ctor: '::',
@@ -13846,7 +13832,7 @@ var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (
 };
 var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
 	return A2(
-		_elm_lang$html$Html$fieldset,
+		_elm_lang$html$Html$form,
 		{ctor: '[]'},
 		{
 			ctor: '::',
@@ -14082,7 +14068,7 @@ var _user$project$Component_ReferenceComponent$submitComponent = A2(
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('hellothere'),
+				_0: _elm_lang$html$Html$text('Start'),
 				_1: {ctor: '[]'}
 			}),
 		_1: {ctor: '[]'}
@@ -14100,8 +14086,20 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_PopupComponent$popupComponent(model),
-					_1: {ctor: '[]'}
+					_0: _user$project$Component_PopupComponent$popupNavbar(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_PopupComponent$popupLeftbar(model),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Component_PopupComponent$popupBottombar(model),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
 				});
 		case 'Stop':
 			return A2(
@@ -14128,6 +14126,15 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 						}
 					}
 				});
+		case 'Finish':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__finish'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'});
 		default:
 			return A2(
 				_elm_lang$html$Html$div,
@@ -14231,11 +14238,11 @@ if (typeof _user$project$Command$main !== 'undefined') {
 }
 Elm['MainReferenceTool'] = Elm['MainReferenceTool'] || {};
 if (typeof _user$project$MainReferenceTool$main !== 'undefined') {
-    _user$project$MainReferenceTool$main(Elm['MainReferenceTool'], 'MainReferenceTool', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"Custom":[],"I60":[],"I120":[],"I30":[],"I90":[],"I45":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ChangeDrawStatus":["Model.DrawStatus"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$MainReferenceTool$main(Elm['MainReferenceTool'], 'MainReferenceTool', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"Custom":[],"I60":[],"I120":[],"I30":[],"I90":[],"I45":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ChangeDrawStatus":["Model.DrawStatus"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
 }
 Elm['MainSearch'] = Elm['MainSearch'] || {};
 if (typeof _user$project$MainSearch$main !== 'undefined') {
-    _user$project$MainSearch$main(Elm['MainSearch'], 'MainSearch', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"Custom":[],"I60":[],"I120":[],"I30":[],"I90":[],"I45":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ChangeDrawStatus":["Model.DrawStatus"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$MainSearch$main(Elm['MainSearch'], 'MainSearch', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"Custom":[],"I60":[],"I120":[],"I30":[],"I90":[],"I45":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ChangeDrawStatus":["Model.DrawStatus"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
 }
 Elm['Model'] = Elm['Model'] || {};
 if (typeof _user$project$Model$main !== 'undefined') {

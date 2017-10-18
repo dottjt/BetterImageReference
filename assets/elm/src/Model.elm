@@ -48,9 +48,10 @@ type alias CollectionImagesList =
 -- SUM TYPES - Application Status
 
 type Status
-  = Stop
+  = Start
   | Loading
-  | Start 
+  | Stop
+  | Finish 
 
 type PopupStatus 
   = Pause
