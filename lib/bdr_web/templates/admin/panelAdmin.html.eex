@@ -1,5 +1,7 @@
 <div class="container">
 
+
+
 <%= for blog <- @blog do %>
     <tr>
       <td><%= blog.name %></td>

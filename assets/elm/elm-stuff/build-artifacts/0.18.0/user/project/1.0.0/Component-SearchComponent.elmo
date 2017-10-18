@@ -1,3 +1,23 @@
+var _user$project$Component_SearchComponent$submitComponent = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Start'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
 var _user$project$Component_SearchComponent$searchInput = function (searchInputValue) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -72,15 +92,27 @@ var _user$project$Component_SearchComponent$searchTile = function (collection) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$h4,
+					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('search__title'),
+						_0: _elm_lang$html$Html_Attributes$href(
+							A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(collection.display_name),
+						_0: A2(
+							_elm_lang$html$Html$h4,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('search__title'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(collection.display_name),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -150,7 +182,11 @@ var _user$project$Component_SearchComponent$searchComponent = function (model) {
 var _user$project$Component_SearchComponent$selectionComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('selectionComponent'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),

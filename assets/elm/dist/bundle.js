@@ -13073,7 +13073,16 @@ var _elm_lang$http$Http$StringPart = F2(
 var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
 
 var _user$project$Model$searchInputEncoder = function (searchInput) {
-	return _elm_lang$core$Json_Encode$string(searchInput);
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'search_input',
+				_1: _elm_lang$core$Json_Encode$string(searchInput)
+			},
+			_1: {ctor: '[]'}
+		});
 };
 var _user$project$Model$imageEncoder = function (image) {
 	return _elm_lang$core$Json_Encode$object(
@@ -13399,7 +13408,7 @@ var _user$project$Helper_HttpHelper$httpDelete = F4(
 var _user$project$Command$startAppFetchImages = function (collectionList) {
 	return A5(
 		_user$project$Helper_HttpHelper$httpPost,
-		'http://localhost:4000/api/collections/image_list',
+		'http://localhost:4000/api/collections_with_images',
 		_elm_lang$http$Http$jsonBody(
 			_user$project$Model$collectionListEncoder(collectionList)),
 		_user$project$Model$collectionImageListDecoder,
@@ -13409,7 +13418,7 @@ var _user$project$Command$startAppFetchImages = function (collectionList) {
 var _user$project$Command$fetchSearchQuery = function (searchInput) {
 	return A5(
 		_user$project$Helper_HttpHelper$httpPost,
-		A2(_elm_lang$core$Basics_ops['++'], 'http://localhost:4000/api/collections/', searchInput),
+		'http://localhost:4000/api/collections/collection_search_query',
 		_elm_lang$http$Http$jsonBody(
 			_user$project$Model$searchInputEncoder(searchInput)),
 		_user$project$Model$collectionListDecoder,
@@ -13520,6 +13529,64 @@ var _user$project$Update$update = F2(
 		}
 	});
 
+var _user$project$Component_FinishComponent$displayDrawnImages = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('viewed images'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+
+var _user$project$Component_PopupComponent$popupPauseResumeButton = function (popupStatus) {
+	var _p0 = popupStatus;
+	if (_p0.ctor === 'Pause') {
+		return A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('button'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$Msg$ChangePopupStatus(_user$project$Model$Resume)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Pause'),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('button'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$Msg$ChangePopupStatus(_user$project$Model$Pause)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Resume'),
+				_1: {ctor: '[]'}
+			});
+	}
+};
 var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -13562,23 +13629,7 @@ var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 								}),
 							_1: {
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('button'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(
-												_user$project$Msg$ChangePopupStatus(_user$project$Model$Pause)),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Pause'),
-										_1: {ctor: '[]'}
-									}),
+								_0: _user$project$Component_PopupComponent$popupPauseResumeButton(model.popupStatus),
 								_1: {
 									ctor: '::',
 									_0: A2(
@@ -13589,7 +13640,7 @@ var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onClick(
-													_user$project$Msg$ChangePopupStatus(_user$project$Model$Pause)),
+													_user$project$Msg$ChangeStatus(_user$project$Model$Finish)),
 												_1: {ctor: '[]'}
 											}
 										},
@@ -13776,42 +13827,89 @@ var _user$project$Component_PopupComponent$popupNavbar = function (model) {
 
 var _user$project$Component_RadioComponent$radio = F3(
 	function (value, isChecked, msg) {
-		return A2(
-			_elm_lang$html$Html$label,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$input,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('radio'),
-						_1: {
+		var _p0 = isChecked;
+		if (_p0 === true) {
+			return A2(
+				_elm_lang$html$Html$label,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$name('font-size'),
+							_0: _elm_lang$html$Html_Attributes$type_('radio'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(msg),
+								_0: _elm_lang$html$Html_Attributes$name('font-size'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$checked(isChecked),
-									_1: {ctor: '[]'}
+									_0: _elm_lang$html$Html_Events$onClick(msg),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(value),
+						_1: {ctor: '[]'}
+					}
+				});
+		} else {
+			return A2(
+				_elm_lang$html$Html$label,
+				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(value),
+					_0: _elm_lang$html$Html_Attributes$class('checkedRadio'),
 					_1: {ctor: '[]'}
-				}
-			});
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('radio'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$name('font-size'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(msg),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(value),
+						_1: {ctor: '[]'}
+					}
+				});
+		}
 	});
 var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A3(
@@ -13833,7 +13931,11 @@ var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (
 var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__interval__container'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A3(
@@ -13959,15 +14061,27 @@ var _user$project$Component_SearchComponent$searchTile = function (collection) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$h4,
+					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('search__title'),
+						_0: _elm_lang$html$Html_Attributes$href(
+							A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(collection.display_name),
+						_0: A2(
+							_elm_lang$html$Html$h4,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('search__title'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(collection.display_name),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -14037,7 +14151,11 @@ var _user$project$Component_SearchComponent$searchComponent = function (model) {
 var _user$project$Component_SearchComponent$selectionComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('selectionComponent'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
@@ -14086,19 +14204,41 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_PopupComponent$popupNavbar(model),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Component_PopupComponent$popupLeftbar(model),
-						_1: {
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
 							ctor: '::',
-							_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+							_0: _elm_lang$html$Html_Attributes$class('outer'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Component_PopupComponent$popupLeftbar(model),
 							_1: {
 								ctor: '::',
 								_0: _user$project$Component_PopupComponent$popupBottombar(model),
 								_1: {ctor: '[]'}
 							}
-						}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('inner'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _user$project$Component_PopupComponent$popupNavbar(model),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
 					}
 				});
 		case 'Stop':
@@ -14134,7 +14274,11 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 					_0: _elm_lang$html$Html_Attributes$class('reference__tool__finish'),
 					_1: {ctor: '[]'}
 				},
-				{ctor: '[]'});
+				{
+					ctor: '::',
+					_0: _user$project$Component_FinishComponent$displayDrawnImages(model),
+					_1: {ctor: '[]'}
+				});
 		default:
 			return A2(
 				_elm_lang$html$Html$div,

@@ -58,9 +58,9 @@ defmodule BdrWeb.Router do
 
     resources "/blog", BlogController, only: [:index, :show]
     resources "/collections", CollectionController, except: [:new, :edit]
-         post "/collections/:query", CollectionController, :collectionsQuerySearch
-         get  "/collections/images_list", CollectionController, :collectionImagesList
-
+    resources "/collections_with_images", CollectionController, :collectionWithImages
+         post "/collections/collection_search_query", CollectionController, :collectionSearchQuery
+    
     resources "/images", ImageController, except: [:new, :edit]
   end
 

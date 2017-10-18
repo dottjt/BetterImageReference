@@ -12,7 +12,7 @@ import Update exposing (..)
 
 radioIntervalComponent : Model -> Html Msg 
 radioIntervalComponent model =
-    Html.form []
+    Html.form [ class "radio__interval__container" ]
         [ radio "30" (model.radioInterval == I30) (SelectIntervalTiming I30)
         , radio "45" (model.radioInterval == I45) (SelectIntervalTiming I45)
         , radio "60" (model.radioInterval == I60) (SelectIntervalTiming I60)
@@ -24,7 +24,7 @@ radioIntervalComponent model =
 
 radioUpsideDownComponent : Model -> Html Msg 
 radioUpsideDownComponent model =
-    Html.form []
+    Html.form [ class "radio__upsidedown__container" ]
         [ radio "Yes" (model.radioUpsideDown == YesUpsideDown) (SelectUpsideDown YesUpsideDown)
         , radio "No" (model.radioUpsideDown == NoUpsideDown) (SelectUpsideDown NoUpsideDown) 
         ]
@@ -32,9 +32,16 @@ radioUpsideDownComponent model =
 
 radio : String -> Bool -> Msg -> Html Msg
 radio value isChecked msg =
-  label
-    [ --style [("padding", "20px")]
-    ]
-    [ input [ type_ "radio", name "font-size", onClick msg, checked isChecked ] []
-    , text value                                -- this might need to be onInput?
-    ]
+  case isChecked of
+    True ->
+      label [ class "uncheckedRadio" ]
+            [ input [ type_ "radio", name "font-size", onClick msg, checked isChecked ] []
+            , text value                                -- this might need to be onInput?
+            ]
+    False ->
+        label
+            [ class "checkedRadio" ]
+            [ input [ type_ "radio", name "font-size", onClick msg, checked isChecked ] []
+            , text value                                -- this might need to be onInput?
+            ]
+        

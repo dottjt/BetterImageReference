@@ -31,19 +31,41 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_PopupComponent$popupNavbar(model),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Component_PopupComponent$popupLeftbar(model),
-						_1: {
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
 							ctor: '::',
-							_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+							_0: _elm_lang$html$Html_Attributes$class('outer'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Component_PopupComponent$popupLeftbar(model),
 							_1: {
 								ctor: '::',
 								_0: _user$project$Component_PopupComponent$popupBottombar(model),
 								_1: {ctor: '[]'}
 							}
-						}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('inner'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _user$project$Component_PopupComponent$popupNavbar(model),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
 					}
 				});
 		case 'Stop':
@@ -79,7 +101,11 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 					_0: _elm_lang$html$Html_Attributes$class('reference__tool__finish'),
 					_1: {ctor: '[]'}
 				},
-				{ctor: '[]'});
+				{
+					ctor: '::',
+					_0: _user$project$Component_FinishComponent$displayDrawnImages(model),
+					_1: {ctor: '[]'}
+				});
 		default:
 			return A2(
 				_elm_lang$html$Html$div,

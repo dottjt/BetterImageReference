@@ -1,41 +1,88 @@
 var _user$project$Component_RadioComponent$radio = F3(
 	function (value, isChecked, msg) {
-		return A2(
-			_elm_lang$html$Html$label,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$input,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('radio'),
-						_1: {
+		var _p0 = isChecked;
+		if (_p0 === true) {
+			return A2(
+				_elm_lang$html$Html$label,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$name('font-size'),
+							_0: _elm_lang$html$Html_Attributes$type_('radio'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(msg),
+								_0: _elm_lang$html$Html_Attributes$name('font-size'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$checked(isChecked),
-									_1: {ctor: '[]'}
+									_0: _elm_lang$html$Html_Events$onClick(msg),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(value),
+						_1: {ctor: '[]'}
+					}
+				});
+		} else {
+			return A2(
+				_elm_lang$html$Html$label,
+				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(value),
+					_0: _elm_lang$html$Html_Attributes$class('checkedRadio'),
 					_1: {ctor: '[]'}
-				}
-			});
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('radio'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$name('font-size'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(msg),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(value),
+						_1: {ctor: '[]'}
+					}
+				});
+		}
 	});
 var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A3(
@@ -57,7 +104,11 @@ var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (
 var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__interval__container'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A3(

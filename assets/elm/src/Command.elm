@@ -22,7 +22,7 @@ initialFetchQuery =
 fetchSearchQuery : String -> Cmd Msg
 fetchSearchQuery searchInput =
     httpPost
-        ("http://localhost:4000/api/collections/" ++ searchInput)
+        ("http://localhost:4000/api/collections/collection_search_query")
         (Http.jsonBody (searchInputEncoder searchInput))          
         collectionListDecoder
         FetchCollectionListFail
@@ -35,7 +35,7 @@ fetchSearchQuery searchInput =
 startAppFetchImages : CollectionList -> Cmd Msg
 startAppFetchImages collectionList =
     httpPost
-        ("http://localhost:4000/api/collections/image_list")
+        ("http://localhost:4000/api/collections_with_images")
         (Http.jsonBody (collectionListEncoder collectionList))          
         collectionImageListDecoder
         FetchCollectionStartAppFail

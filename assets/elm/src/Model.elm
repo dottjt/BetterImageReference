@@ -51,7 +51,7 @@ type Status
   = Start
   | Loading
   | Stop
-  | Finish 
+  | Finish
 
 type PopupStatus 
   = Pause
@@ -207,4 +207,10 @@ imageEncoder image =
 
 searchInputEncoder : String -> Encode.Value
 searchInputEncoder searchInput =    
-        Encode.string searchInput
+        Encode.object [ ("search_input", Encode.string searchInput)]
+
+
+
+-- searchInputEncoder : String -> Encode.Value
+-- searchInputEncoder searchInput =    
+--         Encode.string searchInput

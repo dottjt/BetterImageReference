@@ -19,10 +19,10 @@ defmodule Bdr.ApiResources.Collection do
     
     belongs_to :user, User
     
-    has_many :collection_books, Book
-    has_many :collection_tutorials, Tutorial
-    has_many :collection_tags, Tag
-    has_many :images, Image
+    has_many :collection_books, Book, on_delete: :delete_all 
+    has_many :collection_tutorials, Tutorial, on_delete: :delete_all
+    has_many :collection_tags, Tag, on_delete: :delete_all
+    has_many :images, Image, on_delete: :delete_all
 
     timestamps()
   end

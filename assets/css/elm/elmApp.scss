@@ -8,7 +8,7 @@
         .search__input {
             width: 100%;
             height: 50px;
-            // font-size: 2rem;
+            font-size: 1.5rem;
         }
     }
 }
@@ -17,35 +17,35 @@
 .reference__tool__start {
     width: 100vw;
     height: 100vh; 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
 
+    display: grid;    
+    grid-template-columns: 100vw;
+    grid-template-rows: 10vh 90vh;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    
     // position: fixed;
     background: white; // put an opacity in, perhaps. 
     border: 1px solid black;
 
     .popup__navbar {
         grid-column: 1;
-        grid-row: 1;
-    
-    border: 1px solid black;
+        grid-row: 1;        
+        
+        border: 1px solid black;
 
         .draw__button {
             
         }
-    
-    }
-
-    .popup__leftbar {
-        border: 1px solid black;
-        background: green;
     }
 
     .popup__middlebar {
         grid-column: 1;
         grid-row: 1;
+        
         background: green;
         
         border: 1px solid black;
@@ -55,10 +55,17 @@
         }
     }
 
+    .popup__leftbar {
+        position: absolute;
+        display: none;
+        border: 1px solid black;
+        background: green;
+    }
+
     .popup__bottombar {
         grid-column: 1;
         grid-row: 1;
-       
+        
         border: 1px solid black;
         
         .skip__pause__stop__container {
@@ -82,7 +89,34 @@
 }
 
 .reference__tool__stop {
+    .selectionComponent {
+        margin-bottom: 2rem;
+    }
+    .uncheckedRadio {
+        background: red; 
+    }
 
+    .checkedRadio {
+        background: blue;
+    }
+
+    form {
+        margin-bottom: 2rem;
+        label {
+            padding: 10px;
+
+            input {
+                display: none;  
+            }
+        }
+    }
+
+
+    .radio__upsidedown__container {
+        
+    }
+
+    
 }
 
 .reference__tool__loading {

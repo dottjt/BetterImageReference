@@ -1,5 +1,14 @@
 var _user$project$Model$searchInputEncoder = function (searchInput) {
-	return _elm_lang$core$Json_Encode$string(searchInput);
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'search_input',
+				_1: _elm_lang$core$Json_Encode$string(searchInput)
+			},
+			_1: {ctor: '[]'}
+		});
 };
 var _user$project$Model$imageEncoder = function (image) {
 	return _elm_lang$core$Json_Encode$object(

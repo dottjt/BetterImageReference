@@ -49,11 +49,20 @@ popupBottombar model =
         [ div [ class "skip__pause__stop__container"]
               [ div [ class "button__row"]
                     [ button [ class "button" ] [ text "Skip" ]
-                    , button [ class "button", onClick (ChangePopupStatus Pause) ] [ text "Pause" ]
-                    , button [ class "button", onClick (ChangePopupStatus Pause) ] [ text "Stop" ]
-                    ]
+                    , popupPauseResumeButton model.popupStatus
+                    , button [ class "button", onClick (ChangeStatus Finish) ] [ text "Stop" ]                    
+              ]
               , div [ class "timing__bar"]
                     [ text "this is where the timing bar goes"]
               ]
         ]
 
+
+popupPauseResumeButton : PopupStatus -> Html Msg
+popupPauseResumeButton popupStatus =
+    case popupStatus of
+        Pause ->
+            button [ class "button", onClick (ChangePopupStatus Resume) ] [ text "Pause" ]
+
+        Resume ->
+            button [ class "button", onClick (ChangePopupStatus Pause) ] [ text "Resume" ]

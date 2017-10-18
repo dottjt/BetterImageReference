@@ -15,7 +15,7 @@ defmodule Bdr.ApiResources.Blog do
     field :featured_image, :string
     
     belongs_to :user, User
-    has_many :comments, Comment
+    has_many :comments, Comment, on_delete: :nothing 
 
     timestamps()
   end

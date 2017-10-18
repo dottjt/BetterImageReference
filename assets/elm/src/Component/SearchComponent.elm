@@ -6,14 +6,13 @@ import Html.Events exposing (..)
 
 import Msg exposing (..)
 import Model exposing (..)
-import Update exposing (..)
 
 
 -- REFERENCE VIEW 
 
 selectionComponent : Model -> Html Msg
 selectionComponent model =
-    div []
+    div [ class "selectionComponent"]
         [ searchInput model.searchInput
         , searchedCollections model.searchedCollections
         , selectedCollections model.selectedCollections
@@ -38,8 +37,9 @@ searchTile collection =
         [ a [ href ("/collections/" ++ collection.name) ] 
             [ img [ class "search__image", src collection.featured_image ] []
             ]
-        , h4 [ class "search__title" ]
-            [ text collection.display_name ]
+        , a [ href ("/collections/" ++ collection.name) ] 
+            [ h4 [ class "search__title" ] [ text collection.display_name ]
+            ]
         , div [ class "search__details" ]
             [ h5 []
                 [ text "Times drawn variable" ]
@@ -61,3 +61,10 @@ searchInput searchInputValue =
         [ input [ class "search__input", type_ "text", placeholder "", value searchInputValue, onInput ChangeSearchInput ] []
         ]
 
+
+
+
+submitComponent : Html Msg 
+submitComponent = 
+  div [] 
+      [ button [ onClick (ChangeStatus Start) ] [ text "Start" ]]

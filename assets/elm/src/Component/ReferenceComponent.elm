@@ -19,10 +19,13 @@ referenceComponent model =
   case model.applicationStatus of 
       Start ->
         div [ class "reference__tool__start" ]
-            [ popupNavbar model
-            , popupLeftbar model
-            , popupMiddlebar model
-            , popupBottombar model
+            [ div [ class "outer"] 
+                  [ popupLeftbar model
+                  , popupBottombar model]
+            , div [ class "inner"]
+                  [ popupNavbar model
+                  , popupMiddlebar model
+                  ]
             ]
   
       Stop -> 
@@ -42,11 +45,6 @@ referenceComponent model =
             [ text "Fetching images, please wait" ]
 
 
-
-submitComponent : Html Msg 
-submitComponent = 
-  div [] 
-      [ button [ onClick (ChangeStatus Start) ] [ text "Start" ]]
 
 
 
