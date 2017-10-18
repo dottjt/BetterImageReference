@@ -4,7 +4,7 @@ import Html exposing (..)
 import Model exposing (..)
 import Msg exposing (..)
 import View exposing (viewReference)
-import Update exposing (updateReference)
+import Update exposing (..)
 
 main : Program Never Model Msg
 main =
@@ -23,15 +23,17 @@ initialModel =
 
     , applicationStatus = Stop
     , popupStatus = Resume
+    , imageStatus = Normal
 
     , radioInterval = I30
     , radioUpsideDown = NoUpsideDown
     , radioDistraction = NoMinimalDistraction
 
-    , images = []
+    , loadedCollectionsWithImages = []
     
     , error = "" 
     } ! []
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =

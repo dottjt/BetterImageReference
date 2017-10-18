@@ -8,14 +8,14 @@ import Msg exposing (..)
 import Component.ReferenceComponent exposing (..)
 import Component.SearchComponent exposing (..)
 
-searchView : Model -> Html Msg
-view model =
+viewSearch : Model -> Html Msg
+viewSearch model =
     div [] 
         [(searchComponent model)
-        , p [] [text "ylo"]]
+        , p [] [text "there you go"]]
     
 
-referenceView : Model -> Html Msg
-view model =
+viewReference : Model -> Html Msg
+viewReference model =
     div []
         [ referenceComponent model ]

@@ -24,12 +24,13 @@ initialModel =
 
     , applicationStatus = Stop
     , popupStatus = Resume
+    , imageStatus = Normal
 
     , radioInterval = I30
     , radioUpsideDown = NoUpsideDown
     , radioDistraction = NoMinimalDistraction
 
-    , images = []
+    , loadedCollectionsWithImages = []
     
     , error = "" 
     } ! [initialFetchQuery]

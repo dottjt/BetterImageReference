@@ -24,6 +24,10 @@ update msg model =
         ChangePopupStatus status ->
             { model | popupStatus = status } ! []
 
+        -- TOOL FUNCTIONALITY
+        ChangeDrawStatus status ->
+            { model | imageStatus = status } ! []
+
         -- INITIAL FETCH
         InitialFetchQuerySuccess response ->
             { model | searchedCollections = response } ! []

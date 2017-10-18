@@ -12,6 +12,7 @@ type Msg
 
     | ChangeStatus Status
     | ChangePopupStatus PopupStatus
+    | ChangeDrawStatus DrawStatus
 
     | FetchCollectionListFail Error
     | FetchCollectionListSuccess CollectionList

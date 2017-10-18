@@ -8,20 +8,20 @@ import Msg exposing (..)
 import Model exposing (..)
 import Update exposing (..)
 
-popupComponent : Model -> Html
-popupComponent =
+popupComponent : Model -> Html Msg
+popupComponent model =
     div [] []
 
 
-popupNavbar : Html Msg
-popupNavbar =
+popupNavbar : Model -> Html Msg
+popupNavbar model =
     div [ class "popup__navbar"] 
-        [ button [ class "draw__button", onClick () ] [ text "draw" ] 
+        [ button [ class "draw__button", onClick (ChangeDrawStatus Draw) ] [ text "draw" ] 
         ]
 
 
-popupLeftbar : Model -> Html Msg 
-popupLeftbar =
+popupLeftbar : Model -> Html msg 
+popupLeftbar model =
     div [ class "popup__leftbar"] 
         [ div [] 
               [ h4 [] [ text "User Comments" ] 
@@ -52,7 +52,7 @@ popupBottombar model =
     div [ class "popup__bottombar"] 
         [ div [ class "skip__pause__stop__container"]
               [ div [ class "button__row"]
-                    [ button [ class "button", onClick () ] [ text "Skip" ]
+                    [ button [ class "button" ] [ text "Skip" ]
                     , button [ class "button", onClick (ChangePopupStatus Pause) ] [ text "Pause" ]
                     , button [ class "button", onClick (ChangePopupStatus Pause) ] [ text "Stop" ]
                     ]

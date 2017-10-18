@@ -4,9 +4,18 @@ var _user$project$MainReferenceTool$subscriptions = function (model) {
 var _user$project$MainReferenceTool$initialModel = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],
 	{
-		drawingCollection: {ctor: '[]'},
+		searchedCollections: {ctor: '[]'},
+		selectedCollections: {ctor: '[]'},
+		searchInput: '',
+		applicationStatus: _user$project$Model$Stop,
+		popupStatus: _user$project$Model$Resume,
+		imageStatus: _user$project$Model$Normal,
+		radioInterval: _user$project$Model$I30,
+		radioUpsideDown: _user$project$Model$NoUpsideDown,
+		radioDistraction: _user$project$Model$NoMinimalDistraction,
+		loadedCollectionsWithImages: {ctor: '[]'},
 		error: ''
 	},
 	{ctor: '[]'});
 var _user$project$MainReferenceTool$main = _elm_lang$html$Html$program(
-	{init: _user$project$MainReferenceTool$initialModel, view: _user$project$ReferenceTool_View$view, update: _user$project$ReferenceTool_Update$update, subscriptions: _user$project$MainReferenceTool$subscriptions})();
+	{init: _user$project$MainReferenceTool$initialModel, view: _user$project$View$viewReference, update: _user$project$Update$update, subscriptions: _user$project$MainReferenceTool$subscriptions})();

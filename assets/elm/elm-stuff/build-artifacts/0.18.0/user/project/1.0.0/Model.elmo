@@ -183,7 +183,9 @@ var _user$project$Model$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, radioInterval: f, radioUpsideDown: g, radioDistraction: h, loadedCollectionsWithImages: i, error: j};
+										return function (k) {
+											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionsWithImages: j, error: k};
+										};
 									};
 								};
 							};
@@ -199,6 +201,8 @@ var _user$project$Model$Loading = {ctor: 'Loading'};
 var _user$project$Model$Stop = {ctor: 'Stop'};
 var _user$project$Model$Resume = {ctor: 'Resume'};
 var _user$project$Model$Pause = {ctor: 'Pause'};
+var _user$project$Model$Draw = {ctor: 'Draw'};
+var _user$project$Model$Normal = {ctor: 'Normal'};
 var _user$project$Model$NoUpsideDown = {ctor: 'NoUpsideDown'};
 var _user$project$Model$YesUpsideDown = {ctor: 'YesUpsideDown'};
 var _user$project$Model$NoMinimalDistraction = {ctor: 'NoMinimalDistraction'};

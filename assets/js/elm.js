@@ -9113,6 +9113,259 @@ var _elm_lang$http$Http$StringPart = F2(
 	});
 var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
 
+var _user$project$Model$searchInputEncoder = function (searchInput) {
+	return _elm_lang$core$Json_Encode$string(searchInput);
+};
+var _user$project$Model$imageEncoder = function (image) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'name',
+				_1: _elm_lang$core$Json_Encode$string(image.name)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'image_url',
+					_1: _elm_lang$core$Json_Encode$string(image.image_url)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'id',
+						_1: _elm_lang$core$Json_Encode$string(image.id)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'display_name',
+							_1: _elm_lang$core$Json_Encode$string(image.display_name)
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Model$imageListEncoder = function (imageList) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Model$imageEncoder, imageList));
+};
+var _user$project$Model$collectionEncoder = function (collection) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'user_id',
+				_1: _elm_lang$core$Json_Encode$string(collection.user_id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'name',
+					_1: _elm_lang$core$Json_Encode$string(collection.name)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'id',
+						_1: _elm_lang$core$Json_Encode$string(collection.id)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'featured_image',
+							_1: _elm_lang$core$Json_Encode$string(collection.featured_image)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'display_name',
+								_1: _elm_lang$core$Json_Encode$string(collection.display_name)
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Model$collectionListEncoder = function (collectionList) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Model$collectionEncoder, collectionList));
+};
+var _user$project$Model$Collection = F5(
+	function (a, b, c, d, e) {
+		return {user_id: a, name: b, id: c, featured_image: d, display_name: e};
+	});
+var _user$project$Model$collectionDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'display_name',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'featured_image',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'id',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'user_id',
+					_elm_lang$core$Json_Decode$string,
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$Collection))))));
+var _user$project$Model$collectionListDecoder = A2(
+	_elm_lang$core$Json_Decode$field,
+	'data',
+	_elm_lang$core$Json_Decode$list(_user$project$Model$collectionDecoder));
+var _user$project$Model$Image = F4(
+	function (a, b, c, d) {
+		return {name: a, image_url: b, id: c, display_name: d};
+	});
+var _user$project$Model$imageDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'display_name',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'id',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'image_url',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$Image)))));
+var _user$project$Model$imageListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageDecoder);
+var _user$project$Model$CollectionImages = F6(
+	function (a, b, c, d, e, f) {
+		return {user_id: a, name: b, id: c, featured_image: d, display_name: e, images: f};
+	});
+var _user$project$Model$collectionImageDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'images',
+	_user$project$Model$imageListDecoder,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'display_name',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'featured_image',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'id',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'name',
+					_elm_lang$core$Json_Decode$string,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'user_id',
+						_elm_lang$core$Json_Decode$string,
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$CollectionImages)))))));
+var _user$project$Model$collectionImageListDecoder = A2(
+	_elm_lang$core$Json_Decode$field,
+	'data',
+	_elm_lang$core$Json_Decode$list(_user$project$Model$collectionImageDecoder));
+var _user$project$Model$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionsWithImages: j, error: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Model$Start = {ctor: 'Start'};
+var _user$project$Model$Loading = {ctor: 'Loading'};
+var _user$project$Model$Stop = {ctor: 'Stop'};
+var _user$project$Model$Resume = {ctor: 'Resume'};
+var _user$project$Model$Pause = {ctor: 'Pause'};
+var _user$project$Model$Draw = {ctor: 'Draw'};
+var _user$project$Model$Normal = {ctor: 'Normal'};
+var _user$project$Model$NoUpsideDown = {ctor: 'NoUpsideDown'};
+var _user$project$Model$YesUpsideDown = {ctor: 'YesUpsideDown'};
+var _user$project$Model$NoMinimalDistraction = {ctor: 'NoMinimalDistraction'};
+var _user$project$Model$YesMinimalDistraction = {ctor: 'YesMinimalDistraction'};
+var _user$project$Model$Custom = {ctor: 'Custom'};
+var _user$project$Model$I120 = {ctor: 'I120'};
+var _user$project$Model$I90 = {ctor: 'I90'};
+var _user$project$Model$I60 = {ctor: 'I60'};
+var _user$project$Model$I45 = {ctor: 'I45'};
+var _user$project$Model$I30 = {ctor: 'I30'};
+
+var _user$project$Msg$FetchCollectionStartAppSuccess = function (a) {
+	return {ctor: 'FetchCollectionStartAppSuccess', _0: a};
+};
+var _user$project$Msg$FetchCollectionStartAppFail = function (a) {
+	return {ctor: 'FetchCollectionStartAppFail', _0: a};
+};
+var _user$project$Msg$InitialFetchQuerySuccess = function (a) {
+	return {ctor: 'InitialFetchQuerySuccess', _0: a};
+};
+var _user$project$Msg$InitialFetchQueryFail = function (a) {
+	return {ctor: 'InitialFetchQueryFail', _0: a};
+};
+var _user$project$Msg$FetchCollectionListSuccess = function (a) {
+	return {ctor: 'FetchCollectionListSuccess', _0: a};
+};
+var _user$project$Msg$FetchCollectionListFail = function (a) {
+	return {ctor: 'FetchCollectionListFail', _0: a};
+};
+var _user$project$Msg$ChangeDrawStatus = function (a) {
+	return {ctor: 'ChangeDrawStatus', _0: a};
+};
+var _user$project$Msg$ChangePopupStatus = function (a) {
+	return {ctor: 'ChangePopupStatus', _0: a};
+};
+var _user$project$Msg$ChangeStatus = function (a) {
+	return {ctor: 'ChangeStatus', _0: a};
+};
+var _user$project$Msg$SelectUpsideDown = function (a) {
+	return {ctor: 'SelectUpsideDown', _0: a};
+};
+var _user$project$Msg$SelectIntervalTiming = function (a) {
+	return {ctor: 'SelectIntervalTiming', _0: a};
+};
+var _user$project$Msg$ChangeSearchInput = function (a) {
+	return {ctor: 'ChangeSearchInput', _0: a};
+};
+
 var _user$project$Helper_HttpHelper$resultToMsg = F3(
 	function (errMsg, okMsg, result) {
 		var _p0 = result;
@@ -9183,124 +9436,117 @@ var _user$project$Helper_HttpHelper$httpDelete = F4(
 			request);
 	});
 
-var _user$project$ReferenceTool_Model$collectionEncoder = function (collection) {
-	return _elm_lang$core$Json_Encode$object(
-		{
-			ctor: '::',
-			_0: {
-				ctor: '_Tuple2',
-				_0: 'id',
-				_1: _elm_lang$core$Json_Encode$string(collection.id)
-			},
-			_1: {
-				ctor: '::',
-				_0: {
-					ctor: '_Tuple2',
-					_0: 'name',
-					_1: _elm_lang$core$Json_Encode$string(collection.name)
-				},
-				_1: {
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'display_name',
-						_1: _elm_lang$core$Json_Encode$string(collection.display_name)
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'user_id',
-							_1: _elm_lang$core$Json_Encode$string(collection.user_id)
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'featured_image',
-								_1: _elm_lang$core$Json_Encode$string(collection.featured_image)
-							},
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
+var _user$project$Command$startAppFetchImages = function (collectionList) {
+	return A5(
+		_user$project$Helper_HttpHelper$httpPost,
+		'http://localhost:4000/api/collections/image_list',
+		_elm_lang$http$Http$jsonBody(
+			_user$project$Model$collectionListEncoder(collectionList)),
+		_user$project$Model$collectionImageListDecoder,
+		_user$project$Msg$FetchCollectionStartAppFail,
+		_user$project$Msg$FetchCollectionStartAppSuccess);
 };
-var _user$project$ReferenceTool_Model$Collection = F5(
-	function (a, b, c, d, e) {
-		return {id: a, name: b, display_name: c, user_id: d, featured_image: e};
-	});
-var _user$project$ReferenceTool_Model$referenceCollectionDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'featured_image',
-	_elm_lang$core$Json_Decode$string,
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'user_id',
-		_elm_lang$core$Json_Decode$string,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'display_name',
-			_elm_lang$core$Json_Decode$string,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'name',
-				_elm_lang$core$Json_Decode$string,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'id',
-					_elm_lang$core$Json_Decode$string,
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$ReferenceTool_Model$Collection))))));
-var _user$project$ReferenceTool_Model$referenceCollectionListDecoder = _elm_lang$core$Json_Decode$list(_user$project$ReferenceTool_Model$referenceCollectionDecoder);
-var _user$project$ReferenceTool_Model$Model = F2(
-	function (a, b) {
-		return {drawingCollection: a, error: b};
-	});
-
-var _user$project$ReferenceTool_Msg$FetchReferenceCollectionListSuccess = function (a) {
-	return {ctor: 'FetchReferenceCollectionListSuccess', _0: a};
+var _user$project$Command$fetchSearchQuery = function (searchInput) {
+	return A5(
+		_user$project$Helper_HttpHelper$httpPost,
+		A2(_elm_lang$core$Basics_ops['++'], 'http://localhost:4000/api/collections/', searchInput),
+		_elm_lang$http$Http$jsonBody(
+			_user$project$Model$searchInputEncoder(searchInput)),
+		_user$project$Model$collectionListDecoder,
+		_user$project$Msg$FetchCollectionListFail,
+		_user$project$Msg$FetchCollectionListSuccess);
 };
-var _user$project$ReferenceTool_Msg$FetchReferenceCollectionListFail = function (a) {
-	return {ctor: 'FetchReferenceCollectionListFail', _0: a};
-};
-var _user$project$ReferenceTool_Msg$NoOp = {ctor: 'NoOp'};
+var _user$project$Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections', _user$project$Model$collectionListDecoder, _user$project$Msg$InitialFetchQueryFail, _user$project$Msg$InitialFetchQuerySuccess);
 
-var _user$project$ReferenceTool_View$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$p,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('tissues player'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		});
-};
-
-var _user$project$ReferenceTool_Command$fetchCollection = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections', _user$project$ReferenceTool_Model$referenceCollectionListDecoder, _user$project$ReferenceTool_Msg$FetchReferenceCollectionListFail, _user$project$ReferenceTool_Msg$FetchReferenceCollectionListSuccess);
-
-var _user$project$ReferenceTool_Update$update = F2(
+var _user$project$Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
-			case 'NoOp':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{ctor: '[]'});
-			case 'FetchReferenceCollectionListSuccess':
+			case 'ChangeSearchInput':
+				var _p1 = _p0._0;
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{drawingCollection: _p0._0}),
+						{searchInput: _p1}),
+					{
+						ctor: '::',
+						_0: _user$project$Command$fetchSearchQuery(_p1),
+						_1: {ctor: '[]'}
+					});
+			case 'SelectIntervalTiming':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{radioInterval: _p0._0}),
+					{ctor: '[]'});
+			case 'SelectUpsideDown':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{radioUpsideDown: _p0._0}),
+					{ctor: '[]'});
+			case 'ChangeStatus':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{applicationStatus: _p0._0}),
+					{ctor: '[]'});
+			case 'ChangePopupStatus':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{popupStatus: _p0._0}),
+					{ctor: '[]'});
+			case 'ChangeDrawStatus':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{imageStatus: _p0._0}),
+					{ctor: '[]'});
+			case 'InitialFetchQuerySuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchedCollections: _p0._0}),
+					{ctor: '[]'});
+			case 'InitialFetchQueryFail':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p0._0)
+						}),
+					{ctor: '[]'});
+			case 'FetchCollectionListSuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchedCollections: _p0._0}),
+					{ctor: '[]'});
+			case 'FetchCollectionListFail':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p0._0)
+						}),
+					{ctor: '[]'});
+			case 'FetchCollectionStartAppSuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{loadedCollectionsWithImages: _p0._0}),
 					{ctor: '[]'});
 			default:
 				return A2(
@@ -9314,117 +9560,424 @@ var _user$project$ReferenceTool_Update$update = F2(
 		}
 	});
 
-var _user$project$MainReferenceTool$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _user$project$MainReferenceTool$initialModel = A2(
-	_elm_lang$core$Platform_Cmd_ops['!'],
-	{
-		drawingCollection: {ctor: '[]'},
-		error: ''
-	},
-	{ctor: '[]'});
-var _user$project$MainReferenceTool$main = _elm_lang$html$Html$program(
-	{init: _user$project$MainReferenceTool$initialModel, view: _user$project$ReferenceTool_View$view, update: _user$project$ReferenceTool_Update$update, subscriptions: _user$project$MainReferenceTool$subscriptions})();
-
-var _user$project$Search_Model$searchInputEncoder = function (searchInput) {
-	return _elm_lang$core$Json_Encode$string(searchInput);
-};
-var _user$project$Search_Model$collectionEncoder = function (collection) {
-	return _elm_lang$core$Json_Encode$object(
+var _user$project$Component_PopupComponent$popupBottombar = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: {
-				ctor: '_Tuple2',
-				_0: 'user_id',
-				_1: _elm_lang$core$Json_Encode$string(collection.user_id)
-			},
-			_1: {
-				ctor: '::',
-				_0: {
-					ctor: '_Tuple2',
-					_0: 'name',
-					_1: _elm_lang$core$Json_Encode$string(collection.name)
-				},
-				_1: {
+			_0: _elm_lang$html$Html_Attributes$class('popup__bottombar'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
 					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'id',
-						_1: _elm_lang$core$Json_Encode$string(collection.id)
-					},
+					_0: _elm_lang$html$Html_Attributes$class('skip__pause__stop__container'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('button__row'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('button'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Skip'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('button'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(
+												_user$project$Msg$ChangePopupStatus(_user$project$Model$Pause)),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Pause'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('button'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(
+													_user$project$Msg$ChangePopupStatus(_user$project$Model$Pause)),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Stop'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
 					_1: {
 						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'featured_image',
-							_1: _elm_lang$core$Json_Encode$string(collection.featured_image)
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('timing__bar'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('this is where the timing bar goes'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Component_PopupComponent$popupMiddlebar = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('image__container'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$img,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('image'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src(''),
+								_1: {ctor: '[]'}
+							}
 						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Component_PopupComponent$popupLeftbar = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('popup__leftbar'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h4,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('User Comments'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h4,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('User Scribbles'),
+								_1: {ctor: '[]'}
+							}),
 						_1: {
 							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'display_name',
-								_1: _elm_lang$core$Json_Encode$string(collection.display_name)
-							},
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{ctor: '[]'},
+								{ctor: '[]'}),
 							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h4,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('User Drawings'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Component_PopupComponent$popupNavbar = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('popup__navbar'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('draw__button'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$Msg$ChangeDrawStatus(_user$project$Model$Draw)),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('draw'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Component_PopupComponent$popupComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+
+var _user$project$Component_RadioComponent$radio = F3(
+	function (value, isChecked, msg) {
+		return A2(
+			_elm_lang$html$Html$label,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'padding', _1: '20px'},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('radio'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$name('font-size'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(msg),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(value),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$fieldset,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$Component_RadioComponent$radio,
+				'Yes',
+				_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$YesUpsideDown),
+				_user$project$Msg$SelectUpsideDown(_user$project$Model$YesUpsideDown)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_user$project$Component_RadioComponent$radio,
+					'No',
+					_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$NoUpsideDown),
+					_user$project$Msg$SelectUpsideDown(_user$project$Model$NoUpsideDown)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$fieldset,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$Component_RadioComponent$radio,
+				'30',
+				_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I30),
+				_user$project$Msg$SelectIntervalTiming(_user$project$Model$I30)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_user$project$Component_RadioComponent$radio,
+					'45',
+					_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I45),
+					_user$project$Msg$SelectIntervalTiming(_user$project$Model$I45)),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_user$project$Component_RadioComponent$radio,
+						'60',
+						_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I60),
+						_user$project$Msg$SelectIntervalTiming(_user$project$Model$I60)),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_user$project$Component_RadioComponent$radio,
+							'90',
+							_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I90),
+							_user$project$Msg$SelectIntervalTiming(_user$project$Model$I90)),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_user$project$Component_RadioComponent$radio,
+								'120',
+								_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I120),
+								_user$project$Msg$SelectIntervalTiming(_user$project$Model$I120)),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_user$project$Component_RadioComponent$radio,
+									'Custom',
+									_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$Custom),
+									_user$project$Msg$SelectIntervalTiming(_user$project$Model$Custom)),
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}
 			}
 		});
 };
-var _user$project$Search_Model$Collection = F5(
-	function (a, b, c, d, e) {
-		return {user_id: a, name: b, id: c, featured_image: d, display_name: e};
-	});
-var _user$project$Search_Model$searchCollectionDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'display_name',
-	_elm_lang$core$Json_Decode$string,
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'featured_image',
-		_elm_lang$core$Json_Decode$string,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'id',
-			_elm_lang$core$Json_Decode$string,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'name',
-				_elm_lang$core$Json_Decode$string,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'user_id',
-					_elm_lang$core$Json_Decode$string,
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Search_Model$Collection))))));
-var _user$project$Search_Model$searchCollectionListDecoder = A2(
-	_elm_lang$core$Json_Decode$field,
-	'data',
-	_elm_lang$core$Json_Decode$list(_user$project$Search_Model$searchCollectionDecoder));
-var _user$project$Search_Model$Model = F3(
-	function (a, b, c) {
-		return {searchedCollections: a, searchInput: b, error: c};
-	});
 
-var _user$project$Search_Msg$InitialFetchQuerySuccess = function (a) {
-	return {ctor: 'InitialFetchQuerySuccess', _0: a};
+var _user$project$Component_SearchComponent$searchInput = function (searchInputValue) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('search__input__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('search__input'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('text'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$placeholder(''),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$value(searchInputValue),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$ChangeSearchInput),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		});
 };
-var _user$project$Search_Msg$InitialFetchQueryFail = function (a) {
-	return {ctor: 'InitialFetchQueryFail', _0: a};
-};
-var _user$project$Search_Msg$FetchCollectionListSuccess = function (a) {
-	return {ctor: 'FetchCollectionListSuccess', _0: a};
-};
-var _user$project$Search_Msg$FetchCollectionListFail = function (a) {
-	return {ctor: 'FetchCollectionListFail', _0: a};
-};
-var _user$project$Search_Msg$ChangeSearchInput = function (a) {
-	return {ctor: 'ChangeSearchInput', _0: a};
-};
-
-var _user$project$Search_Component_Component$searchTile = function (collection) {
+var _user$project$Component_SearchComponent$searchTile = function (collection) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -9498,7 +10051,7 @@ var _user$project$Search_Component_Component$searchTile = function (collection) 
 			}
 		});
 };
-var _user$project$Search_Component_Component$searchTileParent = function (collectionList) {
+var _user$project$Component_SearchComponent$selectedCollections = function (collectionList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -9506,46 +10059,19 @@ var _user$project$Search_Component_Component$searchTileParent = function (collec
 			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
 			_1: {ctor: '[]'}
 		},
-		A2(_elm_lang$core$List$map, _user$project$Search_Component_Component$searchTile, collectionList));
+		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
 };
-var _user$project$Search_Component_Component$searchInput = function (searchInputValue) {
+var _user$project$Component_SearchComponent$searchedCollections = function (collectionList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('search__input__container'),
+			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
 			_1: {ctor: '[]'}
 		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$input,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('search__input'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('text'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$placeholder(''),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$value(searchInputValue),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(_user$project$Search_Msg$ChangeSearchInput),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
-		});
+		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
 };
-var _user$project$Search_Component_Component$searchComponent = function (model) {
+var _user$project$Component_SearchComponent$searchComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -9555,22 +10081,127 @@ var _user$project$Search_Component_Component$searchComponent = function (model) 
 		},
 		{
 			ctor: '::',
-			_0: _user$project$Search_Component_Component$searchInput(model.searchInput),
+			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Search_Component_Component$searchTileParent(model.searchedCollections),
+				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-
-var _user$project$Search_View$view = function (model) {
+var _user$project$Component_SearchComponent$selectionComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _user$project$Search_Component_Component$searchComponent(model),
+			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Component_SearchComponent$selectedCollections(model.selectedCollections),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+
+var _user$project$Component_ReferenceComponent$submitComponent = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('hellothere'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Component_ReferenceComponent$referenceComponent = function (model) {
+	var _p0 = model.applicationStatus;
+	switch (_p0.ctor) {
+		case 'Start':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__start'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$Component_PopupComponent$popupComponent(model),
+					_1: {ctor: '[]'}
+				});
+		case 'Stop':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$Component_SearchComponent$selectionComponent(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Component_ReferenceComponent$submitComponent,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				});
+		default:
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__loading'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Fetching images, please wait'),
+					_1: {ctor: '[]'}
+				});
+	}
+};
+
+var _user$project$View$viewReference = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Component_ReferenceComponent$referenceComponent(model),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$View$viewSearch = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Component_SearchComponent$searchComponent(model),
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -9586,68 +10217,27 @@ var _user$project$Search_View$view = function (model) {
 		});
 };
 
-var _user$project$Search_Command$fetchSearchQuery = function (searchInput) {
-	return A5(
-		_user$project$Helper_HttpHelper$httpPost,
-		'http://localhost:4000/api/collections',
-		_elm_lang$http$Http$jsonBody(
-			_user$project$Search_Model$searchInputEncoder(searchInput)),
-		_user$project$Search_Model$searchCollectionListDecoder,
-		_user$project$Search_Msg$FetchCollectionListFail,
-		_user$project$Search_Msg$FetchCollectionListSuccess);
+var _user$project$MainReferenceTool$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
 };
-var _user$project$Search_Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections', _user$project$Search_Model$searchCollectionListDecoder, _user$project$Search_Msg$InitialFetchQueryFail, _user$project$Search_Msg$InitialFetchQuerySuccess);
-
-var _user$project$Search_Update$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'ChangeSearchInput':
-				var _p1 = _p0._0;
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{searchInput: _p1}),
-					{
-						ctor: '::',
-						_0: _user$project$Search_Command$fetchSearchQuery(_p1),
-						_1: {ctor: '[]'}
-					});
-			case 'InitialFetchQuerySuccess':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{searchedCollections: _p0._0}),
-					{ctor: '[]'});
-			case 'InitialFetchQueryFail':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{
-							error: _elm_lang$core$Basics$toString(_p0._0)
-						}),
-					{ctor: '[]'});
-			case 'FetchCollectionListSuccess':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{searchedCollections: _p0._0}),
-					{ctor: '[]'});
-			default:
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{
-							error: _elm_lang$core$Basics$toString(_p0._0)
-						}),
-					{ctor: '[]'});
-		}
-	});
+var _user$project$MainReferenceTool$initialModel = A2(
+	_elm_lang$core$Platform_Cmd_ops['!'],
+	{
+		searchedCollections: {ctor: '[]'},
+		selectedCollections: {ctor: '[]'},
+		searchInput: '',
+		applicationStatus: _user$project$Model$Stop,
+		popupStatus: _user$project$Model$Resume,
+		imageStatus: _user$project$Model$Normal,
+		radioInterval: _user$project$Model$I30,
+		radioUpsideDown: _user$project$Model$NoUpsideDown,
+		radioDistraction: _user$project$Model$NoMinimalDistraction,
+		loadedCollectionsWithImages: {ctor: '[]'},
+		error: ''
+	},
+	{ctor: '[]'});
+var _user$project$MainReferenceTool$main = _elm_lang$html$Html$program(
+	{init: _user$project$MainReferenceTool$initialModel, view: _user$project$View$viewReference, update: _user$project$Update$update, subscriptions: _user$project$MainReferenceTool$subscriptions})();
 
 var _user$project$MainSearch$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
@@ -9656,16 +10246,24 @@ var _user$project$MainSearch$initialModel = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],
 	{
 		searchedCollections: {ctor: '[]'},
-		searchInput: 'popular',
+		selectedCollections: {ctor: '[]'},
+		searchInput: '',
+		applicationStatus: _user$project$Model$Stop,
+		popupStatus: _user$project$Model$Resume,
+		imageStatus: _user$project$Model$Normal,
+		radioInterval: _user$project$Model$I30,
+		radioUpsideDown: _user$project$Model$NoUpsideDown,
+		radioDistraction: _user$project$Model$NoMinimalDistraction,
+		loadedCollectionsWithImages: {ctor: '[]'},
 		error: ''
 	},
 	{
 		ctor: '::',
-		_0: _user$project$Search_Command$initialFetchQuery,
+		_0: _user$project$Command$initialFetchQuery,
 		_1: {ctor: '[]'}
 	});
 var _user$project$MainSearch$main = _elm_lang$html$Html$program(
-	{init: _user$project$MainSearch$initialModel, view: _user$project$Search_View$view, update: _user$project$Search_Update$update, subscriptions: _user$project$MainSearch$subscriptions})();
+	{init: _user$project$MainSearch$initialModel, view: _user$project$View$viewSearch, update: _user$project$Update$update, subscriptions: _user$project$MainSearch$subscriptions})();
 
 var Elm = {};
 Elm['MainReferenceTool'] = Elm['MainReferenceTool'] || {};

@@ -42,6 +42,13 @@ var _user$project$Update$update = F2(
 						model,
 						{popupStatus: _p0._0}),
 					{ctor: '[]'});
+			case 'ChangeDrawStatus':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{imageStatus: _p0._0}),
+					{ctor: '[]'});
 			case 'InitialFetchQuerySuccess':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],

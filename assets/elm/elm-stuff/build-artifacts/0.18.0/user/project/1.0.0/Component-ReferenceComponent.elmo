@@ -7,7 +7,8 @@ var _user$project$Component_ReferenceComponent$submitComponent = A2(
 			_elm_lang$html$Html$button,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$ChangeStatus),
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -28,7 +29,11 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 					_0: _elm_lang$html$Html_Attributes$class('reference__tool__start'),
 					_1: {ctor: '[]'}
 				},
-				{ctor: '[]'});
+				{
+					ctor: '::',
+					_0: _user$project$Component_PopupComponent$popupComponent(model),
+					_1: {ctor: '[]'}
+				});
 		case 'Stop':
 			return A2(
 				_elm_lang$html$Html$div,

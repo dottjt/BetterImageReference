@@ -56,6 +56,10 @@ type PopupStatus
   = Pause
   | Resume
 
+type DrawStatus
+  = Normal
+  | Draw 
+
 
 -- SUM TYPES - Application Settings
 
@@ -87,7 +91,8 @@ type alias Model =
     -- Application Status
     , applicationStatus: Status
     , popupStatus : PopupStatus
-    
+    , imageStatus : DrawStatus
+
     -- Selection Criteria
     , radioInterval : IntervalTiming
     , radioUpsideDown : UpsideDown

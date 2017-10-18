@@ -16,6 +16,9 @@ var _user$project$Msg$FetchCollectionListSuccess = function (a) {
 var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
 };
+var _user$project$Msg$ChangeDrawStatus = function (a) {
+	return {ctor: 'ChangeDrawStatus', _0: a};
+};
 var _user$project$Msg$ChangePopupStatus = function (a) {
 	return {ctor: 'ChangePopupStatus', _0: a};
 };
