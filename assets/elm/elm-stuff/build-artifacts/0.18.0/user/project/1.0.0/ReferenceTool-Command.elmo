@@ -1,0 +1,1 @@
+var _user$project$ReferenceTool_Command$fetchCollection = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections', _user$project$ReferenceTool_Model$referenceCollectionListDecoder, _user$project$ReferenceTool_Msg$FetchReferenceCollectionListFail, _user$project$ReferenceTool_Msg$FetchReferenceCollectionListSuccess);

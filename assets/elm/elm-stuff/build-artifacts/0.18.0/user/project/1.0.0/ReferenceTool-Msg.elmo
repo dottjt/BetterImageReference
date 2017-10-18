@@ -1,0 +1,12 @@
+var _user$project$ReferenceTool_Msg$FetchReferenceCollectionListSuccess = function (a) {
+	return {ctor: 'FetchReferenceCollectionListSuccess', _0: a};
+};
+var _user$project$ReferenceTool_Msg$FetchReferenceCollectionListFail = function (a) {
+	return {ctor: 'FetchReferenceCollectionListFail', _0: a};
+};
+var _user$project$ReferenceTool_Msg$SelectIntervalTiming = function (a) {
+	return {ctor: 'SelectIntervalTiming', _0: a};
+};
+var _user$project$ReferenceTool_Msg$ChangeSearchInput = function (a) {
+	return {ctor: 'ChangeSearchInput', _0: a};
+};

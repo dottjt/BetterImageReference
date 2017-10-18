@@ -1,0 +1,50 @@
+var _user$project$Search_Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'ChangeSearchInput':
+				var _p1 = _p0._0;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchInput: _p1}),
+					{
+						ctor: '::',
+						_0: _user$project$Search_Command$fetchSearchQuery(_p1),
+						_1: {ctor: '[]'}
+					});
+			case 'InitialFetchQuerySuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchedCollections: _p0._0}),
+					{ctor: '[]'});
+			case 'InitialFetchQueryFail':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p0._0)
+						}),
+					{ctor: '[]'});
+			case 'FetchCollectionListSuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchedCollections: _p0._0}),
+					{ctor: '[]'});
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p0._0)
+						}),
+					{ctor: '[]'});
+		}
+	});

@@ -1,0 +1,69 @@
+.search__container {
+    .search__input__container {
+        width: 70%; 
+        margin: 0 auto;
+
+        margin-bottom: 3rem;
+    
+        .search__input {
+            width: 100%;
+            height: 50px;
+            // font-size: 2rem;
+        }
+    }
+}
+
+
+.reference__tool__start {
+    width: 100vw;
+    height: 100vh; 
+    position: fixed;
+    background: white; // put an opacity in, perhaps. 
+
+    .popup__navbar {
+
+        .draw__button {
+            
+        }
+    
+    }
+
+    .popup__leftbar {
+
+    }
+
+    .popup__middlebar {
+        .image__container {
+            
+        }
+    }
+
+    .popup__bottombar {
+        
+        .skip__pause__stop__container {
+            
+            .button__row {
+
+                .button {
+
+                }
+            
+            }
+
+            .timing__bar {
+
+            }
+        
+        }
+
+    }
+
+}
+
+.reference__tool__stop {
+
+}
+
+.reference__tool__loading {
+    
+}

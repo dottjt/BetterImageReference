@@ -1,0 +1,21 @@
+<div class="container collectionsShow">
+    <div class="columns is-tablet">
+        <div class="column is-3 is-offset-1">
+            <h1><%= @collection.display_name %></h1>
+                <a href="<%= collection_path @conn, :showPage, @collection.name %>">Back to collection</a>
+        </div>
+
+        <div class="column is-8">
+        <%# I need to figure out how to get this to work for just three images %>
+            <div class="columns"><!-- top three images -->
+                <%= Enum.map(@collection.images, fn(image) -> %>
+                    <div class="column is-child is-4">
+                        <a href="<%= image_path @conn, :indexPage, image.name %>"><img class="search__image" src="<%= image.image_url %>"></a>
+                    </div>
+                <% end) %>
+            </div>  
+            
+        </div>
+    </div>
+</div>
+

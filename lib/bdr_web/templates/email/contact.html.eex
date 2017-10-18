@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Contact</h1>
+  <p>Send me a message, tell me what you think!</p>
+
+  <%= form_for @changeset, email_path(@conn, :create), fn f -> %>
+    <label>
+      Name: <%= text_input f, :name %>
+    </label>
+
+    <label>
+      Email: <%= text_input f, :recipient %>
+    </label>
+
+    <label>
+      Subject: <%= text_input f, :subject %>
+    </label>
+    
+    <label>
+      Content: <%= text_input f, :content %>
+    </label>
+    
+    <%= submit "Submit" %>
+  <% end %>
+
+</div>

@@ -1,0 +1,97 @@
+var _user$project$ReferenceTool_Component_Component$radio = F3(
+	function (value, isChecked, msg) {
+		return A2(
+			_elm_lang$html$Html$label,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'padding', _1: '20px'},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('radio'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$name('font-size'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(msg),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(value),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$ReferenceTool_Component_Component$radioComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$fieldset,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$ReferenceTool_Component_Component$radio,
+				'30',
+				_elm_lang$core$Native_Utils.eq(model.intervalRadio, _user$project$ReferenceTool_Model$I30),
+				_user$project$ReferenceTool_Msg$SelectIntervalTiming(_user$project$ReferenceTool_Model$I30)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_user$project$ReferenceTool_Component_Component$radio,
+					'45',
+					_elm_lang$core$Native_Utils.eq(model.intervalRadio, _user$project$ReferenceTool_Model$I45),
+					_user$project$ReferenceTool_Msg$SelectIntervalTiming(_user$project$ReferenceTool_Model$I45)),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_user$project$ReferenceTool_Component_Component$radio,
+						'60',
+						_elm_lang$core$Native_Utils.eq(model.intervalRadio, _user$project$ReferenceTool_Model$I60),
+						_user$project$ReferenceTool_Msg$SelectIntervalTiming(_user$project$ReferenceTool_Model$I60)),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_user$project$ReferenceTool_Component_Component$radio,
+							'90',
+							_elm_lang$core$Native_Utils.eq(model.intervalRadio, _user$project$ReferenceTool_Model$I90),
+							_user$project$ReferenceTool_Msg$SelectIntervalTiming(_user$project$ReferenceTool_Model$I90)),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_user$project$ReferenceTool_Component_Component$radio,
+								'120',
+								_elm_lang$core$Native_Utils.eq(model.intervalRadio, _user$project$ReferenceTool_Model$I120),
+								_user$project$ReferenceTool_Msg$SelectIntervalTiming(_user$project$ReferenceTool_Model$I120)),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_user$project$ReferenceTool_Component_Component$radio,
+									'Custom',
+									_elm_lang$core$Native_Utils.eq(model.intervalRadio, _user$project$ReferenceTool_Model$Custom),
+									_user$project$ReferenceTool_Msg$SelectIntervalTiming(_user$project$ReferenceTool_Model$Custom)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};

@@ -1,0 +1,11 @@
+var _user$project$Search_Command$fetchSearchQuery = function (searchInput) {
+	return A5(
+		_user$project$Helper_HttpHelper$httpPost,
+		A2(_elm_lang$core$Basics_ops['++'], 'http://localhost:4000/api/collections/', searchInput),
+		_elm_lang$http$Http$jsonBody(
+			_user$project$Search_Model$searchInputEncoder(searchInput)),
+		_user$project$Search_Model$searchCollectionListDecoder,
+		_user$project$Search_Msg$FetchCollectionListFail,
+		_user$project$Search_Msg$FetchCollectionListSuccess);
+};
+var _user$project$Search_Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections', _user$project$Search_Model$searchCollectionListDecoder, _user$project$Search_Msg$InitialFetchQueryFail, _user$project$Search_Msg$InitialFetchQuerySuccess);

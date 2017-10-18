@@ -1,0 +1,69 @@
+var _user$project$Helper_HttpHelper$resultToMsg = F3(
+	function (errMsg, okMsg, result) {
+		var _p0 = result;
+		if (_p0.ctor === 'Ok') {
+			return okMsg(_p0._0);
+		} else {
+			return errMsg(_p0._0);
+		}
+	});
+var _user$project$Helper_HttpHelper$baseRequest = F4(
+	function (verb, url, expect, body) {
+		return _elm_lang$http$Http$request(
+			{
+				method: verb,
+				headers: {ctor: '[]'},
+				url: url,
+				expect: expect,
+				body: body,
+				timeout: _elm_lang$core$Maybe$Nothing,
+				withCredentials: true
+			});
+	});
+var _user$project$Helper_HttpHelper$httpGet = F4(
+	function (url, decoder, onFail, onSucceed) {
+		var request = A4(
+			_user$project$Helper_HttpHelper$baseRequest,
+			'GET',
+			url,
+			_elm_lang$http$Http$expectJson(decoder),
+			_elm_lang$http$Http$emptyBody);
+		return A2(
+			_elm_lang$http$Http$send,
+			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),
+			request);
+	});
+var _user$project$Helper_HttpHelper$httpPost = F5(
+	function (url, body, decoder, onFail, onSucceed) {
+		var request = A4(
+			_user$project$Helper_HttpHelper$baseRequest,
+			'POST',
+			url,
+			_elm_lang$http$Http$expectJson(decoder),
+			_elm_lang$http$Http$emptyBody);
+		return A2(
+			_elm_lang$http$Http$send,
+			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),
+			request);
+	});
+var _user$project$Helper_HttpHelper$httpPut = F5(
+	function (url, body, decoder, onFail, onSucceed) {
+		var request = A4(
+			_user$project$Helper_HttpHelper$baseRequest,
+			'PUT',
+			url,
+			_elm_lang$http$Http$expectJson(decoder),
+			_elm_lang$http$Http$emptyBody);
+		return A2(
+			_elm_lang$http$Http$send,
+			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),
+			request);
+	});
+var _user$project$Helper_HttpHelper$httpDelete = F4(
+	function (url, expect, onFail, onSucceed) {
+		var request = A4(_user$project$Helper_HttpHelper$baseRequest, 'DELETE', url, expect, _elm_lang$http$Http$emptyBody);
+		return A2(
+			_elm_lang$http$Http$send,
+			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),
+			request);
+	});

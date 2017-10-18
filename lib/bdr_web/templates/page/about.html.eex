@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>About</h1>
+
+  <div class="about__paragraph">
+    <p>Better Draw Tool is an application that is designed to help you better blah blah</p>
+  </div>
+    <div id="elm-app-one"></div>
+
+</div>

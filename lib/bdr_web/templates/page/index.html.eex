@@ -1,0 +1,75 @@
+<div class="container homepage">
+
+    <div class="main__logo__container">
+        <img class="main__logo" src="/images/phoenix.png">        
+    </div>
+
+    <h3 class="title has-text-centered">
+        What do you wish to draw today?
+    </h3>
+
+    <h4 class="subtitle has-text-centered">
+      Search by <strong>user</strong> <strong>collection</strong> or <strong>website</strong>! 
+    </h4>
+  
+
+    <div id="elm-app"></div>
+
+
+  <h2 class="title has-text-centered">What is Better Drawing Reference?</h2>
+  <h3 class="subtitle has-text-centered">Better Drawing Reference is an online tool and community for those learning to draw!</h3> 
+
+
+  <div class="columns">
+    <div class="column is-half">
+      <img class="features__image" src="/images/phoenix.png">              
+    </div>
+    <div class="column is-half">
+      <h3>Timed Drawing Practice</h4>
+        <p>Hone your skills and draw a variety of different subjects under a number of different timings and conditions.</p>  
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-half">
+      <img class="features__image" src="/images/phoenix.png">              
+    </div>
+    <div class="column is-half">
+      <h3>Learn From Other Artists</h4>
+      <p>Observe how other artists have approached the same subject via their thoughts and annotations.</p>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-half">
+      <img class="features__image" src="/images/phoenix.png">              
+    </div>
+    <div class="column is-half">
+      <h3>Save Your Progress</h4>
+      <p>Conveniently save and upload your images online and on the web for the whole world to see!</p>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-half">
+      <img class="features__image" src="/images/phoenix.png">              
+    </div>
+    <div class="column is-half">
+      <h3>Daily Competitions</h4>
+      <p>Take part in daily competitions and gain rewards and points the more you draw!</p>
+    </div>
+  </div>
+
+
+
+  <h3>The best part is that you don't have to sign up and it's free!</h3>
+
+  <h3>Get started with one of our image collections 
+or feel free to create an account if you’re
+interested in the extra features :)</h3>
+
+  <div class="register__account">
+      
+  </div>
+
+</div>

@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <script type="text/javascript" src="dist/bundle.js"></script>
+  </head>
+  <body>
+    <div id="elm-app"></div>
+    <div id="elm-app-one"></div>
+    
+    <script type="text/javascript">
+      var elmDiv = document.getElementById('elm-app');
+      Elm.MainSearch.embed(elmDiv);
+
+      var elmDivOne = document.getElementById('elm-app-one');
+      Elm.MainReferenceTool.embed(elmDivOne);
+      
+    </script>
+  </body>
+</html>

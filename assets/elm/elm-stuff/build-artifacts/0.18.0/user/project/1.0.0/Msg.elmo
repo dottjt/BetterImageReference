@@ -1,0 +1,33 @@
+var _user$project$Msg$FetchCollectionStartAppSuccess = function (a) {
+	return {ctor: 'FetchCollectionStartAppSuccess', _0: a};
+};
+var _user$project$Msg$FetchCollectionStartAppFail = function (a) {
+	return {ctor: 'FetchCollectionStartAppFail', _0: a};
+};
+var _user$project$Msg$InitialFetchQuerySuccess = function (a) {
+	return {ctor: 'InitialFetchQuerySuccess', _0: a};
+};
+var _user$project$Msg$InitialFetchQueryFail = function (a) {
+	return {ctor: 'InitialFetchQueryFail', _0: a};
+};
+var _user$project$Msg$FetchCollectionListSuccess = function (a) {
+	return {ctor: 'FetchCollectionListSuccess', _0: a};
+};
+var _user$project$Msg$FetchCollectionListFail = function (a) {
+	return {ctor: 'FetchCollectionListFail', _0: a};
+};
+var _user$project$Msg$ChangePopupStatus = function (a) {
+	return {ctor: 'ChangePopupStatus', _0: a};
+};
+var _user$project$Msg$ChangeStatus = function (a) {
+	return {ctor: 'ChangeStatus', _0: a};
+};
+var _user$project$Msg$SelectUpsideDown = function (a) {
+	return {ctor: 'SelectUpsideDown', _0: a};
+};
+var _user$project$Msg$SelectIntervalTiming = function (a) {
+	return {ctor: 'SelectIntervalTiming', _0: a};
+};
+var _user$project$Msg$ChangeSearchInput = function (a) {
+	return {ctor: 'ChangeSearchInput', _0: a};
+};

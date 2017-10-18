@@ -1,0 +1,16 @@
+<div class="container">
+
+<%= for blog <- @blog do %>
+    <tr>
+      <td><%= blog.name %></td>
+      <td><%= blog.display_name %></td>
+
+      <td class="text-right">
+        <span><%= link "New", to: admin_path(@conn, :newBlogAdmin, blog), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: admin_path(@conn, :editBlogAdmin, blog), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: blog_path(@conn, :delete, blog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+
+</div>

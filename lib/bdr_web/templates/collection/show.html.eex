@@ -1,0 +1,60 @@
+<div class="container collectionsShow">
+    <div class="columns is-tablet">
+        <div class="column is-3 is-offset-1">
+            <h1><%= @collection.display_name %></h1>
+                <a href="<%= image_path @conn, :indexPage, @collection.name %>">View all images</a>
+        </div>
+
+        <div class="column is-8">
+        <%# I need to figure out how to get this to work for just three images %>
+            <div class="columns"><!-- top three images -->
+                <%= Enum.map(@collection.images, fn(image) -> %>
+                    <div class="column is-child is-4">
+                        <a href="<%= image_path @conn, :indexPage, image.name %>"><img class="search__image" src="<%= image.image_url %>"></a>
+                    </div>
+                <% end) %>
+            </div>  
+
+
+
+            <h2>Timed Drawing Practice</h2>
+                
+            <div id="elm-app-one"></div>
+
+
+
+
+            <h2>Online Tutorials</h2>
+
+            <div class="columns is-multiline">
+                <%= Enum.map(@collection.collection_tutorials, fn(tutorial) -> %>
+                    <div class="column is-child is-12">
+                        <h3><i class="fa fa-external-link" aria-hidden="true"></i><a href="<%= tutorial.url %>"><%= tutorial.display_name %></a></h3>
+                    </div>
+                <% end) %>
+            </div>
+
+
+
+            <h2>Related Books</h2>
+
+            <div class="columns is-multiline">
+                <%= Enum.map(@collection.collection_books, fn(book) -> %>
+                    <div class="column is-child is-12">
+                        <h3><i class="fa fa-external-link" aria-hidden="true"></i><a href="<%= book.url %>"><%= book.display_name %></a></h3>
+                    </div>
+                <% end) %>
+            </div>
+
+
+            <h2>User Drawings</h2>
+
+
+            <h2>Related Collections</h2>
+
+            <h2>Reference Images</h2>
+            
+        </div>
+    </div>
+</div>
+

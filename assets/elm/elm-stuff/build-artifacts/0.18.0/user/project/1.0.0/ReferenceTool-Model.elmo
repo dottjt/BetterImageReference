@@ -1,0 +1,88 @@
+var _user$project$ReferenceTool_Model$searchInputEncoder = function (searchInput) {
+	return _elm_lang$core$Json_Encode$string(searchInput);
+};
+var _user$project$ReferenceTool_Model$collectionEncoder = function (collection) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'user_id',
+				_1: _elm_lang$core$Json_Encode$string(collection.user_id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'name',
+					_1: _elm_lang$core$Json_Encode$string(collection.name)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'id',
+						_1: _elm_lang$core$Json_Encode$string(collection.id)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'featured_image',
+							_1: _elm_lang$core$Json_Encode$string(collection.featured_image)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'display_name',
+								_1: _elm_lang$core$Json_Encode$string(collection.display_name)
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$ReferenceTool_Model$Collection = F5(
+	function (a, b, c, d, e) {
+		return {id: a, name: b, display_name: c, user_id: d, featured_image: e};
+	});
+var _user$project$ReferenceTool_Model$collectionDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'display_name',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'featured_image',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'id',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'user_id',
+					_elm_lang$core$Json_Decode$string,
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$ReferenceTool_Model$Collection))))));
+var _user$project$ReferenceTool_Model$collectionListDecoder = A2(
+	_elm_lang$core$Json_Decode$field,
+	'data',
+	_elm_lang$core$Json_Decode$list(_user$project$ReferenceTool_Model$collectionDecoder));
+var _user$project$ReferenceTool_Model$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {searchedCollections: a, selectedCollections: b, searchInput: c, radioInterval: d, radioUpsidedown: e, error: f};
+	});
+var _user$project$ReferenceTool_Model$UpsideDownNot = {ctor: 'UpsideDownNot'};
+var _user$project$ReferenceTool_Model$UpsideDownIs = {ctor: 'UpsideDownIs'};
+var _user$project$ReferenceTool_Model$Custom = {ctor: 'Custom'};
+var _user$project$ReferenceTool_Model$I120 = {ctor: 'I120'};
+var _user$project$ReferenceTool_Model$I90 = {ctor: 'I90'};
+var _user$project$ReferenceTool_Model$I60 = {ctor: 'I60'};
+var _user$project$ReferenceTool_Model$I45 = {ctor: 'I45'};
+var _user$project$ReferenceTool_Model$I30 = {ctor: 'I30'};

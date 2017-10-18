@@ -1,0 +1,12 @@
+var _user$project$MainReferenceTool$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$MainReferenceTool$initialModel = A2(
+	_elm_lang$core$Platform_Cmd_ops['!'],
+	{
+		drawingCollection: {ctor: '[]'},
+		error: ''
+	},
+	{ctor: '[]'});
+var _user$project$MainReferenceTool$main = _elm_lang$html$Html$program(
+	{init: _user$project$MainReferenceTool$initialModel, view: _user$project$ReferenceTool_View$view, update: _user$project$ReferenceTool_Update$update, subscriptions: _user$project$MainReferenceTool$subscriptions})();

@@ -1,0 +1,7 @@
+var _user$project$ReferenceTool$FullCollection = F5(
+	function (a, b, c, d, e) {
+		return {id: a, name: b, display_name: c, user_id: d, featured_image: e};
+	});
+var _user$project$ReferenceTool$FullCollectionModel = function (a) {
+	return {drawingCollection: a};
+};

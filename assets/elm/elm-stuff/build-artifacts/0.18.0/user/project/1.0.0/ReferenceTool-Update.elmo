@@ -1,0 +1,29 @@
+var _user$project$ReferenceTool_Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'SelectIntervalTiming':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{intervalRadio: _p0._0}),
+					{ctor: '[]'});
+			case 'FetchReferenceCollectionListSuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{drawingCollection: _p0._0}),
+					{ctor: '[]'});
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p0._0)
+						}),
+					{ctor: '[]'});
+		}
+	});

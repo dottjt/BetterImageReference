@@ -1,0 +1,211 @@
+var _user$project$Model$searchInputEncoder = function (searchInput) {
+	return _elm_lang$core$Json_Encode$string(searchInput);
+};
+var _user$project$Model$imageEncoder = function (image) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'name',
+				_1: _elm_lang$core$Json_Encode$string(image.name)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'image_url',
+					_1: _elm_lang$core$Json_Encode$string(image.image_url)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'id',
+						_1: _elm_lang$core$Json_Encode$string(image.id)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'display_name',
+							_1: _elm_lang$core$Json_Encode$string(image.display_name)
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Model$imageListEncoder = function (imageList) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Model$imageEncoder, imageList));
+};
+var _user$project$Model$collectionEncoder = function (collection) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'user_id',
+				_1: _elm_lang$core$Json_Encode$string(collection.user_id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'name',
+					_1: _elm_lang$core$Json_Encode$string(collection.name)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'id',
+						_1: _elm_lang$core$Json_Encode$string(collection.id)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'featured_image',
+							_1: _elm_lang$core$Json_Encode$string(collection.featured_image)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'display_name',
+								_1: _elm_lang$core$Json_Encode$string(collection.display_name)
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Model$collectionListEncoder = function (collectionList) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Model$collectionEncoder, collectionList));
+};
+var _user$project$Model$Collection = F5(
+	function (a, b, c, d, e) {
+		return {user_id: a, name: b, id: c, featured_image: d, display_name: e};
+	});
+var _user$project$Model$collectionDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'display_name',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'featured_image',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'id',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'user_id',
+					_elm_lang$core$Json_Decode$string,
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$Collection))))));
+var _user$project$Model$collectionListDecoder = A2(
+	_elm_lang$core$Json_Decode$field,
+	'data',
+	_elm_lang$core$Json_Decode$list(_user$project$Model$collectionDecoder));
+var _user$project$Model$Image = F4(
+	function (a, b, c, d) {
+		return {name: a, image_url: b, id: c, display_name: d};
+	});
+var _user$project$Model$imageDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'display_name',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'id',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'image_url',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$Image)))));
+var _user$project$Model$imageListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageDecoder);
+var _user$project$Model$CollectionImages = F6(
+	function (a, b, c, d, e, f) {
+		return {user_id: a, name: b, id: c, featured_image: d, display_name: e, images: f};
+	});
+var _user$project$Model$collectionImageDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'images',
+	_user$project$Model$imageListDecoder,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'display_name',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'featured_image',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'id',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'name',
+					_elm_lang$core$Json_Decode$string,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'user_id',
+						_elm_lang$core$Json_Decode$string,
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$CollectionImages)))))));
+var _user$project$Model$collectionImageListDecoder = A2(
+	_elm_lang$core$Json_Decode$field,
+	'data',
+	_elm_lang$core$Json_Decode$list(_user$project$Model$collectionImageDecoder));
+var _user$project$Model$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, radioInterval: f, radioUpsideDown: g, radioDistraction: h, loadedCollectionsWithImages: i, error: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Model$Start = {ctor: 'Start'};
+var _user$project$Model$Loading = {ctor: 'Loading'};
+var _user$project$Model$Stop = {ctor: 'Stop'};
+var _user$project$Model$Resume = {ctor: 'Resume'};
+var _user$project$Model$Pause = {ctor: 'Pause'};
+var _user$project$Model$NoUpsideDown = {ctor: 'NoUpsideDown'};
+var _user$project$Model$YesUpsideDown = {ctor: 'YesUpsideDown'};
+var _user$project$Model$NoMinimalDistraction = {ctor: 'NoMinimalDistraction'};
+var _user$project$Model$YesMinimalDistraction = {ctor: 'YesMinimalDistraction'};
+var _user$project$Model$Custom = {ctor: 'Custom'};
+var _user$project$Model$I120 = {ctor: 'I120'};
+var _user$project$Model$I90 = {ctor: 'I90'};
+var _user$project$Model$I60 = {ctor: 'I60'};
+var _user$project$Model$I45 = {ctor: 'I45'};
+var _user$project$Model$I30 = {ctor: 'I30'};

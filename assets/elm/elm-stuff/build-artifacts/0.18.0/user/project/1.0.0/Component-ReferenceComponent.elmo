@@ -1,0 +1,71 @@
+var _user$project$Component_ReferenceComponent$submitComponent = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$ChangeStatus),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('hellothere'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Component_ReferenceComponent$referenceComponent = function (model) {
+	var _p0 = model.applicationStatus;
+	switch (_p0.ctor) {
+		case 'Start':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__start'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'});
+		case 'Stop':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$Component_SearchComponent$selectionComponent(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Component_ReferenceComponent$submitComponent,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				});
+		default:
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__loading'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Fetching images, please wait'),
+					_1: {ctor: '[]'}
+				});
+	}
+};
