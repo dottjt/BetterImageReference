@@ -100,7 +100,7 @@ type alias Model =
     , radioDistraction : MinimalDistraction
 
     -- Popup Component
-    , loadedCollectionsWithImages : CollectionImagesList
+    , loadedCollectionImagesList : CollectionImagesList
 
     -- Errors 
     , error : String

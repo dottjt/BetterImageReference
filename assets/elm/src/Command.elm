@@ -35,7 +35,7 @@ fetchSearchQuery searchInput =
 startAppFetchImages : CollectionList -> Cmd Msg
 startAppFetchImages collectionList =
     httpPost
-        ("http://localhost:4000/api/collections_with_images")
+        ("http://localhost:4000/api/collections/with_images")
         (Http.jsonBody (collectionListEncoder collectionList))          
         collectionImageListDecoder
         FetchCollectionStartAppFail

@@ -193,7 +193,7 @@ var _user$project$Model$Model = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionsWithImages: j, error: k};
+											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionImagesList: j, error: k};
 										};
 									};
 								};

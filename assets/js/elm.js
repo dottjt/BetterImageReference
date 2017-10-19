@@ -9308,7 +9308,7 @@ var _user$project$Model$Model = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionsWithImages: j, error: k};
+											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionImagesList: j, error: k};
 										};
 									};
 								};
@@ -9449,7 +9449,7 @@ var _user$project$Helper_HttpHelper$httpDelete = F4(
 var _user$project$Command$startAppFetchImages = function (collectionList) {
 	return A5(
 		_user$project$Helper_HttpHelper$httpPost,
-		'http://localhost:4000/api/collections_with_images',
+		'http://localhost:4000/api/collections/with_images',
 		_elm_lang$http$Http$jsonBody(
 			_user$project$Model$collectionListEncoder(collectionList)),
 		_user$project$Model$collectionImageListDecoder,
@@ -9467,6 +9467,210 @@ var _user$project$Command$fetchSearchQuery = function (searchInput) {
 		_user$project$Msg$FetchCollectionListSuccess);
 };
 var _user$project$Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections', _user$project$Model$collectionListDecoder, _user$project$Msg$InitialFetchQueryFail, _user$project$Msg$InitialFetchQuerySuccess);
+
+var _user$project$Component_SearchComponent$submitComponent = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Start'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Component_SearchComponent$searchInput = function (searchInputValue) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('search__input__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('search__input'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('text'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$placeholder(''),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$value(searchInputValue),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$ChangeSearchInput),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Component_SearchComponent$searchTile = function (collection) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('column is-3'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$a,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$href(
+						A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$img,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('search__image'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src(collection.featured_image),
+								_1: {ctor: '[]'}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$href(
+							A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h4,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('search__title'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(collection.display_name),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('search__details'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h5,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Times drawn variable'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Component_SearchComponent$selectedCollections = function (collectionList) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
+};
+var _user$project$Component_SearchComponent$searchedCollections = function (collectionList) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
+};
+var _user$project$Component_SearchComponent$searchComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('search__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Component_SearchComponent$selectionComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('selectionComponent'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Component_SearchComponent$selectedCollections(model.selectedCollections),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
 
 var _user$project$Update$update = F2(
 	function (msg, model) {
@@ -9556,7 +9760,7 @@ var _user$project$Update$update = F2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{loadedCollectionsWithImages: _p0._0}),
+						{loadedCollectionImagesList: _p0._0}),
 					{ctor: '[]'});
 			default:
 				return A2(
@@ -9570,11 +9774,271 @@ var _user$project$Update$update = F2(
 		}
 	});
 
-var _user$project$Component_FinishComponent$displayDrawnImages = function (model) {
+var _user$project$Component_RadioComponent$radio = F3(
+	function (value, isChecked, msg) {
+		var _p0 = isChecked;
+		if (_p0 === true) {
+			return A2(
+				_elm_lang$html$Html$label,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('radio'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$name('font-size'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(msg),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(value),
+						_1: {ctor: '[]'}
+					}
+				});
+		} else {
+			return A2(
+				_elm_lang$html$Html$label,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('checkedRadio'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('radio'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$name('font-size'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(msg),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(value),
+						_1: {ctor: '[]'}
+					}
+				});
+		}
+	});
+var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$form,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$Component_RadioComponent$radio,
+				'Yes',
+				_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$YesUpsideDown),
+				_user$project$Msg$SelectUpsideDown(_user$project$Model$YesUpsideDown)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_user$project$Component_RadioComponent$radio,
+					'No',
+					_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$NoUpsideDown),
+					_user$project$Msg$SelectUpsideDown(_user$project$Model$NoUpsideDown)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$form,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__interval__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$Component_RadioComponent$radio,
+				'30',
+				_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I30),
+				_user$project$Msg$SelectIntervalTiming(_user$project$Model$I30)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_user$project$Component_RadioComponent$radio,
+					'45',
+					_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I45),
+					_user$project$Msg$SelectIntervalTiming(_user$project$Model$I45)),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_user$project$Component_RadioComponent$radio,
+						'60',
+						_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I60),
+						_user$project$Msg$SelectIntervalTiming(_user$project$Model$I60)),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_user$project$Component_RadioComponent$radio,
+							'90',
+							_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I90),
+							_user$project$Msg$SelectIntervalTiming(_user$project$Model$I90)),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_user$project$Component_RadioComponent$radio,
+								'120',
+								_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I120),
+								_user$project$Msg$SelectIntervalTiming(_user$project$Model$I120)),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_user$project$Component_RadioComponent$radio,
+									'Custom',
+									_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$Custom),
+									_user$project$Msg$SelectIntervalTiming(_user$project$Model$Custom)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+
+var _user$project$Component_FinishComponent$relevantUserImages = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{ctor: '[]'});
+};
+var _user$project$Component_FinishComponent$tryNewCollections = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$Component_SearchComponent$selectionComponent(model),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_SearchComponent$submitComponent,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Component_FinishComponent$drawnImages = function (image) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$img,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$src(image.image_url),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$form,
+							{ctor: '[]'},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Component_FinishComponent$displayDrawnImages = function (collectionImages) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, _user$project$Component_FinishComponent$drawnImages, collectionImages.images));
+};
+var _user$project$Component_FinishComponent$displayDrawnCollections = function (loadedCollectionImagesList) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('display__drawn__collections'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Upload and save your drawings!'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					A2(_elm_lang$core$List$map, _user$project$Component_FinishComponent$displayDrawnImages, loadedCollectionImagesList)),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 
 var _user$project$Component_PopupComponent$popupPauseResumeButton = function (popupStatus) {
@@ -9855,372 +10319,6 @@ var _user$project$Component_PopupComponent$popupNavbar = function (model) {
 		});
 };
 
-var _user$project$Component_RadioComponent$radio = F3(
-	function (value, isChecked, msg) {
-		var _p0 = isChecked;
-		if (_p0 === true) {
-			return A2(
-				_elm_lang$html$Html$label,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$input,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$type_('radio'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$name('font-size'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(msg),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(value),
-						_1: {ctor: '[]'}
-					}
-				});
-		} else {
-			return A2(
-				_elm_lang$html$Html$label,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('checkedRadio'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$input,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$type_('radio'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$name('font-size'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(msg),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$checked(isChecked),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(value),
-						_1: {ctor: '[]'}
-					}
-				});
-		}
-	});
-var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$form,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A3(
-				_user$project$Component_RadioComponent$radio,
-				'Yes',
-				_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$YesUpsideDown),
-				_user$project$Msg$SelectUpsideDown(_user$project$Model$YesUpsideDown)),
-			_1: {
-				ctor: '::',
-				_0: A3(
-					_user$project$Component_RadioComponent$radio,
-					'No',
-					_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$NoUpsideDown),
-					_user$project$Msg$SelectUpsideDown(_user$project$Model$NoUpsideDown)),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$form,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('radio__interval__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A3(
-				_user$project$Component_RadioComponent$radio,
-				'30',
-				_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I30),
-				_user$project$Msg$SelectIntervalTiming(_user$project$Model$I30)),
-			_1: {
-				ctor: '::',
-				_0: A3(
-					_user$project$Component_RadioComponent$radio,
-					'45',
-					_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I45),
-					_user$project$Msg$SelectIntervalTiming(_user$project$Model$I45)),
-				_1: {
-					ctor: '::',
-					_0: A3(
-						_user$project$Component_RadioComponent$radio,
-						'60',
-						_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I60),
-						_user$project$Msg$SelectIntervalTiming(_user$project$Model$I60)),
-					_1: {
-						ctor: '::',
-						_0: A3(
-							_user$project$Component_RadioComponent$radio,
-							'90',
-							_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I90),
-							_user$project$Msg$SelectIntervalTiming(_user$project$Model$I90)),
-						_1: {
-							ctor: '::',
-							_0: A3(
-								_user$project$Component_RadioComponent$radio,
-								'120',
-								_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$I120),
-								_user$project$Msg$SelectIntervalTiming(_user$project$Model$I120)),
-							_1: {
-								ctor: '::',
-								_0: A3(
-									_user$project$Component_RadioComponent$radio,
-									'Custom',
-									_elm_lang$core$Native_Utils.eq(model.radioInterval, _user$project$Model$Custom),
-									_user$project$Msg$SelectIntervalTiming(_user$project$Model$Custom)),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		});
-};
-
-var _user$project$Component_SearchComponent$searchInput = function (searchInputValue) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('search__input__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$input,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('search__input'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('text'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$placeholder(''),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$value(searchInputValue),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$ChangeSearchInput),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Component_SearchComponent$searchTile = function (collection) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('column is-3'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$a,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$href(
-						A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$img,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('search__image'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src(collection.featured_image),
-								_1: {ctor: '[]'}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$href(
-							A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$h4,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('search__title'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(collection.display_name),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('search__details'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$h5,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Times drawn variable'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _user$project$Component_SearchComponent$selectedCollections = function (collectionList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
-			_1: {ctor: '[]'}
-		},
-		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
-};
-var _user$project$Component_SearchComponent$searchedCollections = function (collectionList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
-			_1: {ctor: '[]'}
-		},
-		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
-};
-var _user$project$Component_SearchComponent$searchComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('search__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Component_SearchComponent$selectionComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('selectionComponent'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
-				_1: {
-					ctor: '::',
-					_0: _user$project$Component_SearchComponent$selectedCollections(model.selectedCollections),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-
-var _user$project$Component_ReferenceComponent$submitComponent = A2(
-	_elm_lang$html$Html$div,
-	{ctor: '[]'},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$button,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Start'),
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	});
 var _user$project$Component_ReferenceComponent$referenceComponent = function (model) {
 	var _p0 = model.applicationStatus;
 	switch (_p0.ctor) {
@@ -10290,7 +10388,7 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 							_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Component_ReferenceComponent$submitComponent,
+								_0: _user$project$Component_SearchComponent$submitComponent,
 								_1: {ctor: '[]'}
 							}
 						}
@@ -10306,7 +10404,7 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_FinishComponent$displayDrawnImages(model),
+					_0: _user$project$Component_FinishComponent$displayDrawnCollections(model.loadedCollectionImagesList),
 					_1: {ctor: '[]'}
 				});
 		default:
@@ -10372,7 +10470,7 @@ var _user$project$MainReferenceTool$initialModel = A2(
 		radioInterval: _user$project$Model$I30,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
-		loadedCollectionsWithImages: {ctor: '[]'},
+		loadedCollectionImagesList: {ctor: '[]'},
 		error: ''
 	},
 	{ctor: '[]'});
@@ -10394,7 +10492,7 @@ var _user$project$MainSearch$initialModel = A2(
 		radioInterval: _user$project$Model$I30,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
-		loadedCollectionsWithImages: {ctor: '[]'},
+		loadedCollectionImagesList: {ctor: '[]'},
 		error: ''
 	},
 	{

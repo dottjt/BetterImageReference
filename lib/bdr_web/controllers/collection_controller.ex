@@ -16,13 +16,6 @@ defmodule BdrWeb.CollectionController do
     render(conn, "index.json", collections: collections)
   end
 
-  def collectionWithImages(conn, _params) do
-
-    # Enum.map(fn {k, v} -> )  
-    #   |> ApiResources.get_collection_name_image_assoc()
-    
-  end
-
   def create(conn, %{"collection" => collection_params}) do
     with {:ok, %Collection{} = collection} <- ApiResources.create_collection(collection_params) do
       conn
@@ -57,6 +50,14 @@ defmodule BdrWeb.CollectionController do
 
   # CUSTOM API
 
+    # recieves a list of collections with which to retrieve images from. 
+  def collectionWithImages(conn, %{"collection" => collection_params}) do
+      
+        # Enum.map(fn {k, v} -> )  
+        #   |> ApiResources.get_collection_name_image_assoc()  
+  end
+
+    # recieves a string, with which to fetch and return images. 
   def collectionSearchQuery(conn, %{"search_input" => search_input}) do
     Logger.info search_input
 

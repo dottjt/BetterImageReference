@@ -29,7 +29,7 @@ initialModel =
     , radioUpsideDown = NoUpsideDown
     , radioDistraction = NoMinimalDistraction
 
-    , loadedCollectionsWithImages = []
+    , loadedCollectionImagesList = []
     
     , error = "" 
     } ! []

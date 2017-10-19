@@ -11,17 +11,17 @@ import Component.SearchComponent exposing (..)
 import Component.RadioComponent exposing (..)
 
 
-displayDrawnCollections : Model -> Html Msg 
-displayDrawnCollections model =
+displayDrawnCollections : CollectionImagesList -> Html Msg 
+displayDrawnCollections loadedCollectionImagesList =
     div [ class "display__drawn__collections" ]
         [ h1 [] [ text "Upload and save your drawings!" ]
-        , div [] ( List.map displayDrawnImages model.loadedCollectionsWithImages )
+        , div [] ( List.map displayDrawnImages loadedCollectionImagesList )
         ]
 
 displayDrawnImages : CollectionImages -> Html Msg
-displayDrawnImages loadedCollectionsWithImages = 
+displayDrawnImages collectionImages =
     div []
-        ( List.map drawnImages loadedCollectionsWithImages.images )
+        ( List.map drawnImages collectionImages.images )
         
 
 drawnImages : Image -> Html Msg 
@@ -45,7 +45,7 @@ tryNewCollections model =
         ]
 
 
-relevantUserImages : Model -> Html msg
+relevantUserImages : Model -> Html Msg
 relevantUserImages model =
     div []
-        [ ]
+        []

@@ -2,11 +2,9 @@ module Component.ReferenceComponent exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 
 import Msg exposing (..)
 import Model exposing (..)
-import Update exposing (..)
 
 import Component.RadioComponent exposing (..)
 import Component.SearchComponent exposing (..)
@@ -38,7 +36,7 @@ referenceComponent model =
 
       Finish -> 
         div [ class "reference__tool__finish"]
-            [ displayDrawnImages model ]
+            [ displayDrawnCollections model.loadedCollectionImagesList ]
 
       Loading ->
         div [ class "reference__tool__loading"]

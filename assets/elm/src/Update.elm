@@ -45,7 +45,7 @@ update msg model =
 
         -- START APPLICATION IMAGE FETCH
         FetchCollectionStartAppSuccess response ->
-            { model | loadedCollectionsWithImages = response } ! []        
+            { model | loadedCollectionImagesList = response } ! []        
 
         FetchCollectionStartAppFail error ->
             { model | error = toString error } ! []

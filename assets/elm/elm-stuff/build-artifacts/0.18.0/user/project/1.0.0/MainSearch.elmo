@@ -13,7 +13,7 @@ var _user$project$MainSearch$initialModel = A2(
 		radioInterval: _user$project$Model$I30,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
-		loadedCollectionsWithImages: {ctor: '[]'},
+		loadedCollectionImagesList: {ctor: '[]'},
 		error: ''
 	},
 	{
