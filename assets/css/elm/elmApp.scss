@@ -32,19 +32,17 @@
 
         display: grid;    
         grid-template-columns: 20vw 60vw 20vw;
-        grid-template-rows: 10vh 90vh 10vh;        
+        grid-template-rows: 10vh 80vh 10vh;        
         grid-template-areas:
-        "....... navbar ......."
+        "navbar navbar navbar"
         "middlebar middlebar middlebar"
-        "... middlebar ..."
-        ;
+        "bottombar bottombar bottombar";
 
 
         .popup__navbar {
             // grid-column: 1;
             // grid-row: 1;      
             grid-area: navbar;  
-            
             border: 1px solid black;
     
             .draw__button {
@@ -63,19 +61,12 @@
                 
             }
         }
-    }
 
-    .outer {
-        .popup__leftbar {
-            position: absolute;
-            display: none;
-            border: 1px solid black;
-            background: green;
-        }
-    
         .popup__bottombar {
-            grid-column: 1;
-            grid-row: 1;
+            grid-area: bottombar;
+            
+            // grid-column: 1;
+            // grid-row: 1;
             
             border: 1px solid black;
             
@@ -88,7 +79,17 @@
     
                 }
             }
-        }    
+        }            
+    }
+
+    .outer {
+        .popup__leftbar {
+            position: absolute;
+            display: none;
+            border: 1px solid black;
+            background: green;
+        }
+    
     }
 }
 

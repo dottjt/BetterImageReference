@@ -19,13 +19,14 @@ referenceComponent model =
         div [ class "reference__tool__start" ]
             [ div [ class "outer"] 
                   [ popupLeftbar model
-                  , popupBottombar model]
+                  ]
             , div [ class "inner"]
                   [ popupNavbar model
                   , popupMiddlebar model
+                  , popupBottombar model
                   ]
             ]
-  
+
       Stop -> 
         div [ class "reference__tool__stop"]
             [ selectionComponent model

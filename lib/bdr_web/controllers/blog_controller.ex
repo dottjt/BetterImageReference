@@ -36,6 +36,7 @@ defmodule BdrWeb.BlogController do
     end
   end
 
+  
   def delete(conn, %{"id" => id}) do
     blog = ApiResources.get_blog!(id)
     with {:ok, %Blog{}} <- ApiResources.delete_blog(blog) do

@@ -14301,11 +14301,7 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 						{
 							ctor: '::',
 							_0: _user$project$Component_PopupComponent$popupLeftbar(model),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Component_PopupComponent$popupBottombar(model),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',
@@ -14322,7 +14318,11 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 								_1: {
 									ctor: '::',
 									_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: _user$project$Component_PopupComponent$popupBottombar(model),
+										_1: {ctor: '[]'}
+									}
 								}
 							}),
 						_1: {ctor: '[]'}

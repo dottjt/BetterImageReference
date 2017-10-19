@@ -1,18 +1,124 @@
-<div class="container">
+<div class="container panelAdminContainer">
+  <div class="sub_container">
+    <h2>Listing Blog</h2>
+    <span><%= link "New blog", to: admin_path(@conn, :newBlogAdmin) %></span>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Display name</th>
+
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= for blog <- @blogs do %>
+        <tr>
+          <td><%= blog.name %></td>
+          <td><%= blog.display_name %></td>
+
+          <td class="text-right">
+            <span><%= link "Edit", to: admin_path(@conn, :editBlogAdmin, blog), class: "btn btn-default btn-xs" %></span>
+            <span><%#= link "Delete", to: blog_path(@conn, :delete, blog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          </td>
+        </tr>
+    <% end %>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="sub_container">
+    <h2>Listing Collection</h2>
+      <span><%= link "New collection", to: admin_path(@conn, :newCollectionAdmin) %></span>  
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Display name</th>
+    
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= for collection <- @collections do %>
+        <tr>
+          <td><%= collection.name %></td>
+          <td><%= collection.display_name %></td>
+    
+          <td class="text-right">
+            <span><%= link "Edit", to: admin_path(@conn, :editCollectionAdmin, collection), class: "btn btn-default btn-xs" %></span>
+            <span><%#= link "Delete", to: collection_path(@conn, :delete, collection), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          </td>
+        </tr>
+    <% end %>
+      </tbody>
+    </table>    
+  </div>
+
+
+  <div class="sub_container">
+    <h2>Listing Image</h2>
+    <span><%= link "New image", to: admin_path(@conn, :newImageAdmin) %></span>  
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Display name</th>
+    
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= for image <- @images do %>
+        <tr>
+          <td><%= image.name %></td>
+          <td><%= image.display_name %></td>
+    
+          <td class="text-right">
+            <span><%= link "Edit", to: admin_path(@conn, :editImageAdmin, image), class: "btn btn-default btn-xs" %></span>
+            <span><%#= link "Delete", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          </td>
+        </tr>
+    <% end %>
+      </tbody>
+    </table>
+    
+  </div>
 
 
 
-<%= for blog <- @blog do %>
-    <tr>
-      <td><%= blog.name %></td>
-      <td><%= blog.display_name %></td>
 
-      <td class="text-right">
-        <span><%= link "New", to: admin_path(@conn, :newBlogAdmin, blog), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: admin_path(@conn, :editBlogAdmin, blog), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: blog_path(@conn, :delete, blog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
-
+  <div class="sub_container">
+    <h2>Listing User</h2>
+    <span><%= link "New user", to: admin_path(@conn, :newUserAdmin) %></span>  
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Display name</th>
+    
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= for user <- @users do %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.display_name %></td>
+    
+          <td class="text-right">
+            <span><%= link "Edit", to: admin_path(@conn, :editUserAdmin, user), class: "btn btn-default btn-xs" %></span>
+            <span><%#= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+          </td>
+        </tr>
+    <% end %>
+      </tbody>
+    </table>
+    
+  </div>
 </div>

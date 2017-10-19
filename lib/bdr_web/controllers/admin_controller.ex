@@ -19,12 +19,12 @@ defmodule BdrWeb.AdminController do
   end  
 
   def panelPageAdmin(conn, _params) do
-    blog = ApiResources.list_blogs()   
-    collection = ApiResources.list_collections()
-    image = ApiResources.list_images()    
-    user = Account.list_users()    
+    blogs = ApiResources.list_blogs()   
+    collections = ApiResources.list_collections()
+    images = ApiResources.list_images()    
+    users = Account.list_users()    
     
-    render conn, "panelAdmin.html", blog: blog, collection: collection, image: image, user: user                                  
+    render(conn, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                 
   end  
 
 
@@ -37,8 +37,8 @@ defmodule BdrWeb.AdminController do
   end  
 
   def editBlogAdmin(conn, %{"id" => id}) do
-    blog = Accounts.get_blog!(id)
-    changeset = Accounts.change_blog(blog)
+    blog = ApiResources.get_blog!(id)
+    changeset = ApiResources.change_blog(blog)
 
     render conn, "editBlogAdmin.html", blog: blog, changeset: changeset
   end
