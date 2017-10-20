@@ -45,6 +45,7 @@ type alias CollectionImages =
 type alias CollectionImagesList =
     List CollectionImages 
 
+
 -- SUM TYPES - Application Status
 
 type Status
@@ -54,8 +55,8 @@ type Status
   | Finish
 
 type PopupStatus 
-  = Pause
-  | Resume
+  = Resume
+  | Pause
 
 type DrawStatus
   = Normal
@@ -159,18 +160,6 @@ collectionImageDecoder =
         |> Pipeline.required "images" imageListDecoder
 
 
--- Collection Image Encoder 
-
--- collectionImageEncoder : Collection -> Encode.Value
--- collectionImageEncoder collection =
---         Encode.object [ ("user_id", Encode.string collection.user_id)
---                       , ("name", Encode.string collection.name)
---                       , ("id", Encode.string collection.id) 
---                       , ("featured_image", Encode.string collection.featured_image)
---                       , ("display_name", Encode.string collection.display_name)
---                       , ("images", (List.map imageEncoder collection.images))]
-
-
 -- Collection Encoder 
 
 collectionListEncoder : CollectionList -> Encode.Value
@@ -184,7 +173,6 @@ collectionEncoder collection =
                       , ("id", Encode.string collection.id) 
                       , ("featured_image", Encode.string collection.featured_image)
                       , ("display_name", Encode.string collection.display_name)]
-
 
 
 -- Image Encoder 
@@ -202,7 +190,6 @@ imageEncoder image =
                       , ("display_name", Encode.string image.display_name)]
 
 
-
 -- Search Input Encoder 
 
 searchInputEncoder : String -> Encode.Value
@@ -210,7 +197,3 @@ searchInputEncoder searchInput =
         Encode.object [ ("search_input", Encode.string searchInput)]
 
 
-
--- searchInputEncoder : String -> Encode.Value
--- searchInputEncoder searchInput =    
---         Encode.string searchInput

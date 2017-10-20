@@ -61,7 +61,7 @@ defmodule BdrWeb.CollectionController do
   def collectionSearchQuery(conn, %{"search_input" => search_input}) do
     Logger.info search_input
 
-    collections = ApiResources.list_collections()
+    collections = ApiResources.query_search_collection_list()
                     # |> Enum.map(fn {_, v} -> v.name end)
                     # |> Enum.filter(fn {_, v} -> v =~ search_input end)
                   

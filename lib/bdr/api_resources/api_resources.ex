@@ -119,6 +119,11 @@ defmodule Bdr.ApiResources do
     Repo.all(Collection)
   end
 
+  def query_search_collection_list do
+    Repo.all(Collection)
+end
+  
+
   @doc """
   Gets a single collection.
 
@@ -144,7 +149,6 @@ defmodule Bdr.ApiResources do
   def get_collection_name_image_assoc!(name) do
     get_collection_name!(name) |> Repo.preload([:images])         
   end
-  
 
 
   @doc """

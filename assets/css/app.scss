@@ -1,9 +1,11 @@
 @import "bulma";
 @import "common";
 
+@import "elm/elmApp.scss";
+
 @import "page/homepage.scss";
 @import "page/collectionsIndex.scss";
 @import "page/collectionsShow.scss";
 @import "page/panelAdmin.scss";
 
-@import "elm/elmApp.scss";
+@import "partial/footer.scss";

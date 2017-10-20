@@ -15,7 +15,7 @@ displayDrawnCollections : CollectionImagesList -> Html Msg
 displayDrawnCollections loadedCollectionImagesList =
     div [ class "display__drawn__collections" ]
         [ h1 [] [ text "Upload and save your drawings!" ]
-        , div [] ( List.map displayDrawnImages loadedCollectionImagesList )
+        , div [] ( List.map displayDrawnImages loadedCollectionImagesList )        
         ]
 
 displayDrawnImages : CollectionImages -> Html Msg
@@ -33,6 +33,8 @@ drawnImages image =
         , div [] 
               [ Html.form [] [] ]
         ]
+
+
 
 
 tryNewCollections : Model -> Html Msg 

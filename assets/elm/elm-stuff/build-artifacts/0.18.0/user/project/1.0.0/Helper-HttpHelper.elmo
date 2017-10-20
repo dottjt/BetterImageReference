@@ -40,7 +40,7 @@ var _user$project$Helper_HttpHelper$httpPost = F5(
 			'POST',
 			url,
 			_elm_lang$http$Http$expectJson(decoder),
-			_elm_lang$http$Http$emptyBody);
+			body);
 		return A2(
 			_elm_lang$http$Http$send,
 			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),
@@ -53,7 +53,7 @@ var _user$project$Helper_HttpHelper$httpPut = F5(
 			'PUT',
 			url,
 			_elm_lang$http$Http$expectJson(decoder),
-			_elm_lang$http$Http$emptyBody);
+			body);
 		return A2(
 			_elm_lang$http$Http$send,
 			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),

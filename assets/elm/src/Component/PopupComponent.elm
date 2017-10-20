@@ -36,11 +36,22 @@ popupLeftbar model =
 
 popupMiddlebar : Model -> Html Msg
 popupMiddlebar model =
-    div [ class "popup__middlebar"]
-        [ div [ class "image__container"]
-              [ img [ class "image", src "" ] []
-              ]
-        ]
+      case model.popupStatus of
+            Resume ->
+                div [ class "popup__middlebar"]
+                    [ div [ class "image__container"]
+                        [ img [ class "image", src "" ] []
+                        ]
+                    ]
+            Pause ->
+                div [ class "popup__middlebar"]
+                    [ div [ class "image__container image__container--pause"]
+                        [ img [ class "image", src "" ] []
+                        ]
+                    ]
+
+
+
 
 
 popupBottombar : Model -> Html Msg 

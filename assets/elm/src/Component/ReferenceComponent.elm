@@ -18,10 +18,11 @@ referenceComponent model =
       Start ->
         div [ class "reference__tool__start" ]
             [ div [ class "outer"] 
-                  [ popupLeftbar model
+                  [ 
                   ]
             , div [ class "inner"]
                   [ popupNavbar model
+                  , popupLeftbar model
                   , popupMiddlebar model
                   , popupBottombar model
                   ]
@@ -37,7 +38,9 @@ referenceComponent model =
 
       Finish -> 
         div [ class "reference__tool__finish"]
-            [ displayDrawnCollections model.loadedCollectionImagesList ]
+            [ displayDrawnCollections model.loadedCollectionImagesList
+            , tryNewCollections model
+            ]
 
       Loading ->
         div [ class "reference__tool__loading"]

@@ -13283,8 +13283,8 @@ var _user$project$Model$Finish = {ctor: 'Finish'};
 var _user$project$Model$Stop = {ctor: 'Stop'};
 var _user$project$Model$Loading = {ctor: 'Loading'};
 var _user$project$Model$Start = {ctor: 'Start'};
-var _user$project$Model$Resume = {ctor: 'Resume'};
 var _user$project$Model$Pause = {ctor: 'Pause'};
+var _user$project$Model$Resume = {ctor: 'Resume'};
 var _user$project$Model$Draw = {ctor: 'Draw'};
 var _user$project$Model$Normal = {ctor: 'Normal'};
 var _user$project$Model$NoUpsideDown = {ctor: 'NoUpsideDown'};
@@ -13377,7 +13377,7 @@ var _user$project$Helper_HttpHelper$httpPost = F5(
 			'POST',
 			url,
 			_elm_lang$http$Http$expectJson(decoder),
-			_elm_lang$http$Http$emptyBody);
+			body);
 		return A2(
 			_elm_lang$http$Http$send,
 			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),
@@ -13390,7 +13390,7 @@ var _user$project$Helper_HttpHelper$httpPut = F5(
 			'PUT',
 			url,
 			_elm_lang$http$Http$expectJson(decoder),
-			_elm_lang$http$Http$emptyBody);
+			body);
 		return A2(
 			_elm_lang$http$Http$send,
 			A2(_user$project$Helper_HttpHelper$resultToMsg, onFail, onSucceed),
@@ -14127,40 +14127,78 @@ var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 		});
 };
 var _user$project$Component_PopupComponent$popupMiddlebar = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('image__container'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$img,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('image'),
-							_1: {
+	var _p1 = model.popupStatus;
+	if (_p1.ctor === 'Resume') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('image__container'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$img,
+							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src(''),
-								_1: {ctor: '[]'}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		});
+								_0: _elm_lang$html$Html_Attributes$class('image'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$src(''),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('image__container image__container--pause'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$img,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('image'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$src(''),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	}
 };
 var _user$project$Component_PopupComponent$popupLeftbar = function (model) {
 	return A2(
@@ -14298,11 +14336,7 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 							_0: _elm_lang$html$Html_Attributes$class('outer'),
 							_1: {ctor: '[]'}
 						},
-						{
-							ctor: '::',
-							_0: _user$project$Component_PopupComponent$popupLeftbar(model),
-							_1: {ctor: '[]'}
-						}),
+						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
 						_0: A2(
@@ -14317,11 +14351,15 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 								_0: _user$project$Component_PopupComponent$popupNavbar(model),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+									_0: _user$project$Component_PopupComponent$popupLeftbar(model),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Component_PopupComponent$popupBottombar(model),
-										_1: {ctor: '[]'}
+										_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Component_PopupComponent$popupBottombar(model),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							}),
@@ -14364,7 +14402,11 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				{
 					ctor: '::',
 					_0: _user$project$Component_FinishComponent$displayDrawnCollections(model.loadedCollectionImagesList),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_FinishComponent$tryNewCollections(model),
+						_1: {ctor: '[]'}
+					}
 				});
 		default:
 			return A2(

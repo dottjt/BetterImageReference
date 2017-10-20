@@ -125,40 +125,78 @@ var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 		});
 };
 var _user$project$Component_PopupComponent$popupMiddlebar = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('image__container'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$img,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('image'),
-							_1: {
+	var _p1 = model.popupStatus;
+	if (_p1.ctor === 'Resume') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('image__container'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$img,
+							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src(''),
-								_1: {ctor: '[]'}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		});
+								_0: _elm_lang$html$Html_Attributes$class('image'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$src(''),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('image__container image__container--pause'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$img,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('image'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$src(''),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	}
 };
 var _user$project$Component_PopupComponent$popupLeftbar = function (model) {
 	return A2(

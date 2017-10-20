@@ -34,7 +34,7 @@ httpPost : String -> Body -> Decoder a -> (Error -> b) -> (a -> b) -> Cmd b
 httpPost url body decoder onFail onSucceed =
   let
     request =
-      baseRequest "POST" url (Http.expectJson decoder) Http.emptyBody
+      baseRequest "POST" url (Http.expectJson decoder) body
   in
     Http.send
       (resultToMsg onFail onSucceed)
@@ -45,7 +45,7 @@ httpPut : String -> Body -> Decoder a -> (Error -> b) -> (a -> b) -> Cmd b
 httpPut url body decoder onFail onSucceed =
   let
     request =
-      baseRequest "PUT" url (Http.expectJson decoder) Http.emptyBody
+      baseRequest "PUT" url (Http.expectJson decoder) body
   in
     Http.send
       (resultToMsg onFail onSucceed)

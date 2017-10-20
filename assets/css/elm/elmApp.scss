@@ -21,6 +21,7 @@
     top: 0;
     left: 0;
     
+    z-index: 10;
     
     // position: fixed;
     background: white; // put an opacity in, perhaps. 
@@ -31,64 +32,74 @@
         height: 100%;
 
         display: grid;    
-        grid-template-columns: 20vw 60vw 20vw;
-        grid-template-rows: 10vh 80vh 10vh;        
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-rows: 1fr 9fr 1fr;    
         grid-template-areas:
         "navbar navbar navbar"
-        "middlebar middlebar middlebar"
+        "leftbar middlebar middlebar"
         "bottombar bottombar bottombar";
 
 
         .popup__navbar {
-            // grid-column: 1;
-            // grid-row: 1;      
             grid-area: navbar;  
-            border: 1px solid black;
-    
+
             .draw__button {
                 
             }
         }
     
-        .popup__middlebar {
-            // grid-column: 1;
-            // grid-row: 1;
-            grid-area: middlebar;
-            background: green;
+        .popup__leftbar {
+            grid-area: leftbar;
+            
+            position: relative;
+            right: 400px;
+
+            transition: right 1s;
+
             border: 1px solid black;
+            background: blue;
+        }
+        
+        .popup__middlebar {
+            grid-area: middlebar;
             
             .image__container {
-                
+                transition: opacity 1s; 
+                opacity: 1;
+            }
+
+            .image__container--pause {
+                opacity: 0;
             }
         }
 
         .popup__bottombar {
             grid-area: bottombar;
             
-            // grid-column: 1;
-            // grid-row: 1;
-            
-            border: 1px solid black;
+            display: flex;
+            justify-content: center;
             
             .skip__pause__stop__container {
+                display: flex;
+                flex-direction: column;
+                
+                width: 400px;
+
                 .button__row {
+                    display: flex;
+                    justify-content: space-around;
+
                     .button {
                     }
                 }
                 .timing__bar {
-    
+                    
                 }
             }
         }            
     }
 
     .outer {
-        .popup__leftbar {
-            position: absolute;
-            display: none;
-            border: 1px solid black;
-            background: green;
-        }
     
     }
 }

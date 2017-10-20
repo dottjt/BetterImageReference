@@ -36,8 +36,8 @@ defmodule BdrWeb.Router do
 
 
     scope "/admin" do
-      get "/", AdminController, :loginPageAdmin
-      get "/panel", AdminController, :panelPageAdmin 
+      get "/", AdminController, :panelPageAdmin      
+      get "/login", AdminController, :loginPageAdmin
       
       get "/collections/new", AdminController, :newCollectionAdmin
       get "/collections/:id", AdminController, :editCollectionAdmin
@@ -55,8 +55,8 @@ defmodule BdrWeb.Router do
 
   scope "/api", BdrWeb do
     pipe_through :api
-
-    resources "/blog", BlogController, only: [:index, :show]
+    resources "/users", UserController, except: [:new, :edit]    
+    resources "/blog", BlogController, except: [:new, :edit]
     resources "/collections", CollectionController, except: [:new, :edit]
          post "/collections/with_images", CollectionController, :collectionWithImages
          post "/collections/collection_search_query", CollectionController, :collectionSearchQuery
