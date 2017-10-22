@@ -95,8 +95,12 @@ type alias Model =
     , popupStatus : PopupStatus
     , imageStatus : DrawStatus
 
+    , imageTime : Int 
+    , imagerTimerBarProgress : Int 
+
     -- Selection Criteria
     , radioInterval : IntervalTiming
+    , radioIntervalCustomInput : Int
     , radioUpsideDown : UpsideDown
     , radioDistraction : MinimalDistraction
 

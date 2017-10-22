@@ -5,6 +5,7 @@ import Model exposing (..)
 import Msg exposing (..)
 import View exposing (viewReference)
 import Update exposing (..)
+import Time exposing (Time, second)
 
 main : Program Never Model Msg
 main =
@@ -24,18 +25,26 @@ initialModel =
     , applicationStatus = Stop
     , popupStatus = Resume
     , imageStatus = Normal
+    
+    , imageTime = 0
+    , imagerTimerBarProgress = 0
 
     , radioInterval = I30
+    , radioIntervalCustomInput = 0
     , radioUpsideDown = NoUpsideDown
     , radioDistraction = NoMinimalDistraction
 
     , loadedCollectionImagesList = []
     
     , error = "" 
-    } ! []
+    } ! [initialFetchQuery]
+
+
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+      Time.every second ImageTimer
+
+
 

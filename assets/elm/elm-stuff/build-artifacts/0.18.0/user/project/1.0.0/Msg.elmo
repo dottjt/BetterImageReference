@@ -16,6 +16,10 @@ var _user$project$Msg$FetchCollectionListSuccess = function (a) {
 var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
 };
+var _user$project$Msg$ImageTimerBarProgress = {ctor: 'ImageTimerBarProgress'};
+var _user$project$Msg$ImageTimer = function (a) {
+	return {ctor: 'ImageTimer', _0: a};
+};
 var _user$project$Msg$ChangeDrawStatus = function (a) {
 	return {ctor: 'ChangeDrawStatus', _0: a};
 };
@@ -25,8 +29,14 @@ var _user$project$Msg$ChangePopupStatus = function (a) {
 var _user$project$Msg$ChangeStatus = function (a) {
 	return {ctor: 'ChangeStatus', _0: a};
 };
+var _user$project$Msg$SelectCollection = function (a) {
+	return {ctor: 'SelectCollection', _0: a};
+};
 var _user$project$Msg$SelectUpsideDown = function (a) {
 	return {ctor: 'SelectUpsideDown', _0: a};
+};
+var _user$project$Msg$UpdateCustomIntervalInput = function (a) {
+	return {ctor: 'UpdateCustomIntervalInput', _0: a};
 };
 var _user$project$Msg$SelectIntervalTiming = function (a) {
 	return {ctor: 'SelectIntervalTiming', _0: a};

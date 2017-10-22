@@ -30,7 +30,15 @@ defmodule Bdr.ApiResources.Collection do
   @doc false
   def changeset(%Collection{} = collection, attrs) do
     collection
-    |> cast(attrs, [:name, :display_name, :user_id, :featured_image, :external_url])
-    |> validate_required([:name, :display_name, :user_id, :featured_image, :external_url])
+    |> cast(attrs, [:name, :display_name, :featured_image, :external_url])
+    |> validate_required([:name, :display_name, :featured_image])
   end
+
+  def changeset_assoc(%Collection{} = collection, attrs) do
+    collection
+    |> cast(attrs, [:name, :display_name, :featured_image, :external_url])
+    |> cast_assoc(:collection_books)
+    |> validate_required([:name, :display_name, :featured_image])
+  end
+  
 end

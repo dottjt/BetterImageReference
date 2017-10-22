@@ -1,35 +1,129 @@
 <%= form_for @changeset, @action, fn f -> %>
+
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
+
+  <div class="field">
+    <%= label f, :name, class: "label" %>
+    <%= text_input f, :name, class: "control" %>
     <%= error_tag f, :name %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= label f, :display_name, class: "control-label" %>
-    <%= text_input f, :display_name, class: "form-control" %>
+  <div class="field">
+    <%= label f, :display_name, class: "label" %>
+    <%= text_input f, :display_name, class: "control" %>
     <%= error_tag f, :display_name %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= label f, :external_url, class: "control-label" %>
-    <%= text_input f, :external_url, class: "form-control" %>
+  <div class="field">
+    <%= label f, :external_url, class: "label" %>
+    <%= text_input f, :external_url, class: "control" %>
     <%= error_tag f, :external_url %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= label f, :featured_image, class: "control-label" %>
-    <%= text_input f, :featured_image, class: "form-control" %>
+  <div class="field">
+    <%= label f, :featured_image, class: "label" %>
+    <%= text_input f, :featured_image, class: "control" %>
     <%= error_tag f, :featured_image %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+
+  <h3 class="admin_title">Collection Books</h3>
+
+    <div class="columns is-multiline">
+      <%= inputs_for f, :collection_books, fn fp -> %>
+        <div class="column is-3">
+          <div class="field">                  
+            <%= label fp, :name, class: "label" %>
+            <%= text_input fp, :name, class: "control" %>
+            <%= error_tag fp, :name %>
+            <p class="help">Required</p>
+          </div>
+          <div class="field">          
+            <%= label fp, :display_name, class: "label" %>
+            <%= text_input fp, :display_name, class: "control" %>
+            <%= error_tag fp, :display_name %>
+            <p class="help">Required</p>
+          </div>
+          <div class="field">          
+            <%= label fp, :url, class: "label" %>
+            <%= text_input fp, :url, class: "control" %>
+            <%= error_tag fp, :url %> 
+            <p class="help">Required</p>
+          </div>     
+        </div>
+      <% end %>
+    </div>
+
+    <h3 class="admin_title">Collection Tutorials</h3>
+      <div class="columns is-multiline">
+        <%= inputs_for f, :collection_tutorials, fn fp -> %>
+          <div class="column is-3">
+            <div class="field">                    
+              <%= label fp, :name, class: "label" %>
+              <%= text_input fp, :name, class: "control" %>
+              <%= error_tag fp, :name %>
+              <p class="help">Required</p>
+            </div>
+            <div class="field">          
+              <%= label fp, :display_name, class: "label" %>
+              <%= text_input fp, :display_name, class: "control" %>
+              <%= error_tag fp, :display_name %>
+              <p class="help">Required</p>
+            </div>
+            <div class="field">          
+              <%= label fp, :url, class: "label" %>
+              <%= text_input fp, :url, class: "control" %>
+              <%= error_tag fp, :url %>    
+              <p class="help">Required</p>
+            </div>  
+          </div>
+        <% end %>
+      </div>
+
+    <h3 class="admin_title">Collection Tags</h3>
+      <div class="columns is-multiline">
+        <%= inputs_for f, :collection_tags, fn fp -> %>
+          <div class="column is-3">
+            <div class="field">                                
+              <%= label fp, :name, class: "label" %>
+              <%= text_input fp, :name, class: "control" %>
+              <%= error_tag fp, :name %>
+              <p class="help">Required</p>
+            </div>
+            <div class="field">                      
+              <%= label fp, :display_name, class: "label" %>
+              <%= text_input fp, :display_name, class: "control" %>
+              <%= error_tag fp, :display_name %>
+              <p class="help">Required</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  
+
+    <h3 class="admin_title">Images</h3>
+
+      <div class="columns is-multiline">
+        <%= inputs_for f, :images, fn fp -> %>
+          <div class="column is-3">
+
+          </div>
+        <% end %>
+      </div>
+
+  <div class="field">
+    <div class="control">    
+      <%= submit "Submit", class: "button is-link" %>
+    </div>
   </div>
+  
 <% end %>

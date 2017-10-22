@@ -1,5 +1,7 @@
-<h2>New Blog</h2>
+<div class="container">
+    <h2>New Blog</h2>
 
-<%= render "formImageAdmin.html", Map.put(assigns, :action, image_path(@conn, :create)) %>
+    <%= render "formImageAdmin.html", Map.put(assigns, :action, image_path(@conn, :create)) %>
 
-<span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+    <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+</div>

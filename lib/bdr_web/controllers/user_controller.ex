@@ -3,7 +3,8 @@ defmodule BdrWeb.UserController do
 
   alias Bdr.Account
   alias Bdr.Account.User
-
+  alias Bdr.ApiResources
+  
   action_fallback BdrWeb.FallbackController
 
   # API
@@ -15,10 +16,12 @@ defmodule BdrWeb.UserController do
 
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Account.create_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      # conn
+      # |> put_status(:created)
+      # |> put_resp_header("location", user_path(conn, :show, user))
+      # |> render("show.json", user: user)
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
     end
   end
 
@@ -31,14 +34,18 @@ defmodule BdrWeb.UserController do
     user = Account.get_user!(id)
 
     with {:ok, %User{} = user} <- Account.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+      # render(conn, "show.json", user: user)
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
     end
   end
 
   def delete(conn, %{"id" => id}) do
     user = Account.get_user!(id)
     with {:ok, %User{}} <- Account.delete_user(user) do
-      send_resp(conn, :no_content, "")
+      # send_resp(conn, :no_content, "")
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
     end
   end
 

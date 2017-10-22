@@ -193,7 +193,13 @@ var _user$project$Model$Model = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionImagesList: j, error: k};
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, imageTime: g, imagerTimerBarProgress: h, radioInterval: i, radioIntervalCustomInput: j, radioUpsideDown: k, radioDistraction: l, loadedCollectionImagesList: m, error: n};
+													};
+												};
+											};
 										};
 									};
 								};

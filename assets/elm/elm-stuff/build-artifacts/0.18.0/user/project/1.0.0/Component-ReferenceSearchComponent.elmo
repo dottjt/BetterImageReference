@@ -1,66 +1,9 @@
-var _user$project$Component_SearchComponent$submitComponent = A2(
-	_elm_lang$html$Html$div,
-	{ctor: '[]'},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$button,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Start'),
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	});
-var _user$project$Component_SearchComponent$searchInput = function (searchInputValue) {
+var _user$project$Component_ReferenceSearchComponent$searchTile = function (collection) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('search__input__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$input,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('search__input'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('text'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$placeholder(''),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$value(searchInputValue),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$ChangeSearchInput),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Component_SearchComponent$searchTile = function (collection) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('column is-3 search__tile__container'),
+			_0: _elm_lang$html$Html_Attributes$class('column is-12 reference_search__tile__container'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -156,7 +99,7 @@ var _user$project$Component_SearchComponent$searchTile = function (collection) {
 			}
 		});
 };
-var _user$project$Component_SearchComponent$selectedCollections = function (collectionList) {
+var _user$project$Component_ReferenceSearchComponent$selectedCollections = function (collectionList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -164,9 +107,9 @@ var _user$project$Component_SearchComponent$selectedCollections = function (coll
 			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
 			_1: {ctor: '[]'}
 		},
-		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
+		A2(_elm_lang$core$List$map, _user$project$Component_ReferenceSearchComponent$searchTile, collectionList));
 };
-var _user$project$Component_SearchComponent$searchedCollections = function (collectionList) {
+var _user$project$Component_ReferenceSearchComponent$searchedCollections = function (collectionList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -174,9 +117,9 @@ var _user$project$Component_SearchComponent$searchedCollections = function (coll
 			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
 			_1: {ctor: '[]'}
 		},
-		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
+		A2(_elm_lang$core$List$map, _user$project$Component_ReferenceSearchComponent$searchTile, collectionList));
 };
-var _user$project$Component_SearchComponent$searchComponent = function (model) {
+var _user$project$Component_ReferenceSearchComponent$searchComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -189,12 +132,12 @@ var _user$project$Component_SearchComponent$searchComponent = function (model) {
 			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
+				_0: _user$project$Component_ReferenceSearchComponent$searchedCollections(model.searchedCollections),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _user$project$Component_SearchComponent$selectionComponent = function (model) {
+var _user$project$Component_ReferenceSearchComponent$selectionComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -207,10 +150,10 @@ var _user$project$Component_SearchComponent$selectionComponent = function (model
 			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
+				_0: _user$project$Component_ReferenceSearchComponent$searchedCollections(model.searchedCollections),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Component_SearchComponent$selectedCollections(model.selectedCollections),
+					_0: _user$project$Component_ReferenceSearchComponent$selectedCollections(model.selectedCollections),
 					_1: {ctor: '[]'}
 				}
 			}

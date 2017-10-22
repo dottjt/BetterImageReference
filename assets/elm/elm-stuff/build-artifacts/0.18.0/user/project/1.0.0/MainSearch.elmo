@@ -10,6 +10,8 @@ var _user$project$MainSearch$initialModel = A2(
 		applicationStatus: _user$project$Model$Stop,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
+		imageTime: 0,
+		imagerTimerBarProgress: 0,
 		radioInterval: _user$project$Model$I30,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,

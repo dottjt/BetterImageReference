@@ -1,13 +1,13 @@
 <div class="container panelAdminContainer">
-  <div class="sub_container">
+  <div class="sub_container admin_blog_container">
     <h2>Listing Blog</h2>
-    <span><%= link "New blog", to: admin_path(@conn, :newBlogAdmin) %></span>
+    <span><%= link "New blog", to: admin_path(@conn, :newBlogAdmin), class: "button is-link is-outlined" %></span>
 
     <table class="table">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Display name</th>
+          <th>Display</th>
 
           <th></th>
         </tr>
@@ -19,8 +19,8 @@
           <td><%= blog.display_name %></td>
 
           <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editBlogAdmin, blog), class: "btn btn-default btn-xs" %></span>
-            <span><%#= link "Delete", to: blog_path(@conn, :delete, blog), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+            <span><%= link "Edit", to: admin_path(@conn, :editBlogAdmin, blog), class: "button is-link is-outlined" %></span>
+            <span><%= link "Delete", to: blog_path(@conn, :delete, blog), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
           </td>
         </tr>
     <% end %>
@@ -29,15 +29,15 @@
   </div>
 
 
-  <div class="sub_container">
+  <div class="sub_container admin_collection_container">
     <h2>Listing Collection</h2>
-      <span><%= link "New collection", to: admin_path(@conn, :newCollectionAdmin) %></span>  
+      <span><%= link "New collection", to: admin_path(@conn, :newCollectionAdmin), class: "button is-link is-outlined" %></span>  
 
     <table class="table">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Display name</th>
+          <th>Display</th>
     
           <th></th>
         </tr>
@@ -49,8 +49,8 @@
           <td><%= collection.display_name %></td>
     
           <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editCollectionAdmin, collection), class: "btn btn-default btn-xs" %></span>
-            <span><%#= link "Delete", to: collection_path(@conn, :delete, collection), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+            <span><%= link "Edit", to: admin_path(@conn, :editCollectionAdmin, collection), class: "button is-link is-outlined" %></span>
+            <span><%= link "Delete", to: collection_path(@conn, :delete, collection), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
           </td>
         </tr>
     <% end %>
@@ -59,15 +59,15 @@
   </div>
 
 
-  <div class="sub_container">
+  <div class="sub_container admin_image_container">
     <h2>Listing Image</h2>
-    <span><%= link "New image", to: admin_path(@conn, :newImageAdmin) %></span>  
+    <span><%= link "New image", to: admin_path(@conn, :newImageAdmin), class: "button is-link is-outlined" %></span>  
     
     <table class="table">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Display name</th>
+          <th>Display</th>
     
           <th></th>
         </tr>
@@ -79,8 +79,8 @@
           <td><%= image.display_name %></td>
     
           <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editImageAdmin, image), class: "btn btn-default btn-xs" %></span>
-            <span><%#= link "Delete", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+            <span><%= link "Edit", to: admin_path(@conn, :editImageAdmin, image), class: "button is-link is-outlined" %></span>
+            <span><%= link "Delete", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
           </td>
         </tr>
     <% end %>
@@ -92,15 +92,15 @@
 
 
 
-  <div class="sub_container">
+  <div class="sub_container admin_user_container">
     <h2>Listing User</h2>
-    <span><%= link "New user", to: admin_path(@conn, :newUserAdmin) %></span>  
+    <span><%= link "New user", to: admin_path(@conn, :newUserAdmin), class: "button is-link is-outlined" %></span>  
     
     <table class="table">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Display name</th>
+          <th>Display</th>
     
           <th></th>
         </tr>
@@ -112,8 +112,8 @@
           <td><%= user.display_name %></td>
     
           <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editUserAdmin, user), class: "btn btn-default btn-xs" %></span>
-            <span><%#= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+            <span><%= link "Edit", to: admin_path(@conn, :editUserAdmin, user), class: "button is-link is-outlined" %></span>
+            <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
           </td>
         </tr>
     <% end %>

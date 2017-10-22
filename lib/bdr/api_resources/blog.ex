@@ -15,7 +15,7 @@ defmodule Bdr.ApiResources.Blog do
     field :featured_image, :string
     
     belongs_to :user, User
-    has_many :comments, Comment, on_delete: :nothing 
+    has_many :blog_comments, Comment, on_delete: :nothing 
 
     timestamps()
   end
@@ -26,4 +26,12 @@ defmodule Bdr.ApiResources.Blog do
     |> cast(attrs, [:name, :display_name, :featured_image, :excerpt])
     |> validate_required([:name, :display_name, :featured_image, :excerpt])
   end
+
+  def changeset_assoc(%Blog{} = blog, attrs) do
+    blog
+    |> cast(attrs, [:name, :display_name, :featured_image, :excerpt])
+    |> cast_assoc(:blog_comments)
+    |> validate_required([:name, :display_name, :featured_image, :excerpt])
+  end
+
 end

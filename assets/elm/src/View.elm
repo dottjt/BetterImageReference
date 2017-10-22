@@ -11,8 +11,7 @@ import Component.SearchComponent exposing (..)
 viewSearch : Model -> Html Msg
 viewSearch model =
     div [] 
-        [(searchComponent model)
-        , p [] [text "there you go"]]
+        [(searchComponent model)]
     
 
 viewReference : Model -> Html Msg

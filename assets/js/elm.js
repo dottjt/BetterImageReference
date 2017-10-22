@@ -9308,7 +9308,11 @@ var _user$project$Model$Model = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, radioInterval: g, radioUpsideDown: h, radioDistraction: i, loadedCollectionImagesList: j, error: k};
+											return function (l) {
+												return function (m) {
+													return {searchedCollections: a, selectedCollections: b, searchInput: c, applicationStatus: d, popupStatus: e, imageStatus: f, imageTime: g, imagerTimerBarProgress: h, radioInterval: i, radioUpsideDown: j, radioDistraction: k, loadedCollectionImagesList: l, error: m};
+												};
+											};
 										};
 									};
 								};
@@ -9356,6 +9360,10 @@ var _user$project$Msg$FetchCollectionListSuccess = function (a) {
 };
 var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
+};
+var _user$project$Msg$ImageTimerBarProgress = {ctor: 'ImageTimerBarProgress'};
+var _user$project$Msg$ImageTimer = function (a) {
+	return {ctor: 'ImageTimer', _0: a};
 };
 var _user$project$Msg$ChangeDrawStatus = function (a) {
 	return {ctor: 'ChangeDrawStatus', _0: a};
@@ -9562,52 +9570,67 @@ var _user$project$Component_SearchComponent$searchTile = function (collection) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$a,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$href(
-							A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
+						_0: _elm_lang$html$Html_Attributes$class('search__information__container'),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$h4,
+							_elm_lang$html$Html$a,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('search__title'),
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html_Attributes$class('search__tile__link'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href(
+										A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
+									_1: {ctor: '[]'}
+								}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(collection.display_name),
+								_0: A2(
+									_elm_lang$html$Html$h4,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('search__tile__display__name'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(collection.display_name),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('search__details'),
-							_1: {ctor: '[]'}
-						},
-						{
+						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$h5,
-								{ctor: '[]'},
+								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Times drawn variable'),
+									_0: _elm_lang$html$Html_Attributes$class('search__details'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$h5,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Times drawn variable'),
+											_1: {ctor: '[]'}
+										}),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
+						}
+					}),
+				_1: {ctor: '[]'}
 			}
 		});
 };
@@ -9723,6 +9746,16 @@ var _user$project$Update$update = F2(
 						model,
 						{imageStatus: _p0._0}),
 					{ctor: '[]'});
+			case 'ImageTimer':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
+			case 'ImageTimerBarProgress':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
 			case 'InitialFetchQuerySuccess':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -9782,7 +9815,7 @@ var _user$project$Component_RadioComponent$radio = F3(
 				_elm_lang$html$Html$label,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio'),
+					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio button'),
 					_1: {ctor: '[]'}
 				},
 				{
@@ -9818,7 +9851,7 @@ var _user$project$Component_RadioComponent$radio = F3(
 				_elm_lang$html$Html$label,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('checkedRadio'),
+					_0: _elm_lang$html$Html_Attributes$class('checkedRadio button is-primary'),
 					_1: {ctor: '[]'}
 				},
 				{
@@ -10482,23 +10515,12 @@ var _user$project$View$viewSearch = function (model) {
 		{
 			ctor: '::',
 			_0: _user$project$Component_SearchComponent$searchComponent(model),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('there you go'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
+			_1: {ctor: '[]'}
 		});
 };
 
 var _user$project$MainReferenceTool$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
+	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$ImageTimer);
 };
 var _user$project$MainReferenceTool$initialModel = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],
@@ -10509,6 +10531,8 @@ var _user$project$MainReferenceTool$initialModel = A2(
 		applicationStatus: _user$project$Model$Stop,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
+		imageTime: 0,
+		imagerTimerBarProgress: 0,
 		radioInterval: _user$project$Model$I30,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
@@ -10531,6 +10555,8 @@ var _user$project$MainSearch$initialModel = A2(
 		applicationStatus: _user$project$Model$Stop,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
+		imageTime: 0,
+		imagerTimerBarProgress: 0,
 		radioInterval: _user$project$Model$I30,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,

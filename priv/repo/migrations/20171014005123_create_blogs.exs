@@ -10,7 +10,6 @@ defmodule Bdr.Repo.Migrations.CreateBlogs do
       add :excerpt, :string
       
       add :user_id, references(:users, on_delete: :nothing, type: :binary_id)
-      
 
       timestamps()
     end

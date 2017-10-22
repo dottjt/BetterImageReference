@@ -32,4 +32,13 @@ defmodule Bdr.Account.User do
     |> cast(attrs, [:name, :display_name, :email, :password, :tier])
     |> validate_required([:name, :display_name, :email, :password, :tier])
   end
+
+  def changeset_assoc(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:name, :display_name, :email, :password, :tier])
+    |> cast_assoc([:image_comments, :blog_comments, :collections, :blog, :image_scribbles])
+    |> validate_required([:name, :display_name, :email, :password, :tier])
+  end
+  
+
 end

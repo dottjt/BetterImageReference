@@ -158,7 +158,7 @@ Repo.insert!(%User{
         },        
         %Collection{
             name: "human-face",
-            display_name: "Human-Face",
+            display_name: "Human Face",
             external_url: "",            
             featured_image: "https://i.imgur.com/6YuCVaC.jpg",
             collection_books: [],            
@@ -181,7 +181,7 @@ Repo.insert!(%User{
             display_name: "Dog",
             excerpt: "There is just a little problem with people who have the better saint of literature",
             featured_image: "https://i.imgur.com/6YuCVaC.jpg",
-            comments: [
+            blog_comments: [
                 %Blog.Comment{
                     text: "this is a comment for this blog. So if you have a problem with that, then that's a problem, ain't it ;)"
                 }
@@ -192,7 +192,7 @@ Repo.insert!(%User{
             display_name: "Corky The Porky",
             excerpt: "There is just a little problem with people who have the better saint of literature",
             featured_image: "https://i.imgur.com/6YuCVaC.jpg",
-            comments: [
+            blog_comments: [
                 %Blog.Comment{
                     text: "happy problems are a thing they are, they are, ain't it ;)"
                 }

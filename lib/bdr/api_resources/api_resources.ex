@@ -7,6 +7,25 @@ defmodule Bdr.ApiResources do
   import Ecto.Query, warn: false
   alias Bdr.Repo
   alias Bdr.ApiResources.Blog
+  alias Bdr.Account
+
+
+  @doc """
+  Returns everything needed for the panel.
+
+  ## Examples
+
+      iex> list_admin_panel_resources()
+
+  """
+
+
+  def list_admin_panel_resources do
+    {list_blogs(), list_collections(), list_images(), Account.list_users()}
+  end
+
+
+
 
   @doc """
   Returns the list of blogs.
@@ -17,9 +36,15 @@ defmodule Bdr.ApiResources do
       [%Blog{}, ...]
 
   """
+
   def list_blogs do
     Repo.all(Blog)
   end
+
+  def list_blogs_assoc do
+    Repo.all(Blog) |> Repo.preload(:blog_comments)
+  end
+
 
   @doc """
   Gets a single blog.
@@ -36,7 +61,11 @@ defmodule Bdr.ApiResources do
 
   """
   def get_blog!(id), do: Repo.get!(Blog, id)
+  def get_blog_assoc!(id), do: Repo.get!(Blog, id) |> Repo.preload(:blog_comments)
+
   def get_blog_name!(name), do: Repo.get_by!(Blog, name: name)
+  
+  def get_blog_name_assoc!(name), do: Repo.get_by!(Blog, name: name) |> Repo.preload(:blog_comments)
   
 
   @doc """
@@ -71,7 +100,7 @@ defmodule Bdr.ApiResources do
   """
   def update_blog(%Blog{} = blog, attrs) do
     blog
-    |> Blog.changeset(attrs)
+    |> Blog.changeset_assoc(attrs)
     |> Repo.update()
   end
 
@@ -104,6 +133,12 @@ defmodule Bdr.ApiResources do
     Blog.changeset(blog, %{})
   end
 
+  def change_blog_assoc(%Blog{} = blog) do
+    Blog.changeset_assoc(blog, %{})
+  end
+
+
+
   alias Bdr.ApiResources.Collection
 
   @doc """
@@ -118,10 +153,23 @@ defmodule Bdr.ApiResources do
   def list_collections do
     Repo.all(Collection)
   end
+  
+  def list_collections_assoc do
+    Repo.all(Collection) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])
+  end
 
-  def query_search_collection_list do
-    Repo.all(Collection)
-end
+  # def list_selected_collections_assoc do
+
+  #   Repo.all(Collection) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])
+  # end
+
+  def query_search_collection_list(search_input) do
+    Repo.all(from c in Collection,
+             where: ilike(c.display_name, ^"%#{search_input}%") and ilike(c.name, ^"%#{search_input}%"),
+            #  preload: [images: i],
+             select: c)
+
+  end
   
 
   @doc """
@@ -139,16 +187,12 @@ end
 
   """
   def get_collection!(id), do: Repo.get!(Collection, id)
-  
+  def get_collection_assoc!(id), do: Repo.get!(Collection, id) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])
   def get_collection_name!(name), do: Repo.get_by!(Collection, name: name)
 
-  def get_collection_name_assoc!(name) do
-    get_collection_name!(name) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])         
-  end
-
-  def get_collection_name_image_assoc!(name) do
-    get_collection_name!(name) |> Repo.preload([:images])         
-  end
+  def get_collection_name_assoc!(name), do: Repo.get_by!(Collection, name: name) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])         
+  
+  def get_collection_name_assoc_images!(name), do: Repo.get_by!(Collection, name: name) |> Repo.preload([:images])         
 
 
   @doc """
@@ -183,7 +227,7 @@ end
   """
   def update_collection(%Collection{} = collection, attrs) do
     collection
-    |> Collection.changeset(attrs)
+    |> Collection.changeset_assoc(attrs)
     |> Repo.update()
   end
 
@@ -216,6 +260,10 @@ end
     Collection.changeset(collection, %{})
   end
 
+  def change_collection_assoc(%Collection{} = collection) do
+    Collection.changeset_assoc(collection, %{})
+  end
+
   alias Bdr.ApiResources.Image
 
   @doc """
@@ -230,6 +278,11 @@ end
   def list_images do
     Repo.all(Image)
   end
+
+  def list_images_assoc do
+    Repo.all(Image) |> Repo.preload([:image_comments, :image_scribbles, :image_tags])
+  end
+
 
   @doc """
   Gets a single image.
@@ -246,8 +299,12 @@ end
 
   """
   def get_image!(id), do: Repo.get!(Image, id)
+  def get_image_assoc!(id), do: Repo.get!(Image, id) |> Repo.preload([:image_comments, :image_scribbles, :image_tags])  
   def get_image_name!(name), do: Repo.get_by!(Image, name: name)
+  def get_image_name_assoc!(name), do: Repo.get_by!(Image, name: name) |> Repo.preload([:image_comments, :image_scribbles, :image_tags]) 
   
+  
+
   @doc """
   Creates a image.
 
@@ -280,7 +337,7 @@ end
   """
   def update_image(%Image{} = image, attrs) do
     image
-    |> Image.changeset(attrs)
+    |> Image.changeset_assoc(attrs)
     |> Repo.update()
   end
 
@@ -312,4 +369,8 @@ end
   def change_image(%Image{} = image) do
     Image.changeset(image, %{})
   end
+  def change_image_assoc(%Image{} = image) do
+    Image.changeset_assoc(image, %{})
+  end
+  
 end

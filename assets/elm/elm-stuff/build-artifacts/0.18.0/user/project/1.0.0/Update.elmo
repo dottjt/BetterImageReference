@@ -21,6 +21,20 @@ var _user$project$Update$update = F2(
 						model,
 						{radioInterval: _p0._0}),
 					{ctor: '[]'});
+			case 'UpdateCustomIntervalInput':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{radioIntervalCustomInput: _p0._0}),
+					{ctor: '[]'});
+			case 'SelectCollection':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{selectedCollections: model.selectedCollections}),
+					{ctor: '[]'});
 			case 'SelectUpsideDown':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -34,7 +48,11 @@ var _user$project$Update$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{applicationStatus: _p0._0}),
-					{ctor: '[]'});
+					{
+						ctor: '::',
+						_0: _user$project$Command$startAppFetchImages(model.selectedCollections),
+						_1: {ctor: '[]'}
+					});
 			case 'ChangePopupStatus':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -48,6 +66,16 @@ var _user$project$Update$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{imageStatus: _p0._0}),
+					{ctor: '[]'});
+			case 'ImageTimer':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{ctor: '[]'});
+			case 'ImageTimerBarProgress':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
 					{ctor: '[]'});
 			case 'InitialFetchQuerySuccess':
 				return A2(

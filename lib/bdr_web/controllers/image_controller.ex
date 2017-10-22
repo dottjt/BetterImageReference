@@ -16,10 +16,12 @@ defmodule BdrWeb.ImageController do
 
   def create(conn, %{"image" => image_params}) do
     with {:ok, %Image{} = image} <- ApiResources.create_image(image_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", image_path(conn, :show, image))
-      |> render("show.json", image: image)
+      # conn
+      # |> put_status(:created)
+      # |> put_resp_header("location", image_path(conn, :show, image))
+      # |> render("show.json", image: image)
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)      
     end
   end
 
@@ -32,14 +34,18 @@ defmodule BdrWeb.ImageController do
     image = ApiResources.get_image!(id)
 
     with {:ok, %Image{} = image} <- ApiResources.update_image(image, image_params) do
-      render(conn, "show.json", image: image)
+      # render(conn, "show.json", image: image)
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)      
     end
   end
 
   def delete(conn, %{"id" => id}) do
     image = ApiResources.get_image!(id)
     with {:ok, %Image{}} <- ApiResources.delete_image(image) do
-      send_resp(conn, :no_content, "")
+      # send_resp(conn, :no_content, "")
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
     end
   end
 
@@ -47,7 +53,7 @@ defmodule BdrWeb.ImageController do
   # PAGE 
 
   def indexPage(conn, %{"name" => name}) do
-    collection = ApiResources.get_collection_name_image_assoc!(name) 
+    collection = ApiResources.get_collection_name_assoc_images!(name) 
         
     render conn, "indexPage.html", collection: collection
   end

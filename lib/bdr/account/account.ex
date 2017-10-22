@@ -21,6 +21,11 @@ defmodule Bdr.Account do
     Repo.all(User)
   end
 
+  def list_users_assoc do
+    Repo.all(User) |> Repo.preload([:image_comments, :blog_comments, :collections, :blog, :image_scribbles])
+  end
+
+
   @doc """
   Gets a single user.
 
@@ -36,8 +41,12 @@ defmodule Bdr.Account do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
-  def get_user_name!(name), do: Repo.get!(User, name)
+  def get_user_assoc!(id), do: Repo.get!(User, id) |> Repo.preload([:image_comments, :blog_comments, :collections, :blog, :image_scribbles])
   
+  def get_user_name!(name), do: Repo.get!(User, name)
+  def get_user_name_assoc!(name), do: Repo.get!(User, name) |> Repo.preload([:image_comments, :blog_comments, :collections, :blog, :image_scribbles])  
+  
+
   @doc """
   Creates a user.
 
@@ -70,7 +79,7 @@ defmodule Bdr.Account do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.changeset_assoc(attrs)
     |> Repo.update()
   end
 
@@ -101,6 +110,9 @@ defmodule Bdr.Account do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+  def change_user_assoc(%User{} = user) do
+    User.changeset_assoc(user, %{})
   end
 
   alias Bdr.Account.Email

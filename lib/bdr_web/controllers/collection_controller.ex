@@ -3,6 +3,8 @@ defmodule BdrWeb.CollectionController do
 
   use BdrWeb, :controller
 
+  alias BdrWeb.AdminView
+  
   alias Bdr.ApiResources
   alias Bdr.ApiResources.Collection
 
@@ -19,9 +21,11 @@ defmodule BdrWeb.CollectionController do
   def create(conn, %{"collection" => collection_params}) do
     with {:ok, %Collection{} = collection} <- ApiResources.create_collection(collection_params) do
       conn
-      |> put_status(:created)
-      |> put_resp_header("location", collection_path(conn, :show, collection))
-      |> render("show.json", collection: collection)
+      # |> put_status(:created)
+      # |> put_resp_header("location", collection_path(conn, :show, collection))
+      # |> render("show.json", collection: collection)
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                             
     end
   end
 
@@ -34,37 +38,38 @@ defmodule BdrWeb.CollectionController do
     collection = ApiResources.get_collection!(id)
 
     with {:ok, %Collection{} = collection} <- ApiResources.update_collection(collection, collection_params) do
-      render(conn, "show.json", collection: collection)
+      # render(conn, "show.json", collection: collection)
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                             
     end
   end
 
   def delete(conn, %{"id" => id}) do
     collection = ApiResources.get_collection!(id)
     with {:ok, %Collection{}} <- ApiResources.delete_collection(collection) do
-      send_resp(conn, :no_content, "")
+
+      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                 
     end
   end
-
-
 
 
   # CUSTOM API
 
     # recieves a list of collections with which to retrieve images from. 
-  def collectionWithImages(conn, %{"collection" => collection_params}) do
-      
-        # Enum.map(fn {k, v} -> )  
-        #   |> ApiResources.get_collection_name_image_assoc()  
+  def collectionWithImages(conn, %{"collections" => collections}) do
+    Logger.info collections 
+    collections |> Repo.preload(:images)
+    render(conn, "index.json", collections: collections)
+    
+    # how do I enum through a list and pass to query? 
+    ApiResources.list_selected_collections_assoc()
+  
   end
 
     # recieves a string, with which to fetch and return images. 
   def collectionSearchQuery(conn, %{"search_input" => search_input}) do
-    Logger.info search_input
-
-    collections = ApiResources.query_search_collection_list()
-                    # |> Enum.map(fn {_, v} -> v.name end)
-                    # |> Enum.filter(fn {_, v} -> v =~ search_input end)
-                  
+    collections = ApiResources.query_search_collection_list(search_input)                   
     render(conn, "index.json", collections: collections)
   end
 

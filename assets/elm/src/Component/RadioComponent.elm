@@ -19,7 +19,17 @@ radioIntervalComponent model =
         , radio "90" (model.radioInterval == I90) (SelectIntervalTiming I90)
         , radio "120" (model.radioInterval == I120) (SelectIntervalTiming I120)
         , radio "Custom" (model.radioInterval == Custom) (SelectIntervalTiming Custom)
+        , customInput model.radioInterval
         ]
+
+customInput: IntervalTiming -> Html Msg 
+customInput radioInterval =
+    case radioInterval of
+        Custom -> 
+            input [ type_ "text", name "radioIntervalCustomInput", onInput UpdateCustomIntervalInput ] []            
+        -- _ ->
+        --     div [] []
+            -- div [ style (display "none") ] []          
 
 
 radioUpsideDownComponent : Model -> Html Msg 
@@ -34,13 +44,13 @@ radio : String -> Bool -> Msg -> Html Msg
 radio value isChecked msg =
   case isChecked of
     True ->
-      label [ class "uncheckedRadio" ]
+      label [ class "uncheckedRadio button is-primary is-outlined" ]
             [ input [ type_ "radio", name "font-size", onClick msg, checked isChecked ] []
             , text value                                -- this might need to be onInput?
             ]
     False ->
         label
-            [ class "checkedRadio" ]
+            [ class "checkedRadio button" ]
             [ input [ type_ "radio", name "font-size", onClick msg, checked isChecked ] []
             , text value                                -- this might need to be onInput?
             ]

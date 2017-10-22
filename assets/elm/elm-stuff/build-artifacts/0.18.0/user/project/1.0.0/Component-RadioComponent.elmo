@@ -6,7 +6,7 @@ var _user$project$Component_RadioComponent$radio = F3(
 				_elm_lang$html$Html$label,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio'),
+					_0: _elm_lang$html$Html_Attributes$class('uncheckedRadio button'),
 					_1: {ctor: '[]'}
 				},
 				{
@@ -42,7 +42,7 @@ var _user$project$Component_RadioComponent$radio = F3(
 				_elm_lang$html$Html$label,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('checkedRadio'),
+					_0: _elm_lang$html$Html_Attributes$class('checkedRadio button is-primary'),
 					_1: {ctor: '[]'}
 				},
 				{

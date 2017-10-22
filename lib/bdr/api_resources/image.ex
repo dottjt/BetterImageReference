@@ -30,4 +30,12 @@ defmodule Bdr.ApiResources.Image do
     |> cast(attrs, [:name, :display_name, :image_url])
     |> validate_required([:name, :display_name, :image_url])
   end
+
+  def changeset_assoc(%Image{} = image, attrs) do
+    image
+    |> cast(attrs, [:name, :display_name, :image_url])
+    |> cast_assoc(:image_comments)
+    |> validate_required([:name, :display_name, :image_url])
+  end
+  
 end

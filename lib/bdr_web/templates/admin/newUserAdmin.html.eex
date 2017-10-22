@@ -1,5 +1,7 @@
-<h2>New User</h2>
+<div class="container">
+    <h2>New User</h2>
 
-<%= render "formUserAdmin.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
+    <%= render "formUserAdmin.html", Map.put(assigns, :action, user_path(@conn, :create)) %>
 
-<span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+    <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+</div>

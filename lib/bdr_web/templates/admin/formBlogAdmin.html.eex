@@ -5,31 +5,56 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
+  <div class="field">
+    <%= label f, :name, class: "label" %>
+    <%= text_input f, :name, class: "control" %>
     <%= error_tag f, :name %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= label f, :display_name, class: "control-label" %>
-    <%= text_input f, :display_name, class: "form-control" %>
+  <div class="field">
+    <%= label f, :display_name, class: "label" %>
+    <%= text_input f, :display_name, class: "control" %>
     <%= error_tag f, :display_name %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= label f, :excerpt, class: "control-label" %>
-    <%= text_input f, :excerpt, class: "form-control" %>
+  <div class="field">
+    <%= label f, :excerpt, class: "label" %>
+    <%= text_input f, :excerpt, class: "control" %>
     <%= error_tag f, :excerpt %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= label f, :featured_image, class: "control-label" %>
-    <%= text_input f, :featured_image, class: "form-control" %>
+  <div class="field">
+    <%= label f, :featured_image, class: "label" %>
+    <%= text_input f, :featured_image, class: "control" %>
     <%= error_tag f, :featured_image %>
+    <p class="help">Required</p>
   </div>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+  <h3 class="admin_title">Blog Comments</h3>
+    <div class="columns is-multiline">
+      <%= inputs_for f, :blog_comments, fn fp -> %>
+        <div class="column is-3">
+          <%= label fp, :user_id, class: "label" %>
+          <%= text_input fp, :user_id, class: "control" %>
+          <%= error_tag fp, :user_id %>
+    <p class="help">Required</p>      
+          
+          <%= label fp, :text, class: "label" %>
+          <%= text_input fp, :text, class: "control" %>
+          <%= error_tag fp, :text %>
+    <p class="help">Required</p>      
+        </div>
+      <% end %>
+    </div>
+
+
+  <div class="field">
+    <div class="control">    
+      <%= submit "Submit", class: "button is-link" %>
+    </div>
   </div>
+  
 <% end %>

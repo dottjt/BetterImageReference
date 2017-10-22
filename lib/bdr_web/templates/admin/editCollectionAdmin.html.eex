@@ -1,5 +1,7 @@
-<h2>Edit Collection</h2>
+<div class="container">
+    <h2>Edit Collection</h2>
 
-<%= render "formCollectionAdmin.html", Map.put(assigns, :action, collection_path(@conn, :update, @collection)) %>
+    <%= render "formCollectionAdmin.html", Map.put(assigns, :action, collection_path(@conn, :update, @collection)) %>
 
-<span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+    <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+</div>

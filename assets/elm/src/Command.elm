@@ -29,7 +29,6 @@ fetchSearchQuery searchInput =
         FetchCollectionListSuccess
 
 
-
 -- Start Application
 
 startAppFetchImages : CollectionList -> Cmd Msg

@@ -26,7 +26,11 @@ initialModel =
     , popupStatus = Resume
     , imageStatus = Normal
 
+    , imageTime = 0
+    , imagerTimerBarProgress = 0
+
     , radioInterval = I30
+    , radioIntervalCustomInput = 0    
     , radioUpsideDown = NoUpsideDown
     , radioDistraction = NoMinimalDistraction
 

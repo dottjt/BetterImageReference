@@ -14,12 +14,18 @@ update msg model =
         SelectIntervalTiming value ->
             { model | radioInterval = value } ! []
 
+        UpdateCustomIntervalInput int ->
+            { model | radioIntervalCustomInput = int } ! []        
+
+        SelectCollection collection ->
+            { model | selectedCollections = model.selectedCollections :: collection } ! []
+
         SelectUpsideDown value ->
             { model | radioUpsideDown = value } ! []
 
         -- BEGIN TOOL
         ChangeStatus status ->
-            { model | applicationStatus = status } ! []
+            { model | applicationStatus = status } ! [startAppFetchImages model.selectedCollections]
         
         ChangePopupStatus status ->
             { model | popupStatus = status } ! []
@@ -27,6 +33,12 @@ update msg model =
         -- TOOL FUNCTIONALITY
         ChangeDrawStatus status ->
             { model | imageStatus = status } ! []
+
+        ImageTimer time -> 
+            model ! []
+
+        ImageTimerBarProgress ->
+            model ! []
 
         -- INITIAL FETCH
         InitialFetchQuerySuccess response ->

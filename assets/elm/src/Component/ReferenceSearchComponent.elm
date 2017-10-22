@@ -1,4 +1,4 @@
-module Component.SearchComponent exposing (..)
+module Component.ReferenceSearchComponent exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -6,6 +6,8 @@ import Html.Events exposing (..)
 
 import Msg exposing (..)
 import Model exposing (..)
+
+import Component.SearchComponent exposing (searchInput)
 
 
 -- REFERENCE VIEW 
@@ -33,7 +35,7 @@ selectedCollections collectionList =
 
 searchTile : Collection -> Html Msg
 searchTile collection =
-    div [ class "column is-3 search__tile__container" ]
+    div [ class "column is-12 reference_search__tile__container", onClick collection ]
         [ a [ href ("/collections/" ++ collection.name) ] 
             [ img [ class "search__image", src collection.featured_image ] []
             ]
@@ -56,17 +58,3 @@ searchComponent model =
         [ searchInput model.searchInput
         , searchedCollections model.searchedCollections
         ]
-
-searchInput : String -> Html Msg 
-searchInput searchInputValue =
-    div [ class "search__input__container" ] 
-        [ input [ class "search__input", type_ "text", placeholder "", value searchInputValue, onInput ChangeSearchInput ] []
-        ]
-
-
-
-
-submitComponent : Html Msg 
-submitComponent = 
-  div [] 
-      [ button [ onClick (ChangeStatus Start) ] [ text "Start" ]]

@@ -13,13 +13,12 @@ import Component.FinishComponent exposing (..)
 
 
 referenceComponent : Model -> Html Msg
-referenceComponent model = 
-  case model.applicationStatus of 
+referenceComponent model =
+  case model.applicationStatus of
       Start ->
         div [ class "reference__tool__start" ]
-            [ div [ class "outer"] 
-                  [ 
-                  ]
+            [ div [ class "outer"]
+                  [ ]
             , div [ class "inner"]
                   [ popupNavbar model
                   , popupLeftbar model
