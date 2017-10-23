@@ -41,7 +41,7 @@ Repo.insert!(%User{
             name: "figure-drawing",
             display_name: "Figure Drawing",
             external_url: "",
-            featured_image: "https://i.imgur.com/6YuCVaC.jpg",
+            featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
             collection_books: [
                 %Book{
                     name: "this-is-the-book-name",
@@ -109,6 +109,7 @@ Repo.insert!(%User{
                     display_name: "Yes, We Know That Youre Happily There",
                     description: "take a compliment bby",                    
                     image_url: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
+                    times_drawn: 300,
                     image_tags: [],
                     image_scribbles: [],                    
                     image_comments: [
@@ -125,6 +126,7 @@ Repo.insert!(%User{
                     display_name: "zzzzzzzzsss Happily There",
                     description: "fffftrt",                    
                     image_url: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
+                    times_drawn: 900,                    
                     image_tags: [],
                     image_scribbles: [],                    
                     image_comments: [
@@ -142,7 +144,7 @@ Repo.insert!(%User{
             name: "cat",
             display_name: "Cat",
             external_url: "",            
-            featured_image: "https://i.imgur.com/6YuCVaC.jpg",
+            featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
             collection_books: [],            
             collection_tutorials: [],
             collection_tags: [],
@@ -151,7 +153,7 @@ Repo.insert!(%User{
             name: "dog",
             display_name: "Dog",
             external_url: "",            
-            featured_image: "https://i.imgur.com/6YuCVaC.jpg",
+            featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
             collection_books: [],            
             collection_tutorials: [],
             collection_tags: [],
@@ -160,7 +162,7 @@ Repo.insert!(%User{
             name: "human-face",
             display_name: "Human Face",
             external_url: "",            
-            featured_image: "https://i.imgur.com/6YuCVaC.jpg",
+            featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
             collection_books: [],            
             collection_tutorials: [],
             collection_tags: [],
@@ -169,7 +171,7 @@ Repo.insert!(%User{
             name: "anime",
             display_name: "Anime",
             external_url: "",            
-            featured_image: "https://i.imgur.com/6YuCVaC.jpg",
+            featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
             collection_books: [],            
             collection_tutorials: [],
             collection_tags: [],
@@ -180,7 +182,7 @@ Repo.insert!(%User{
             name: "how-to-become-a-better-artist",
             display_name: "Dog",
             excerpt: "There is just a little problem with people who have the better saint of literature",
-            featured_image: "https://i.imgur.com/6YuCVaC.jpg",
+            featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
             blog_comments: [
                 %Blog.Comment{
                     text: "this is a comment for this blog. So if you have a problem with that, then that's a problem, ain't it ;)"
@@ -191,7 +193,7 @@ Repo.insert!(%User{
             name: "we-are-the-champions",
             display_name: "Corky The Porky",
             excerpt: "There is just a little problem with people who have the better saint of literature",
-            featured_image: "https://i.imgur.com/6YuCVaC.jpg",
+            featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
             blog_comments: [
                 %Blog.Comment{
                     text: "happy problems are a thing they are, they are, ain't it ;)"
@@ -245,7 +247,7 @@ Repo.insert!(%User{
 #                                     name: "figure-drawing",
 #                                     display_name: "Figure Drawing",
 #                                     external_url: "",
-#                                     featured_image: "https://i.imgur.com/6YuCVaC.jpg")
+#                                     featured_image: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg")
 
                                     
 

@@ -7,12 +7,27 @@ var _user$project$MainSearch$initialModel = A2(
 		searchedCollections: {ctor: '[]'},
 		selectedCollections: {ctor: '[]'},
 		searchInput: '',
+		popularQueries: {
+			ctor: '::',
+			_0: 'popular',
+			_1: {
+				ctor: '::',
+				_0: 'human figure',
+				_1: {
+					ctor: '::',
+					_0: 'face',
+					_1: {ctor: '[]'}
+				}
+			}
+		},
 		applicationStatus: _user$project$Model$Stop,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
 		imageTime: 0,
 		imagerTimerBarProgress: 0,
-		radioInterval: _user$project$Model$I30,
+		radioIntervalType: _user$project$Model$Second,
+		radioIntervalTiming: _user$project$Model$S30,
+		radioIntervalCustomInput: 0,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
 		loadedCollectionImagesList: {ctor: '[]'},

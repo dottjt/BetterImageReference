@@ -13,7 +13,7 @@ import Http exposing (..)
 initialFetchQuery : Cmd Msg
 initialFetchQuery =
     httpGet
-        "http://localhost:4000/api/collections"
+        "http://localhost:4000/api/collections_initial"
         collectionListDecoder
         InitialFetchQueryFail
         InitialFetchQuerySuccess

@@ -4,6 +4,7 @@ import Html exposing (..)
 import Model exposing (..)
 import Msg exposing (..)
 import View exposing (viewReference)
+import Command exposing (..)
 import Update exposing (..)
 import Time exposing (Time, second)
 
@@ -21,6 +22,7 @@ initialModel =
     { searchedCollections = []
     , selectedCollections = []
     , searchInput = ""
+    , popularQueries = ["popular", "human figure", "face"]
 
     , applicationStatus = Stop
     , popupStatus = Resume
@@ -29,7 +31,9 @@ initialModel =
     , imageTime = 0
     , imagerTimerBarProgress = 0
 
-    , radioInterval = I30
+    , radioIntervalType = Second
+    , radioIntervalTiming = S30
+    
     , radioIntervalCustomInput = 0
     , radioUpsideDown = NoUpsideDown
     , radioDistraction = NoMinimalDistraction

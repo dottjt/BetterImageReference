@@ -4,32 +4,6 @@ var _user$project$Component_FinishComponent$relevantUserImages = function (model
 		{ctor: '[]'},
 		{ctor: '[]'});
 };
-var _user$project$Component_FinishComponent$tryNewCollections = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Component_SearchComponent$selectionComponent(model),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
-				_1: {
-					ctor: '::',
-					_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Component_SearchComponent$submitComponent,
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-};
 var _user$project$Component_FinishComponent$drawnImages = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,

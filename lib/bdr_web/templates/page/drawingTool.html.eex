@@ -1,3 +1,5 @@
 <div class="container">
+    <h1>Timed Drawing Practice Tool</h1>
+    <h2>Type what you want to draw!</h2>
     <div id="elm-app-one"></div>
 </div>

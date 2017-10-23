@@ -1,19 +1,23 @@
-var _user$project$Component_ReferenceSearchComponent$searchTile = function (collection) {
+var _user$project$Component_ReferenceSearchComponent$searchReferenceTile = function (collection) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$class('column is-12 reference_search__tile__container'),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$SelectCollection(collection)),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$a,
+				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$href(
-						A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
+					_0: _elm_lang$html$Html_Attributes$class('search__image__container'),
 					_1: {ctor: '[]'}
 				},
 				{
@@ -44,100 +48,87 @@ var _user$project$Component_ReferenceSearchComponent$searchTile = function (coll
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$a,
+							_elm_lang$html$Html$h4,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('search__tile__link'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href(
-										A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
-									_1: {ctor: '[]'}
-								}
+								_0: _elm_lang$html$Html_Attributes$class('search__tile__display__name'),
+								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$h4,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('search__tile__display__name'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(collection.display_name),
-										_1: {ctor: '[]'}
-									}),
+								_0: _elm_lang$html$Html$text(collection.display_name),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$div,
+								_elm_lang$html$Html$a,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('search__details'),
-									_1: {ctor: '[]'}
+									_0: _elm_lang$html$Html_Attributes$class('search__tile__link'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$href(
+											A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
+										_1: {ctor: '[]'}
+									}
 								},
 								{
 									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$h5,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Times drawn variable'),
-											_1: {ctor: '[]'}
-										}),
+									_0: _elm_lang$html$Html$text('View Collection'),
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h5,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('times drawn'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _user$project$Component_ReferenceSearchComponent$selectedCollections = function (collectionList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
-			_1: {ctor: '[]'}
-		},
-		A2(_elm_lang$core$List$map, _user$project$Component_ReferenceSearchComponent$searchTile, collectionList));
-};
-var _user$project$Component_ReferenceSearchComponent$searchedCollections = function (collectionList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
-			_1: {ctor: '[]'}
-		},
-		A2(_elm_lang$core$List$map, _user$project$Component_ReferenceSearchComponent$searchTile, collectionList));
-};
-var _user$project$Component_ReferenceSearchComponent$searchComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('search__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
-			_1: {
+var _user$project$Component_ReferenceSearchComponent$selectedReferenceCollections = function (collectionList) {
+	var _p0 = collectionList;
+	if (_p0.ctor === '[]') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
 				ctor: '::',
-				_0: _user$project$Component_ReferenceSearchComponent$searchedCollections(model.searchedCollections),
+				_0: _elm_lang$html$Html$text('Please select a collection!'),
 				_1: {ctor: '[]'}
-			}
-		});
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$List$map, _user$project$Component_ReferenceSearchComponent$searchReferenceTile, collectionList));
+	}
 };
-var _user$project$Component_ReferenceSearchComponent$selectionComponent = function (model) {
+var _user$project$Component_ReferenceSearchComponent$searchedReferenceCollections = function (collectionList) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, _user$project$Component_ReferenceSearchComponent$searchReferenceTile, collectionList));
+};
+var _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -150,11 +141,33 @@ var _user$project$Component_ReferenceSearchComponent$selectionComponent = functi
 			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Component_ReferenceSearchComponent$searchedCollections(model.searchedCollections),
+				_0: A2(
+					_elm_lang$html$Html$h2,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Select a collection'),
+						_1: {ctor: '[]'}
+					}),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Component_ReferenceSearchComponent$selectedCollections(model.selectedCollections),
-					_1: {ctor: '[]'}
+					_0: _user$project$Component_ReferenceSearchComponent$searchedReferenceCollections(model.searchedCollections),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h2,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Selected collections'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_ReferenceSearchComponent$selectedReferenceCollections(model.selectedCollections),
+							_1: {ctor: '[]'}
+						}
+					}
 				}
 			}
 		});

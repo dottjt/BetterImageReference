@@ -14,26 +14,52 @@ var _user$project$Update$update = F2(
 						_0: _user$project$Command$fetchSearchQuery(_p1),
 						_1: {ctor: '[]'}
 					});
+			case 'SelectIntervalTimingType':
+				var _p3 = _p0._0;
+				var _p2 = _p3;
+				if (_p2.ctor === 'Minute') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{radioIntervalType: _p3, radioIntervalTiming: _user$project$Model$M1}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{radioIntervalType: _p3, radioIntervalTiming: _user$project$Model$S30}),
+						{ctor: '[]'});
+				}
 			case 'SelectIntervalTiming':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{radioInterval: _p0._0}),
+						{radioIntervalTiming: _p0._0}),
 					{ctor: '[]'});
 			case 'UpdateCustomIntervalInput':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{radioIntervalCustomInput: _p0._0}),
-					{ctor: '[]'});
+				var _p4 = _elm_lang$core$String$toInt(_p0._0);
+				if (_p4.ctor === 'Ok') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{radioIntervalCustomInput: _p4._0}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{error: _p4._0}),
+						{ctor: '[]'});
+				}
 			case 'SelectCollection':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{selectedCollections: model.selectedCollections}),
+					model,
 					{ctor: '[]'});
 			case 'SelectUpsideDown':
 				return A2(

@@ -1,124 +1,139 @@
-<div class="container panelAdminContainer">
-  <div class="sub_container admin_blog_container">
-    <h2>Listing Blog</h2>
-    <span><%= link "New blog", to: admin_path(@conn, :newBlogAdmin), class: "button is-link is-outlined" %></span>
+<div class="container panel__admin__container">
+  <div class="admin__grid">
+    <div class="sub_container admin_blog_container">
+      <h2>Listing Blog</h2>
+      <span><%= link "New blog", to: admin_path(@conn, :newBlogAdmin), class: "button is-link is-outlined" %></span>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Display</th>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Display</th>
 
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-    <%= for blog <- @blogs do %>
-        <tr>
-          <td><%= blog.name %></td>
-          <td><%= blog.display_name %></td>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+      <%= for blog <- @blogs do %>
+          <tr>
+            <td><%= blog.name %></td>
+            <td><%= blog.display_name %></td>
 
-          <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editBlogAdmin, blog), class: "button is-link is-outlined" %></span>
-            <span><%= link "Delete", to: blog_path(@conn, :delete, blog), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
-          </td>
-        </tr>
-    <% end %>
-      </tbody>
-    </table>
-  </div>
+            <td class="text-right">
+              <span><%= link "Edit", to: admin_path(@conn, :editBlogAdmin, blog), class: "button is-link is-outlined" %></span>
+              <span><%= link "Delete", to: blog_path(@conn, :delete, blog), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
+            </td>
+          </tr>
+      <% end %>
+        </tbody>
+      </table>
+    </div>
 
+    <div class="sub_container admin_collection_container">
+      <h2>Listing Collection</h2>
+        <span><%= link "New collection", to: admin_path(@conn, :newCollectionAdmin), class: "button is-link is-outlined" %></span>  
 
-  <div class="sub_container admin_collection_container">
-    <h2>Listing Collection</h2>
-      <span><%= link "New collection", to: admin_path(@conn, :newCollectionAdmin), class: "button is-link is-outlined" %></span>  
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Display</th>
+      
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+      <%= for collection <- @collections do %>
+          <tr>
+            <td><%= collection.name %></td>
+            <td><%= collection.display_name %></td>
+      
+            <td class="text-right">
+              <span><%= link "Edit", to: admin_path(@conn, :editCollectionAdmin, collection), class: "button is-link is-outlined" %></span>
+              <span><%= link "Delete", to: collection_path(@conn, :delete, collection), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
+            </td>
+          </tr>
+      <% end %>
+        </tbody>
+      </table>    
+    </div>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Display</th>
-    
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-    <%= for collection <- @collections do %>
-        <tr>
-          <td><%= collection.name %></td>
-          <td><%= collection.display_name %></td>
-    
-          <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editCollectionAdmin, collection), class: "button is-link is-outlined" %></span>
-            <span><%= link "Delete", to: collection_path(@conn, :delete, collection), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
-          </td>
-        </tr>
-    <% end %>
-      </tbody>
-    </table>    
-  </div>
+    <div class="sub_container admin_image_container">
+      <h2>Listing Image</h2>
+      <span><%= link "New image", to: admin_path(@conn, :newImageAdmin), class: "button is-link is-outlined" %></span>  
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Display</th>
+      
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+      <%= for image <- @images do %>
+          <tr>
+            <td><%= image.name %></td>
+            <td><%= image.display_name %></td>
+      
+            <td class="text-right">
+              <span><%= link "Edit", to: admin_path(@conn, :editImageAdmin, image), class: "button is-link is-outlined" %></span>
+              <span><%= link "Delete", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
+            </td>
+          </tr>
+      <% end %>
+        </tbody>
+      </table>
+      
+    </div>
 
+    <div class="sub_container admin_user_container">
+      <h2>Listing User</h2>
+      <span><%= link "New user", to: admin_path(@conn, :newUserAdmin), class: "button is-link is-outlined" %></span>  
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Display</th>
+      
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+      <%= for user <- @users do %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.display_name %></td>
+      
+            <td class="text-right">
+              <span><%= link "Edit", to: admin_path(@conn, :editUserAdmin, user), class: "button is-link is-outlined" %></span>
+              <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
+            </td>
+          </tr>
+      <% end %>
+        </tbody>
+      </table>
+      
+    </div>
+  </div><!-- end of admin grid -->
 
-  <div class="sub_container admin_image_container">
-    <h2>Listing Image</h2>
-    <span><%= link "New image", to: admin_path(@conn, :newImageAdmin), class: "button is-link is-outlined" %></span>  
-    
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Display</th>
-    
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-    <%= for image <- @images do %>
-        <tr>
-          <td><%= image.name %></td>
-          <td><%= image.display_name %></td>
-    
-          <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editImageAdmin, image), class: "button is-link is-outlined" %></span>
-            <span><%= link "Delete", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
-          </td>
-        </tr>
-    <% end %>
-      </tbody>
-    </table>
-    
-  </div>
+  <div class="image__library__container">
+    <div class="image__library__upload__container">
+      <%= form_for @image_changeset, @action, [multipart: true], fn f -> %>
 
+        <div class="field">
+          <%= label f, :photo, class: "label" %>
+          <%= file_input f, :photo, class: "control" %>
+        </div>
 
+        <div class="field">
+          <%= submit "Submit", class: "button is-link" %>
+        </div>
 
+      <% end %>
+    </div>
+  </div><!-- end image library container -->
 
-  <div class="sub_container admin_user_container">
-    <h2>Listing User</h2>
-    <span><%= link "New user", to: admin_path(@conn, :newUserAdmin), class: "button is-link is-outlined" %></span>  
-    
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Display</th>
-    
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-    <%= for user <- @users do %>
-        <tr>
-          <td><%= user.name %></td>
-          <td><%= user.display_name %></td>
-    
-          <td class="text-right">
-            <span><%= link "Edit", to: admin_path(@conn, :editUserAdmin, user), class: "button is-link is-outlined" %></span>
-            <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "button is-link is-outlined" %></span>
-          </td>
-        </tr>
-    <% end %>
-      </tbody>
-    </table>
-    
-  </div>
 </div>

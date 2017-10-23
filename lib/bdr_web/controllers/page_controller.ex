@@ -1,6 +1,7 @@
 defmodule BdrWeb.PageController do
   use BdrWeb, :controller
 
+  alias Bdr.Account  
   alias Bdr.Account.User
   alias Bdr.Account.Email
   
@@ -14,7 +15,8 @@ defmodule BdrWeb.PageController do
   end
 
   def aboutPage(conn, _params) do
-    render conn, "about.html"    
+    changeset = Account.change_email(%Email{})
+    render conn, "about.html", changeset: changeset   
   end
 
   # APP

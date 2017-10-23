@@ -1,33 +1,42 @@
-.panelAdminContainer {
-    display: grid;
-    grid-template-columns: 40vw 40vw;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 2rem;
-
-    .admin_blog_container {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .admin_collection_container {
-        grid-column: 1;
-        grid-row: 1;
-    }
+.panel__admin__container {
+    .admin__grid {
+        display: grid;
+        grid-template-columns: 40vw 40vw;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 2rem;
     
-    .admin_image_container {
-        grid-column: 2;
-        grid-row: 1;
+        .admin_blog_container {
+            grid-column: 1;
+            grid-row: 2;
+        }
+    
+        .admin_collection_container {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        
+        .admin_image_container {
+            grid-column: 2;
+            grid-row: 1;
+        }
+    
+        .admin_user_container {
+            grid-column: 2;
+            grid-row: 2;
+        }
+    
+        .text-right {
+            min-width: 160px;
+        }
     }
 
-    .admin_user_container {
-        grid-column: 2;
-        grid-row: 2;
-    }
-
-    .text-right {
-        min-width: 158px;
+    .image__library__container {
+        .image__library__upload__container {
+            
+        }
     }
 }
+
 
 .sub_container {
     table {

@@ -6,33 +6,92 @@ import Html.Events exposing (..)
 
 import Msg exposing (..)
 import Model exposing (..)
-import Update exposing (..)
 
 
 
 radioIntervalComponent : Model -> Html Msg 
 radioIntervalComponent model =
-    Html.form [ class "radio__interval__container" ]
-        [ radio "30" (model.radioInterval == I30) (SelectIntervalTiming I30)
-        , radio "45" (model.radioInterval == I45) (SelectIntervalTiming I45)
-        , radio "60" (model.radioInterval == I60) (SelectIntervalTiming I60)
-        , radio "90" (model.radioInterval == I90) (SelectIntervalTiming I90)
-        , radio "120" (model.radioInterval == I120) (SelectIntervalTiming I120)
-        , radio "Custom" (model.radioInterval == Custom) (SelectIntervalTiming Custom)
-        , customInput model.radioInterval
+    div [] [ radioIntervalTypeComponent model
+           , radioIntervalSecondsOrMinutesComponent model 
+           ]
+
+
+radioIntervalTypeComponent : Model -> Html Msg
+radioIntervalTypeComponent model =
+    Html.form [ class "radio__interval__type__container" ]
+        [ radio "Second" (model.radioIntervalType == Second) (SelectIntervalTimingType Second)
+        , radio "Minute" (model.radioIntervalType == Minute) (SelectIntervalTimingType Minute)
         ]
 
-customInput: IntervalTiming -> Html Msg 
-customInput radioInterval =
+
+
+-- SECOND/MINUTE RADIO COMPONENTS
+
+
+radioIntervalSecondsOrMinutesComponent : Model -> Html Msg
+radioIntervalSecondsOrMinutesComponent model =
+    case model.radioIntervalType of
+        Second ->
+            radioIntervalSecondsComponent model
+        Minute ->
+            radioIntervalMinutesComponent model
+
+
+radioIntervalSecondsComponent : Model -> Html Msg
+radioIntervalSecondsComponent model =
+    Html.form [ class "radio__interval__timing__container" ]
+        [ radio "30" (model.radioIntervalTiming == S30) (SelectIntervalTiming S30)
+        , radio "45" (model.radioIntervalTiming == S45) (SelectIntervalTiming S45)
+        , radio "60" (model.radioIntervalTiming == S60) (SelectIntervalTiming S60)
+        , radio "90" (model.radioIntervalTiming == S90) (SelectIntervalTiming S90)
+        , radio "120" (model.radioIntervalTiming == S120) (SelectIntervalTiming S120)
+        , radio "Custom" (model.radioIntervalTiming == Custom) (SelectIntervalTiming Custom)
+        , customInputComponent model
+        ]
+
+
+radioIntervalMinutesComponent : Model -> Html Msg
+radioIntervalMinutesComponent model =
+    Html.form [ class "radio__interval__timing__container" ]
+        [ radio "1" (model.radioIntervalTiming == M1) (SelectIntervalTiming M1)
+        , radio "2" (model.radioIntervalTiming == M2) (SelectIntervalTiming M2)
+        , radio "3" (model.radioIntervalTiming == M3) (SelectIntervalTiming M3)
+        , radio "4" (model.radioIntervalTiming == M4) (SelectIntervalTiming M4)
+        , radio "5" (model.radioIntervalTiming == M5) (SelectIntervalTiming M5)
+        , radio "10" (model.radioIntervalTiming == M10) (SelectIntervalTiming M10)
+        , radio "Custom" (model.radioIntervalTiming == Custom) (SelectIntervalTiming Custom)
+        , customInputComponent model
+        ]
+
+
+customInputComponent : Model -> Html Msg 
+customInputComponent model =
+    case model.radioIntervalType of 
+        Second ->
+            customInput model.radioIntervalTiming "How many seconds?"
+        Minute ->
+            customInput model.radioIntervalTiming "How many minutes?"
+        
+
+
+customInput : IntervalTiming -> String -> Html Msg
+customInput radioInterval label_text =
     case radioInterval of
         Custom -> 
-            input [ type_ "text", name "radioIntervalCustomInput", onInput UpdateCustomIntervalInput ] []            
-        -- _ ->
-        --     div [] []
-            -- div [ style (display "none") ] []          
+            div [ class "field" ] 
+                [ h5 [ ] [ text label_text ]
+                , div [ class "control" ]
+                      [ input [ class "input", type_ "text", onInput UpdateCustomIntervalInput ] [] 
+                      ]
+                ]
+        _ ->
+            div [ style [("display", "none")] ] []          
 
 
-radioUpsideDownComponent : Model -> Html Msg 
+
+-- RADIO UPSIDE DOWN COMPONENT
+
+radioUpsideDownComponent : Model -> Html Msg
 radioUpsideDownComponent model =
     Html.form [ class "radio__upsidedown__container" ]
         [ radio "Yes" (model.radioUpsideDown == YesUpsideDown) (SelectUpsideDown YesUpsideDown)

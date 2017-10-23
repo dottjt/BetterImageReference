@@ -18,4 +18,4 @@ var _user$project$Command$fetchSearchQuery = function (searchInput) {
 		_user$project$Msg$FetchCollectionListFail,
 		_user$project$Msg$FetchCollectionListSuccess);
 };
-var _user$project$Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections', _user$project$Model$collectionListDecoder, _user$project$Msg$InitialFetchQueryFail, _user$project$Msg$InitialFetchQuerySuccess);
+var _user$project$Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections_initial', _user$project$Model$collectionListDecoder, _user$project$Msg$InitialFetchQueryFail, _user$project$Msg$InitialFetchQuerySuccess);

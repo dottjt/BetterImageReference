@@ -8,10 +8,13 @@ import Time exposing (..)
 type Msg
     = ChangeSearchInput String
 
+    | SelectIntervalTimingType IntervalTimingType
     | SelectIntervalTiming IntervalTiming
-    | UpdateCustomIntervalInput Int
+    | UpdateCustomIntervalInput String
     | SelectUpsideDown UpsideDown
+    
     | SelectCollection Collection
+    -- | SelectPopularQueries String
 
     | ChangeStatus Status
     | ChangePopupStatus PopupStatus

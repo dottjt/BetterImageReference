@@ -20,7 +20,9 @@ defmodule BdrWeb.AdminController do
 
   def panelPageAdmin(conn, _params) do
     {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-    render(conn, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)
+    image_uplaod_changeset = ApiResources.change_image(%Image{})
+
+    render(conn, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, image_uplaod_changeset: image_uplaod_changeset)
   end
 
 

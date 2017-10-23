@@ -158,6 +158,14 @@ defmodule Bdr.ApiResources do
     Repo.all(Collection) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])
   end
 
+  def list_collections_with_times_drawn do
+    
+    Repo.all(Collection) |> Repo.preload(:images)
+    # Repo.all(Collection) |> Repo.preload(images: [:times_drawn])
+
+  end
+
+
   # def list_selected_collections_assoc do
 
   #   Repo.all(Collection) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])

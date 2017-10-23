@@ -2,8 +2,39 @@
   <h1>About</h1>
 
   <div class="about__paragraph">
-    <p>Better Draw Tool is an application that is designed to help you better blah blah</p>
+    <p>Better Drawing Reference is a website that is designed to help you become a better artist.</p>
+    <p>It features a suite of applications to help you work on your skills, as well as an incredible collection of images and references for you to work with.</p>
+    <p>As an amateur artist, I decided to create Better Drawing Reference because I felt that existing solutions were inadequate.</p>
   </div>
-    <div id="elm-app-one"></div>
 
+  <h1>Application</h1>
+  <div class="application__paragraph">
+
+  </div>
+
+  <h2>Contact</h2>
+    <p>You may contact me via email or with the contact form below.</p>
+    <p>I am open to suggestions and improving this website to be to the best possible experience for you!</p>
+
+    <%= form_for @changeset, email_path(@conn, :create), fn f -> %>
+      <label>
+        Name: <%= text_input f, :name %>
+      </label>
+
+      <label>
+        Email: <%= text_input f, :recipient %>
+      </label>
+
+      <label>
+        Subject: <%= text_input f, :subject %>
+      </label>
+      
+      <label>
+        Content: <%= text_input f, :content %>
+      </label>
+      
+      <%= submit "Submit" %>
+    <% end %>
+
+  </div>
 </div>

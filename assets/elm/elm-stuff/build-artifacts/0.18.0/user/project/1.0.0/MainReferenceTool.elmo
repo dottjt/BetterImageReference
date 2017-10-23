@@ -7,17 +7,36 @@ var _user$project$MainReferenceTool$initialModel = A2(
 		searchedCollections: {ctor: '[]'},
 		selectedCollections: {ctor: '[]'},
 		searchInput: '',
+		popularQueries: {
+			ctor: '::',
+			_0: 'popular',
+			_1: {
+				ctor: '::',
+				_0: 'human figure',
+				_1: {
+					ctor: '::',
+					_0: 'face',
+					_1: {ctor: '[]'}
+				}
+			}
+		},
 		applicationStatus: _user$project$Model$Stop,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
 		imageTime: 0,
 		imagerTimerBarProgress: 0,
-		radioInterval: _user$project$Model$I30,
+		radioIntervalType: _user$project$Model$Second,
+		radioIntervalTiming: _user$project$Model$S30,
+		radioIntervalCustomInput: 0,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
 		loadedCollectionImagesList: {ctor: '[]'},
 		error: ''
 	},
-	{ctor: '[]'});
+	{
+		ctor: '::',
+		_0: _user$project$Command$initialFetchQuery,
+		_1: {ctor: '[]'}
+	});
 var _user$project$MainReferenceTool$main = _elm_lang$html$Html$program(
 	{init: _user$project$MainReferenceTool$initialModel, view: _user$project$View$viewReference, update: _user$project$Update$update, subscriptions: _user$project$MainReferenceTool$subscriptions})();

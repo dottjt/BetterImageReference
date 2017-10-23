@@ -7,6 +7,7 @@ import Msg exposing (..)
 import Model exposing (..)
 
 import Component.RadioComponent exposing (..)
+import Component.ReferenceSearchComponent exposing (..)
 import Component.SearchComponent exposing (..)
 import Component.PopupComponent exposing (..)
 import Component.FinishComponent exposing (..)
@@ -29,8 +30,10 @@ referenceComponent model =
 
       Stop -> 
         div [ class "reference__tool__stop"]
-            [ selectionComponent model
+            [ selectionReferenceComponent model
+            , h5 [] [ text "Image timing" ]
             , radioIntervalComponent model
+            , h5 [] [ text "Display image upside down?" ]            
             , radioUpsideDownComponent model 
             , submitComponent
             ]
@@ -38,7 +41,7 @@ referenceComponent model =
       Finish -> 
         div [ class "reference__tool__finish"]
             [ displayDrawnCollections model.loadedCollectionImagesList
-            , tryNewCollections model
+            , selectionReferenceComponent model
             ]
 
       Loading ->

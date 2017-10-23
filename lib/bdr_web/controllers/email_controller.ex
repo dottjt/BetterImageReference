@@ -39,24 +39,4 @@ defmodule BdrWeb.EmailController do
       send_resp(conn, :no_content, "")
     end
   end
-
-  
-  # EMAIL 
-  def contactPage(conn, _params) do
-    changeset = Email.changeset(%Email{})
-    
-    render conn, "contact.html", changeset: changeset   
-  end  
-
-  # ADMIN
-  def indexPageAdmin(conn, _params) do
-    emails = Account.list_emails()
-    render conn, "indexAdmin.html", emails: emails
-  end
-
-  def showPageAdmin(conn, %{"name" => name}) do
-    email = Account.get_email_name!(name)  
-
-    render conn, "showAdmin.html", email: email
-  end  
 end

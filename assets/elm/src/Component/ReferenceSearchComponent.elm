@@ -12,49 +12,48 @@ import Component.SearchComponent exposing (searchInput)
 
 -- REFERENCE VIEW 
 
-selectionComponent : Model -> Html Msg
-selectionComponent model =
+selectionReferenceComponent : Model -> Html Msg
+selectionReferenceComponent model =
     div [ class "selectionComponent"]
         [ searchInput model.searchInput
-        , searchedCollections model.searchedCollections
-        , selectedCollections model.selectedCollections
+        , h2 [] [ text "Select a collection" ]
+        , searchedReferenceCollections model.searchedCollections
+        , h2 [] [ text "Selected collections"]
+        , selectedReferenceCollections model.selectedCollections
         ]
 
 -- REFERENCE VIEW 
 
-searchedCollections : CollectionList -> Html Msg
-searchedCollections collectionList =
+searchedReferenceCollections : CollectionList -> Html Msg
+searchedReferenceCollections collectionList =
     div [ class "columns is-multiline is-tablet" ]
-        (List.map searchTile collectionList)
+        (List.map searchReferenceTile collectionList)
 
-selectedCollections : CollectionList -> Html Msg
-selectedCollections collectionList = 
-    div [ class "columns is-multiline is-tablet" ]
-        (List.map searchTile collectionList)
+selectedReferenceCollections : CollectionList -> Html Msg
+selectedReferenceCollections collectionList = 
+    case collectionList of 
+            [] ->
+                div [ ]
+                    [ text "Please select a collection!"]
+            _ ->
+                div [ class "columns is-multiline is-tablet" ]
+                    (List.map searchReferenceTile collectionList)
 
 
-searchTile : Collection -> Html Msg
-searchTile collection =
-    div [ class "column is-12 reference_search__tile__container", onClick collection ]
-        [ a [ href ("/collections/" ++ collection.name) ] 
-            [ img [ class "search__image", src collection.featured_image ] []
-            ]
-        , div [ class "search__information__container"] [
-            a [ class "search__tile__link", href ("/collections/" ++ collection.name) ] 
-            [ h4 [ class "search__tile__display__name" ] [ text collection.display_name ]
-            ]
-        , div [ class "search__details" ]
-            [ h5 []
-                [ text "Times drawn variable" ]
-            ]
+searchReferenceTile : Collection -> Html Msg
+searchReferenceTile collection =
+    div [ class "column is-12 reference_search__tile__container", onClick (SelectCollection collection) ]
+        [ div [ class "search__image__container" ]
+              [ img [ class "search__image", src collection.featured_image ] []
+              ]
+        , div [ class "search__information__container" ] 
+              [ h4 [ class "search__tile__display__name" ] 
+                   [ text collection.display_name ]
+              ,  a [ class "search__tile__link", href ("/collections/" ++ collection.name) ]
+                   [ text "View Collection"]
+              , h5 [] 
+                   [ text "times drawn" ] 
+              ] 
         ]
-        ]
-
--- SEARCH VIEW
-
-searchComponent : Model -> Html Msg
-searchComponent model =
-    div [ class "search__container"]
-        [ searchInput model.searchInput
-        , searchedCollections model.searchedCollections
-        ]
+        
+        

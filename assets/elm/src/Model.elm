@@ -25,6 +25,7 @@ type alias Image =
     , image_url : String
     , id : String
     , display_name : String
+    , times_drawn : Int
     }
 
 type alias ImageList =
@@ -73,12 +74,22 @@ type MinimalDistraction
   = YesMinimalDistraction
   | NoMinimalDistraction
 
+type IntervalTimingType 
+  = Second
+  | Minute
+
 type IntervalTiming 
-  = I30
-  | I45
-  | I60
-  | I90 
-  | I120
+  = S30
+  | S45
+  | S60
+  | S90 
+  | S120
+  | M1
+  | M2
+  | M3
+  | M4 
+  | M5
+  | M10 
   | Custom 
 
 
@@ -89,6 +100,7 @@ type alias Model =
     { searchedCollections : CollectionList
     , selectedCollections : CollectionList
     , searchInput : String
+    , popularQueries : (List String)
 
     -- Application Status
     , applicationStatus: Status
@@ -99,10 +111,13 @@ type alias Model =
     , imagerTimerBarProgress : Int 
 
     -- Selection Criteria
-    , radioInterval : IntervalTiming
+    , radioIntervalType : IntervalTimingType
+    , radioIntervalTiming : IntervalTiming
     , radioIntervalCustomInput : Int
+
     , radioUpsideDown : UpsideDown
     , radioDistraction : MinimalDistraction
+
 
     -- Popup Component
     , loadedCollectionImagesList : CollectionImagesList
@@ -144,6 +159,7 @@ imageDecoder =
         |> Pipeline.required "image_url" Decode.string
         |> Pipeline.required "id" Decode.string        
         |> Pipeline.required "display_name" Decode.string
+        |> Pipeline.required "times_drawn" Decode.int
 
 
 -- Collection Image Decoder

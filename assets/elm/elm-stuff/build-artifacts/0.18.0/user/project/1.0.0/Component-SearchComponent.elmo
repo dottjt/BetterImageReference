@@ -7,9 +7,13 @@ var _user$project$Component_SearchComponent$submitComponent = A2(
 			_elm_lang$html$Html$button,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html_Attributes$class('button is-primary'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$Msg$ChangeStatus(_user$project$Model$Start)),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',
@@ -18,43 +22,6 @@ var _user$project$Component_SearchComponent$submitComponent = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$Component_SearchComponent$searchInput = function (searchInputValue) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('search__input__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$input,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('search__input'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('text'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$placeholder(''),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$value(searchInputValue),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$ChangeSearchInput),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
-		});
-};
 var _user$project$Component_SearchComponent$searchTile = function (collection) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -131,22 +98,11 @@ var _user$project$Component_SearchComponent$searchTile = function (collection) {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$div,
+								_elm_lang$html$Html$h5,
+								{ctor: '[]'},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('search__details'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$h5,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Times drawn variable'),
-											_1: {ctor: '[]'}
-										}),
+									_0: _elm_lang$html$Html$text('times drawn'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -156,25 +112,129 @@ var _user$project$Component_SearchComponent$searchTile = function (collection) {
 			}
 		});
 };
-var _user$project$Component_SearchComponent$selectedCollections = function (collectionList) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
-			_1: {ctor: '[]'}
-		},
-		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
-};
 var _user$project$Component_SearchComponent$searchedCollections = function (collectionList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet'),
+			_0: _elm_lang$html$Html_Attributes$class('columns is-multiline is-tablet searched__collections__container'),
 			_1: {ctor: '[]'}
 		},
 		A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$searchTile, collectionList));
+};
+var _user$project$Component_SearchComponent$popularQueryText = function (popularQuery) {
+	return A2(
+		_elm_lang$html$Html$a,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('popular__queries__text is-link'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$ChangeSearchInput(popularQuery)),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(popularQuery),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Component_SearchComponent$popularQueries = function (popularQueries) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('popular__queries__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h5,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class(''),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('popular searches'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('popular__queries__container__text'),
+						_1: {ctor: '[]'}
+					},
+					A2(_elm_lang$core$List$map, _user$project$Component_SearchComponent$popularQueryText, popularQueries)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Component_SearchComponent$searchInput = function (searchInput) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('field search__input__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$label,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('label'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('control'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('input search__input'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('text'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$placeholder(''),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$value(searchInput),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$ChangeSearchInput),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Component_SearchComponent$searchComponent = function (model) {
 	return A2(
@@ -189,28 +249,10 @@ var _user$project$Component_SearchComponent$searchComponent = function (model) {
 			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Component_SearchComponent$selectionComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('selectionComponent'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Component_SearchComponent$searchInput(model.searchInput),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
+				_0: _user$project$Component_SearchComponent$popularQueries(model.popularQueries),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Component_SearchComponent$selectedCollections(model.selectedCollections),
+					_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
 					_1: {ctor: '[]'}
 				}
 			}

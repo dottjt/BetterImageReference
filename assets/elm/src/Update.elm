@@ -5,20 +5,43 @@ import Msg exposing (..)
 
 import Command exposing (..)
 
+
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of        
         ChangeSearchInput inputValue ->
+            -- case inputValue of
+            --     "" ->
+            -- { model | searchInput = inputValue } ! []
+            --     _ ->
             { model | searchInput = inputValue } ! [fetchSearchQuery inputValue]
 
+        SelectIntervalTimingType value ->
+            case value of 
+                Minute -> 
+                    { model | radioIntervalType = value, radioIntervalTiming = M1 } ! []        
+
+                Second -> 
+                    { model | radioIntervalType = value, radioIntervalTiming = S30 } ! []        
+
         SelectIntervalTiming value ->
-            { model | radioInterval = value } ! []
+            { model | radioIntervalTiming = value } ! []
 
         UpdateCustomIntervalInput int ->
-            { model | radioIntervalCustomInput = int } ! []        
+            case (String.toInt int) of
+                Ok val ->
+                    { model | radioIntervalCustomInput = val } ! []
+
+                Err err ->
+                    { model | error = err } ! []
 
         SelectCollection collection ->
-            { model | selectedCollections = model.selectedCollections :: collection } ! []
+            -- { model | selectedCollections = model.selectedCollections :: collection } ! []
+            model ! []
+
+        -- SelectPopularQueries inputValue ->
+        --     { model | ! [fetchSearchQuery inputValue]
+
 
         SelectUpsideDown value ->
             { model | radioUpsideDown = value } ! []

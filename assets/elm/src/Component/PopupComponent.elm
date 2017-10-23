@@ -6,7 +6,6 @@ import Html.Events exposing (..)
 
 import Msg exposing (..)
 import Model exposing (..)
-import Update exposing (..)
 
 
 popupNavbar : Model -> Html Msg

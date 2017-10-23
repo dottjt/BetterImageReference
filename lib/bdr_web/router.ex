@@ -58,6 +58,8 @@ defmodule BdrWeb.Router do
     resources "/users", UserController, except: [:new, :edit]    
     resources "/blog", BlogController, except: [:new, :edit]
     resources "/collections", CollectionController, except: [:new, :edit]
+         get  "/collections_initial", CollectionController, :indexWithTimesDrawn
+    
          post "/collections/with_images", CollectionController, :collectionWithImages
          post "/collections/collection_search_query", CollectionController, :collectionSearchQuery
     

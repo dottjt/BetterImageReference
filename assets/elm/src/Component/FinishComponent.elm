@@ -35,18 +35,6 @@ drawnImages image =
         ]
 
 
-
-
-tryNewCollections : Model -> Html Msg 
-tryNewCollections model =
-    div [ class "reference__tool__stop"]
-        [ selectionComponent model
-        , radioIntervalComponent model
-        , radioUpsideDownComponent model 
-        , submitComponent
-        ]
-
-
 relevantUserImages : Model -> Html Msg
 relevantUserImages model =
     div []

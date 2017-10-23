@@ -58,17 +58,39 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_SearchComponent$selectionComponent(model),
+					_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
+						_0: A2(
+							_elm_lang$html$Html$h5,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Image timing'),
+								_1: {ctor: '[]'}
+							}),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+							_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Component_SearchComponent$submitComponent,
-								_1: {ctor: '[]'}
+								_0: A2(
+									_elm_lang$html$Html$h5,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Display image upside down?'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Component_SearchComponent$submitComponent,
+										_1: {ctor: '[]'}
+									}
+								}
 							}
 						}
 					}
@@ -86,7 +108,7 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 					_0: _user$project$Component_FinishComponent$displayDrawnCollections(model.loadedCollectionImagesList),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Component_FinishComponent$tryNewCollections(model),
+						_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
 						_1: {ctor: '[]'}
 					}
 				});

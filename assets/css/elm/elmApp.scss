@@ -1,17 +1,16 @@
 .search__container {
-
     margin-bottom: 4rem;
+
+    .search__tile__container {
+        min-height: 16rem;
+        height: auto;     
+    }
 
     .search__input__container {
         width: 70%; 
         margin: 0 auto;
 
-        margin-bottom: 3rem;
-    
-        .search__tile__container {
-            min-height: 16rem;
-            height: auto;        
-        }
+        margin-bottom: 1rem;
 
         .search__input {
             width: 100%;
@@ -21,6 +20,21 @@
     }
 }
 
+
+.popular__queries__container { 
+    display: flex;
+    
+    
+    .popular__queries__container__text {
+        display: flex;
+
+        margin-bottom: 2rem;
+    
+        .popular__queries__text {
+            margin-left: 1rem;
+        }
+    }
+}
 
 .reference__tool__start {
     width: 100vw;
@@ -119,15 +133,32 @@
         .reference_search__tile__container {
             display: flex;
             height: 80px;
+
+            .search__image__container {
+                // height: 100%;
+                width: 50%;
+                .search__image {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
         }
+    }
+
+    .radio__interval__type__container {
 
     }
+
+    .radio__interval__timing__container {
+        min-height: 124px;
+    }
+
     .uncheckedRadio {
-        // background: red; 
+        min-width: 42px;
     }
 
     .checkedRadio {
-        // background: blue;
+        min-width: 42px;
     }
 
     form {
@@ -158,26 +189,36 @@
 }
 
 
+
+@media screen and (min-width: 768px) {
+    .searched__collections__container {
+        min-width: 775px;
+        width: 775px;
+    }    
+}
+
+
 @media screen and (max-width: 768px) {
-    .search__information__container {
-        position: absolute;
-        margin-top: -9rem;
-        margin-left: 1rem;
-        
-        .search__tile__link {
-            // position: absolute;
-            // left: 1rem;
-            // padding-top: 1rem;
+    .search__container {
+        .search__tile__container {
+            min-height: 0;
+            height: auto;
     
-            .search__tile__display__name {
-                font-size: 2.5rem;
+            .search__information__container {
+                position: absolute;
+                margin-top: -9rem;
+                margin-left: 1rem;
+                
+                .search__tile__link {
+                    // position: absolute;
+                    // left: 1rem;
+                    // padding-top: 1rem;
+            
+                    .search__tile__display__name {
+                        font-size: 2.5rem;
+                    }
+                }        
             }
         }
-    
-        .search__details {
-            // position: absolute;
-            // left: 1rem;
-        }
-    
     }
 }
