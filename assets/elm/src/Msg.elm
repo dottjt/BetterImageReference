@@ -14,7 +14,6 @@ type Msg
     | SelectUpsideDown UpsideDown
     
     | SelectCollection Collection
-    -- | SelectPopularQueries String
 
     | ChangeStatus Status
     | ChangePopupStatus PopupStatus

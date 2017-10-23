@@ -1,4 +1,4 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
@@ -27,20 +27,109 @@
   </div>
 
   <div class="field">
+    <%= label f, :times_drawn, class: "label" %>
+    <%= text_input f, :times_drawn, class: "control" %>
+    <%= error_tag f, :times_drawn %>
+    <p class="help">Required</p>    
+  </div>
+
+
+  <%#= form_for @image_upload_changeset, image_path(@conn, :create), [multipart: true], fn f -> %>
+    <%# <div class="field"> %>
+      <%#= label f, :image_url, class: "label" %>
+      <%#= file_input f, :image_url, class: "control" %>
+    <%# </div> %>
+
+    <%# <div class="field"> %>
+      <%#= submit "Submit", class: "button is-link" %>
+    <%# </div> %>
+  <%# end %>
+
+  <div class="field">
     <%= label f, :image_url, class: "label" %>
     <%= text_input f, :image_url, class: "control" %>
     <%= error_tag f, :image_url %>
     <p class="help">Required</p>    
   </div>
 
+  <div class="field">
+    <%= label f, :photo, class: "label" %>
+    <%= file_input f, :photo, class: "control" %>
+    <%= error_tag f, :photo %>
+    <p class="help">Required</p>    
+  </div>
+
     <h3 class="admin_title">Image Comments</h3>
       <div class="columns is-multiline">
-        <%= inputs_for f, :blog_comments, fn fp -> %>
+        <%= inputs_for f, :image_comments, fn fp -> %>
           <div class="column is-3">
-            <%= label fp, :text, class: "label" %>
-            <%= text_input fp, :text, class: "control" %>
-            <%= error_tag fp, :text %>
-            <p class="help">Required</p>            
+
+            <div class="field">
+              <%= label fp, :text, class: "label" %>
+              <%= text_input fp, :text, class: "control" %>
+              <%= error_tag fp, :text %>
+              <p class="help">Required</p>    
+            </div>        
+          </div>
+        <% end %>
+      </div>
+
+    <h3 class="admin_title">Image Scribbles</h3>
+      <div class="columns is-multiline">
+        <%= inputs_for f, :image_scribbles, fn fp -> %>
+          <div class="column is-3">
+
+            <div class="field">
+              <%= label fp, :name, class: "label" %>
+              <%= text_input fp, :name, class: "control" %>
+              <%= error_tag fp, :name %>
+              <p class="help">Required</p>    
+            </div>   
+
+            <div class="field">
+              <%= label fp, :display_name, class: "label" %>
+              <%= text_input fp, :display_name, class: "control" %>
+              <%= error_tag fp, :display_name %>
+              <p class="help">Required</p>    
+            </div>   
+
+            <div class="field">
+              <%= label fp, :description, class: "label" %>
+              <%= text_input fp, :description, class: "control" %>
+              <%= error_tag fp, :description %>
+              <p class="help">Required</p>    
+            </div>    
+
+            <div class="field">
+              <%= label fp, :data, class: "label" %>
+              <%= text_input fp, :data, class: "control" %>
+              <%= error_tag fp, :data %>
+              <p class="help">Required</p>    
+            </div>   
+
+          </div>
+        <% end %>
+      </div>
+
+    <h3 class="admin_title">Image Tags</h3>
+      <div class="columns is-multiline">
+        <%= inputs_for f, :image_tags, fn fp -> %>
+          <div class="column is-3">
+
+            <div class="field">
+              <%= label fp, :name, class: "label" %>
+              <%= text_input fp, :name, class: "control" %>
+              <%= error_tag fp, :name %>
+              <p class="help">Required</p>    
+            </div>      
+
+            <div class="field">
+              <%= label fp, :display_name, class: "label" %>
+              <%= text_input fp, :display_name, class: "control" %>
+              <%= error_tag fp, :display_name %>
+              <p class="help">Required</p>    
+            </div>        
+        
           </div>
         <% end %>
       </div>

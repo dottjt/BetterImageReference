@@ -9,6 +9,8 @@ defmodule Bdr.Repo.Migrations.CreateImages do
       add :description, :string 
       add :image_url, :string
       add :times_drawn, :integer
+
+      add :photo, :string 
       
       add :collection_id, references(:collections, on_delete: :nothing, type: :binary_id)
 

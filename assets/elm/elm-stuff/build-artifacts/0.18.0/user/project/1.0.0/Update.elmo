@@ -59,7 +59,11 @@ var _user$project$Update$update = F2(
 			case 'SelectCollection':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							selectedCollections: {ctor: '::', _0: _p0._0, _1: model.selectedCollections}
+						}),
 					{ctor: '[]'});
 			case 'SelectUpsideDown':
 				return A2(

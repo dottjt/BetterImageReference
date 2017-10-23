@@ -33,7 +33,7 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 								_0: _user$project$Component_PopupComponent$popupNavbar(model),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Component_PopupComponent$popupLeftbar(model),
+									_0: _user$project$Component_PopupComponent$popupLeftbar(model.loadedCollectionImagesList),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Component_PopupComponent$popupMiddlebar(model),

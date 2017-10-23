@@ -22,7 +22,6 @@ defmodule Bdr.Account.User do
     has_many :image_scribbles, Image.Scribble
     has_many :blog, ApiResources.Blog
     
-    
     timestamps()
   end
 

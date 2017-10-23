@@ -15,13 +15,19 @@ defmodule BdrWeb.ImageController do
   end
 
   def create(conn, %{"image" => image_params}) do
+    Logger.info image_params
+
+    # user = Repo.get!(Image, image_params.id)
+    # image_params.image_url = Bdr.Photo.url({user.photo, user}, :original)
+    # To receive a single rendition:
+    
     with {:ok, %Image{} = image} <- ApiResources.create_image(image_params) do
       # conn
       # |> put_status(:created)
       # |> put_resp_header("location", image_path(conn, :show, image))
       # |> render("show.json", image: image)
       {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)      
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                
     end
   end
 

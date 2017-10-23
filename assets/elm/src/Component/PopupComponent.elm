@@ -15,12 +15,12 @@ popupNavbar model =
         ]
 
 
-popupLeftbar : Model -> Html msg 
-popupLeftbar model =
+popupLeftbar : CollectionImagesList -> Html msg 
+popupLeftbar loadedCollectionImagesList =
     div [ class "popup__leftbar"] 
         [ div [] 
               [ h4 [] [ text "User Comments" ] 
-              , div [] [] 
+              , div [] (List.map userComments loadedCollectionImagesList) 
               ]
         , div [] 
               [ h4 [] [ text "User Scribbles" ] 
@@ -31,6 +31,19 @@ popupLeftbar model =
               , div [] [] 
               ]
         ]
+
+
+userComments : CollectionImages -> Html msg
+userComments image =
+    div [] []
+
+userScribbles : CollectionImages -> Html msg
+userScribbles image =
+    div [] []
+
+userDrawings : CollectionImages -> Html msg
+userDrawings image =
+    div [] []
 
 
 popupMiddlebar : Model -> Html Msg

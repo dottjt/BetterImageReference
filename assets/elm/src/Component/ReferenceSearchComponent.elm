@@ -14,7 +14,7 @@ import Component.SearchComponent exposing (searchInput)
 
 selectionReferenceComponent : Model -> Html Msg
 selectionReferenceComponent model =
-    div [ class "selectionComponent"]
+    div [ class "selection__component"]
         [ searchInput model.searchInput
         , h2 [] [ text "Select a collection" ]
         , searchedReferenceCollections model.searchedCollections
@@ -42,18 +42,39 @@ selectedReferenceCollections collectionList =
 
 searchReferenceTile : Collection -> Html Msg
 searchReferenceTile collection =
-    div [ class "column is-12 reference_search__tile__container", onClick (SelectCollection collection) ]
-        [ div [ class "search__image__container" ]
-              [ img [ class "search__image", src collection.featured_image ] []
-              ]
-        , div [ class "search__information__container" ] 
-              [ h4 [ class "search__tile__display__name" ] 
-                   [ text collection.display_name ]
+    a [ class "column is-3 reference__search__tile__container" ]
+        [ a [] 
+            [ div [ class "click__to__select", onClick (SelectCollection collection) ] [ text "click to select" ]
+            , img [ class "search__image", src collection.featured_image ] []
+            ]
+        , div [ class "search__information__container"] 
+              [
+                a [ class "search__tile__link", href ("/collections/" ++ collection.name) ] 
+                  [ h4 [ class "search__tile__display__name" ] [ text collection.display_name ]
+                  ]
               ,  a [ class "search__tile__link", href ("/collections/" ++ collection.name) ]
                    [ text "View Collection"]
-              , h5 [] 
-                   [ text "times drawn" ] 
-              ] 
+                -- , h5 [] 
+                --      [ text "times drawn"] 
+              ]
+
         ]
+
+
+-- searchReferenceTile : Collection -> Html Msg
+-- searchReferenceTile collection =
+--     div [ class "column is-12 reference_search__tile__container", onClick (SelectCollection collection) ]
+--         [ div [ class "search__image__container" ]
+--               [ img [ class "search__image", src collection.featured_image ] []
+--               ]
+--         , div [ class "search__information__container" ] 
+--               [ h4 [ class "search__tile__display__name" ] 
+--                    [ text collection.display_name ]
+--               ,  a [ class "search__tile__link", href ("/collections/" ++ collection.name) ]
+--                    [ text "View Collection"]
+--               , h5 [] 
+--                    [ text "times drawn" ] 
+--               ] 
+--         ]
         
         

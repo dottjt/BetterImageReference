@@ -22,7 +22,7 @@ referenceComponent model =
                   [ ]
             , div [ class "inner"]
                   [ popupNavbar model
-                  , popupLeftbar model
+                  , popupLeftbar model.loadedCollectionImagesList
                   , popupMiddlebar model
                   , popupBottombar model
                   ]

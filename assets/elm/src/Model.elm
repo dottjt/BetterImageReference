@@ -99,6 +99,7 @@ type alias Model =
     -- Search Functions
     { searchedCollections : CollectionList
     , selectedCollections : CollectionList
+
     , searchInput : String
     , popularQueries : (List String)
 

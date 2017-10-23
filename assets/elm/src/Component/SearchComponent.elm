@@ -16,6 +16,14 @@ searchComponent model =
         [ searchInput model.searchInput
         , popularQueries model.popularQueries
         , searchedCollections model.searchedCollections
+        , viewAllCollections
+        ]
+
+viewAllCollections : Html Msg 
+viewAllCollections =
+    a [ href "/collections" ]
+        [ h3 [ class "has-text-centered" ]
+            [ text "View all collections" ]
         ]
 
 searchInput : String -> Html Msg 
@@ -32,8 +40,8 @@ searchInput searchInput =
 
 popularQueries : (List String) -> Html Msg
 popularQueries popularQueries =  
-    div [ class "popular__queries__container"] 
-        [ h5 [ class "" ] [ text "popular searches" ]
+    div [ class "popular__queries__container" ]
+        [ h5  [ class "" ] [ text "popular searches" ]
         , div [ class "popular__queries__container__text" ] (List.map popularQueryText popularQueries)
         ]
 

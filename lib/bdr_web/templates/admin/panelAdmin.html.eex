@@ -121,7 +121,7 @@
 
   <div class="image__library__container">
     <div class="image__library__upload__container">
-      <%= form_for @image_changeset, @action, [multipart: true], fn f -> %>
+      <%= form_for @image_upload_changeset, image_path(@conn, :create), [multipart: true], fn f -> %>
 
         <div class="field">
           <%= label f, :photo, class: "label" %>

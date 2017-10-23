@@ -5,6 +5,7 @@ defmodule Bdr.ApiResources.Collection do
   alias Bdr.ApiResources.Image  
   alias Bdr.Collection.Book
   alias Bdr.Collection.Tag
+  alias Bdr.Collection.Category  
   alias Bdr.Collection.Tutorial
   alias Bdr.Account.User
   
@@ -18,7 +19,8 @@ defmodule Bdr.ApiResources.Collection do
     # field :user_id, :binary_id
     
     belongs_to :user, User
-    
+    belongs_to :category, Category
+
     has_many :collection_books, Book, on_delete: :delete_all 
     has_many :collection_tutorials, Tutorial, on_delete: :delete_all
     has_many :collection_tags, Tag, on_delete: :delete_all

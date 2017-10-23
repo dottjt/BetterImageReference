@@ -1,4 +1,4 @@
-<div class="container collectionsShow">
+<div class="container collections__show">
     <div class="columns is-tablet">
         <div class="column is-3 is-offset-1">
             <h1><%= @collection.display_name %></h1>

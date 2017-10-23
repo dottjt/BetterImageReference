@@ -198,7 +198,25 @@ var _user$project$Component_PopupComponent$popupMiddlebar = function (model) {
 			});
 	}
 };
-var _user$project$Component_PopupComponent$popupLeftbar = function (model) {
+var _user$project$Component_PopupComponent$userDrawings = function (image) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Component_PopupComponent$userScribbles = function (image) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Component_PopupComponent$userComments = function (image) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollectionImagesList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -226,7 +244,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (model) {
 						_0: A2(
 							_elm_lang$html$Html$div,
 							{ctor: '[]'},
-							{ctor: '[]'}),
+							A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userComments, loadedCollectionImagesList)),
 						_1: {ctor: '[]'}
 					}
 				}),

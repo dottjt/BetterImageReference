@@ -10,11 +10,10 @@ defmodule BdrWeb.CollectionController do
 
   action_fallback BdrWeb.FallbackController
 
-
   # API
 
   def index(conn, _params) do
-    collections = ApiResources.list_collections()
+    collections = ApiResources.list_collections_with_times_drawn()
     render(conn, "index.json", collections: collections)
   end
 

@@ -9741,6 +9741,29 @@ var _user$project$Component_SearchComponent$searchInput = function (searchInput)
 			}
 		});
 };
+var _user$project$Component_SearchComponent$viewAllCollections = A2(
+	_elm_lang$html$Html$a,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$href('/collections'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h3,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('has-text-centered'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('View all collections'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
 var _user$project$Component_SearchComponent$searchComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -9758,7 +9781,11 @@ var _user$project$Component_SearchComponent$searchComponent = function (model) {
 				_1: {
 					ctor: '::',
 					_0: _user$project$Component_SearchComponent$searchedCollections(model.searchedCollections),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_SearchComponent$viewAllCollections,
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});
@@ -10404,7 +10431,25 @@ var _user$project$Component_PopupComponent$popupMiddlebar = function (model) {
 			});
 	}
 };
-var _user$project$Component_PopupComponent$popupLeftbar = function (model) {
+var _user$project$Component_PopupComponent$userDrawings = function (image) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Component_PopupComponent$userScribbles = function (image) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Component_PopupComponent$userComments = function (image) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollectionImagesList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10432,7 +10477,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (model) {
 						_0: A2(
 							_elm_lang$html$Html$div,
 							{ctor: '[]'},
-							{ctor: '[]'}),
+							A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userComments, loadedCollectionImagesList)),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -10522,41 +10567,52 @@ var _user$project$Component_PopupComponent$popupNavbar = function (model) {
 
 var _user$project$Component_ReferenceSearchComponent$searchReferenceTile = function (collection) {
 	return A2(
-		_elm_lang$html$Html$div,
+		_elm_lang$html$Html$a,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('column is-12 reference_search__tile__container'),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Msg$SelectCollection(collection)),
-				_1: {ctor: '[]'}
-			}
+			_0: _elm_lang$html$Html_Attributes$class('column is-3 reference__search__tile__container'),
+			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('search__image__container'),
-					_1: {ctor: '[]'}
-				},
+				_elm_lang$html$Html$a,
+				{ctor: '[]'},
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$img,
+						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('search__image'),
+							_0: _elm_lang$html$Html_Attributes$class('click__to__select'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$src(collection.featured_image),
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$Msg$SelectCollection(collection)),
 								_1: {ctor: '[]'}
 							}
 						},
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('click to select'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$img,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('search__image'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$src(collection.featured_image),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
 				}),
 			_1: {
 				ctor: '::',
@@ -10570,15 +10626,31 @@ var _user$project$Component_ReferenceSearchComponent$searchReferenceTile = funct
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$h4,
+							_elm_lang$html$Html$a,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('search__tile__display__name'),
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html_Attributes$class('search__tile__link'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href(
+										A2(_elm_lang$core$Basics_ops['++'], '/collections/', collection.name)),
+									_1: {ctor: '[]'}
+								}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(collection.display_name),
+								_0: A2(
+									_elm_lang$html$Html$h4,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('search__tile__display__name'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(collection.display_name),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -10600,18 +10672,7 @@ var _user$project$Component_ReferenceSearchComponent$searchReferenceTile = funct
 									_0: _elm_lang$html$Html$text('View Collection'),
 									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$h5,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('times drawn'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						}
 					}),
 				_1: {ctor: '[]'}
@@ -10655,7 +10716,7 @@ var _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('selectionComponent'),
+			_0: _elm_lang$html$Html_Attributes$class('selection__component'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -10730,7 +10791,7 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 								_0: _user$project$Component_PopupComponent$popupNavbar(model),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Component_PopupComponent$popupLeftbar(model),
+									_0: _user$project$Component_PopupComponent$popupLeftbar(model.loadedCollectionImagesList),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
@@ -10907,7 +10968,11 @@ var _user$project$Update$update = F2(
 			case 'SelectCollection':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							selectedCollections: {ctor: '::', _0: _p0._0, _1: model.selectedCollections}
+						}),
 					{ctor: '[]'});
 			case 'SelectUpsideDown':
 				return A2(

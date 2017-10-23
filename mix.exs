@@ -20,9 +20,10 @@ defmodule Bdr.Mixfile do
   def application do
     [
       mod: {Bdr.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
     ]
   end
+
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -43,7 +44,14 @@ defmodule Bdr.Mixfile do
       {:cowboy, "~> 1.0"},
 
       {:arc, "~> 0.8.0"},
+      {:arc_ecto, "~> 0.7.0"},
       # {:rummage_phoenix, "~> 1.2.0", override: true}
+
+      {:ex_aws, "~> 1.1"},
+      {:hackney, "~> 1.6"},
+      {:poison, "~> 3.1"},
+      {:sweet_xml, "~> 0.6"}
+        
     ]
   end
 

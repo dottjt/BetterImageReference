@@ -151,7 +151,7 @@ defmodule Bdr.ApiResources do
 
   """
   def list_collections do
-    Repo.all(Collection)
+    Repo.all(Collection)  
   end
   
   def list_collections_assoc do
@@ -159,17 +159,10 @@ defmodule Bdr.ApiResources do
   end
 
   def list_collections_with_times_drawn do
-    
-    Repo.all(Collection) |> Repo.preload(:images)
+    Repo.all(Collection) |> Repo.preload([:images])
     # Repo.all(Collection) |> Repo.preload(images: [:times_drawn])
-
   end
 
-
-  # def list_selected_collections_assoc do
-
-  #   Repo.all(Collection) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])
-  # end
 
   def query_search_collection_list(search_input) do
     Repo.all(from c in Collection,

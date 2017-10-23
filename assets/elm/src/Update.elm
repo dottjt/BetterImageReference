@@ -36,11 +36,7 @@ update msg model =
                     { model | error = err } ! []
 
         SelectCollection collection ->
-            -- { model | selectedCollections = model.selectedCollections :: collection } ! []
-            model ! []
-
-        -- SelectPopularQueries inputValue ->
-        --     { model | ! [fetchSearchQuery inputValue]
+            { model | selectedCollections = collection :: model.selectedCollections } ! []
 
 
         SelectUpsideDown value ->
