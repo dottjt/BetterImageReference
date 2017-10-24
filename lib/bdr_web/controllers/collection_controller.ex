@@ -13,7 +13,7 @@ defmodule BdrWeb.CollectionController do
   # API
 
   def index(conn, _params) do
-    collections = ApiResources.list_collections_with_times_drawn()
+    collections = ApiResources.list_collections()
     render(conn, "index.json", collections: collections)
   end
 
@@ -56,35 +56,23 @@ defmodule BdrWeb.CollectionController do
   # CUSTOM API
 
 
-  def indexWithTimesDrawn(conn, _params) do
+  def indexWithTimesDrawn(conn, _params) do # initial homepage load
     collections = ApiResources.list_collections_with_times_drawn()
 
     render(conn, "index.json", collections: collections)
   end
 
-
-    # recieves a list of collections with which to retrieve images from. 
-  def collectionWithImages(conn, %{"collections" => collections}) do
-    Logger.info collections
-    # %Collection{}
-    collections |> Repo.preload(:images)
-    render(conn, "index.json", collections: collections)
-    
-    # how do I enum through a list and pass to query? 
-    # ApiResources.list_selected_collections_assoc()
-  
+  def collectionloadApp(conn, %{"collections" => collections}) do # initial application start
+    images = ApiResources.list_images_load_app(collections)
+    render(conn, "collection_app_load.json", images: images)  
   end
 
-    # recieves a string, with which to fetch and return images. 
-  def collectionSearchQuery(conn, %{"search_input" => search_input}) do
-    # case search_input do
-    #   "" ->
-    #     send_resp(conn, 200, "")        
-    #   _ ->
-        collections = ApiResources.query_search_collection_list(search_input)                   
-        render(conn, "index.json", collections: collections)        
-    # end 
+  def collectionSearchQuery(conn, %{"search_input" => search_input}) do # query search string
+    collections = ApiResources.query_search_collection_list(search_input)                   
+    render(conn, "index.json", collections: collections)        
   end
+
+
 
 
   # PAGES

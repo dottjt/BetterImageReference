@@ -19,15 +19,15 @@ popupLeftbar : CollectionImagesList -> Html msg
 popupLeftbar loadedCollectionImagesList =
     div [ class "popup__leftbar"] 
         [ div [] 
-              [ h4 [] [ text "User Comments" ] 
+              [ h4 [] [ text "User Comments" ] -- Image Comments
               , div [] (List.map userComments loadedCollectionImagesList) 
               ]
         , div [] 
-              [ h4 [] [ text "User Scribbles" ] 
+              [ h4 [] [ text "User Scribbles" ]
               , div [] [] 
               ]
         , div [] 
-              [ h4 [] [ text "User Drawings" ] 
+              [ h4 [] [ text "User Drawings" ] -- 
               , div [] [] 
               ]
         ]

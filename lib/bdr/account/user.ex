@@ -13,7 +13,9 @@ defmodule Bdr.Account.User do
     field :name, :string
     field :display_name, :string
     field :email, :string
-    field :password, :string
+    field :password, :string, virtual: true
+    field :password_hash, :string
+    field :is_admin, :boolean, default: false
     field :tier, :string
     
     has_many :collections, ApiResources.Collection

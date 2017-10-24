@@ -53,6 +53,11 @@ defmodule BdrWeb.Router do
     end
   end
 
+  scope "/auth", BdrWeb do 
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback  
+  end
+
   scope "/api", BdrWeb do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]    
@@ -60,7 +65,7 @@ defmodule BdrWeb.Router do
     resources "/collections", CollectionController, except: [:new, :edit]
          get  "/collections_initial", CollectionController, :indexWithTimesDrawn
     
-         post "/collections/with_images", CollectionController, :collectionWithImages
+         post "/collections/load_app", CollectionController, :collectionloadApp
          post "/collections/collection_search_query", CollectionController, :collectionSearchQuery
     
     resources "/images", ImageController, except: [:new, :edit]

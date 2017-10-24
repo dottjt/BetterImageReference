@@ -1,8 +1,8 @@
 defmodule Bdr.Collection.Category do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Bdr.Collection  
   alias Bdr.Collection.Category
-
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -11,7 +11,7 @@ defmodule Bdr.Collection.Category do
     field :name, :string
     field :collection_id, :binary_id
 
-    has_many :collections, Tag, on_delete: :delete_all    
+    has_many :collections, Collection, on_delete: :delete_all    
     
     timestamps()
   end

@@ -9,6 +9,41 @@ use Mix.Config
 config :bdr,
   ecto_repos: [Bdr.Repo]
 
+
+# Authentication configuration 
+config :bdr, Bdr.Guardian, #:guardian is what the tutorial said. 
+  issuer: "bdr",
+  secret_key: "cd3ETCHa9SDjGd0gi3/FXgR7o9oyyYBJLm4WYW1W/NlGXiobSC+4pgA0E9P+VDRx",
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "MyAppName",
+  ttl: { 30, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  serializer: Bdr.GuardianSerializer
+  
+  
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: { Ueberauth.Strategy.Facebook, [display: "popup"] },
+    github: { Ueberauth.Strategy.Google, [] }
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: System.get_env("GOOGLE_CLIENT_ID"),
+  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: System.get_env("FACEBOOK_CLIENT_ID"),
+  client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
+
+
+config :argon2_elixir,
+  t_cost: 2,
+  m_cost: 12
+
+
+
 # Configures the endpoint
 config :bdr, BdrWeb.Endpoint,
   url: [host: "localhost"],
@@ -31,3 +66,4 @@ import_config "#{Mix.env}.exs"
 config :arc,
   storage: Arc.Storage.Local # or Arc.Storage.S3
   # bucket: {:system, "AWS_S3_BUCKET"} # if using Amazon S3
+

@@ -9484,7 +9484,7 @@ var _user$project$Helper_HttpHelper$httpDelete = F4(
 var _user$project$Command$startAppFetchImages = function (collectionList) {
 	return A5(
 		_user$project$Helper_HttpHelper$httpPost,
-		'http://localhost:4000/api/collections/with_images',
+		'http://localhost:4000/api/collections/load_app',
 		_elm_lang$http$Http$jsonBody(
 			_user$project$Model$collectionListEncoder(collectionList)),
 		_user$project$Model$collectionImageListDecoder,

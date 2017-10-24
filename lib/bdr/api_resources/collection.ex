@@ -12,14 +12,14 @@ defmodule Bdr.ApiResources.Collection do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "collections" do
-    field :name, :string 
+    field :name, :string
     field :display_name, :string
     field :external_url, :string
     field :featured_image, :string
     # field :user_id, :binary_id
     
     belongs_to :user, User
-    belongs_to :category, Category
+    # belongs_to :category, Category
 
     has_many :collection_books, Book, on_delete: :delete_all 
     has_many :collection_tutorials, Tutorial, on_delete: :delete_all

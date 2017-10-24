@@ -158,18 +158,17 @@ defmodule Bdr.ApiResources do
     Repo.all(Collection) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])
   end
 
+  # for homepage 
   def list_collections_with_times_drawn do
-    Repo.all(Collection) |> Repo.preload([:images])
+    Repo.all(Collection) |> Repo.preload(:images)
     # Repo.all(Collection) |> Repo.preload(images: [:times_drawn])
   end
-
 
   def query_search_collection_list(search_input) do
     Repo.all(from c in Collection,
              where: ilike(c.display_name, ^"%#{search_input}%") and ilike(c.name, ^"%#{search_input}%"),
             #  preload: [images: i],
              select: c)
-
   end
   
 
@@ -282,6 +281,26 @@ defmodule Bdr.ApiResources do
 
   def list_images_assoc do
     Repo.all(Image) |> Repo.preload([:image_comments, :image_scribbles, :image_tags])
+  end
+
+
+
+
+  #images join with collection details, user details.  
+  def list_images_load_app(collections) do 
+
+    # collection_id_list = Enum.map(collections, fn(x) -> x.id end)
+
+    query = from i in Image,
+            join: c in Collection,
+            where: i.collection_id > c.id
+            # preload: c
+
+    query = from [i, c] in query,
+            select: {i, c}
+            
+    Repo.all(query)
+            
   end
 
 

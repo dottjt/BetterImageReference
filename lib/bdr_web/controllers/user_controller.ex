@@ -1,6 +1,7 @@
 defmodule BdrWeb.UserController do
   use BdrWeb, :controller
-
+  plug Ueberauth
+  
   alias Bdr.Account
   alias Bdr.Account.User
   alias Bdr.ApiResources

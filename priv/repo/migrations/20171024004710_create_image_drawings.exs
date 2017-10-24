@@ -8,6 +8,7 @@ defmodule Bdr.Repo.Migrations.CreateImageDrawings do
       add :display_name, :string
       add :description, :string
       add :image_url, :string
+
       add :image_id, references(:images, on_delete: :nothing, type: :binary_id)
       add :user_id, references(:users, on_delete: :nothing, type: :binary_id)
 
