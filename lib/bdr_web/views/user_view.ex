@@ -1,6 +1,11 @@
 defmodule BdrWeb.UserView do
   use BdrWeb, :view
+  use JaSerializer.PhoenixView
+
   alias BdrWeb.UserView
+
+  attributes [:avatar, :email, :name, :auth_provider]
+  
 
   def render("index.json", %{users: users}) do
     %{data: render_many(users, UserView, "user.json")}

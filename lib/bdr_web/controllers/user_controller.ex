@@ -6,6 +6,10 @@ defmodule BdrWeb.UserController do
   alias Bdr.Account.User
   alias Bdr.ApiResources
   
+  plug Guardian.Plug.EnsureAuthenticated, handler: BdrWeb.AuthController
+  
+
+
   action_fallback BdrWeb.FallbackController
 
   # API
@@ -14,6 +18,16 @@ defmodule BdrWeb.UserController do
     users = Account.list_users()
     render(conn, "index.json", users: users)
   end
+
+  def current(conn, _) do
+    user = conn
+    |> Guardian.Plug.current_resource
+
+    conn
+    |> render(BdrWeb.UserView, "show.json-api", data: user)
+  end
+
+
 
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Account.create_user(user_params) do

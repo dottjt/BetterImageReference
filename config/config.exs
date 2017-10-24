@@ -16,7 +16,6 @@ config :bdr, Bdr.Guardian, #:guardian is what the tutorial said.
   secret_key: "cd3ETCHa9SDjGd0gi3/FXgR7o9oyyYBJLm4WYW1W/NlGXiobSC+4pgA0E9P+VDRx",
   allowed_algos: ["HS512"], # optional
   verify_module: Guardian.JWT,  # optional
-  issuer: "MyAppName",
   ttl: { 30, :days },
   allowed_drift: 2000,
   verify_issuer: true, # optional
@@ -26,12 +25,20 @@ config :bdr, Bdr.Guardian, #:guardian is what the tutorial said.
 config :ueberauth, Ueberauth,
   providers: [
     facebook: { Ueberauth.Strategy.Facebook, [display: "popup"] },
-    github: { Ueberauth.Strategy.Google, [] }
+    github: { Ueberauth.Strategy.Google, [] },
+    identity: { Ueberauth.Strategy.Identity, [
+      callback_methods: ["POST"],
+      uid_field: :name,
+      nickname_field: :name,
+    ] }
+
   ]
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: System.get_env("GOOGLE_CLIENT_ID"),
-  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+  client_secret: System.get_env("GOOGLE_CLIENT_SECRET"),
+  redirect_uri: System.get_env("GOOGLE_REDIRECT_URI")
+  
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
   client_id: System.get_env("FACEBOOK_CLIENT_ID"),

@@ -50,10 +50,12 @@ defmodule Bdr.Mixfile do
       {:ueberauth, "~> 0.4"},
       {:ueberauth_google, "~> 0.5"},
       {:ueberauth_facebook, "~> 0.7"},
-
+      {:ja_serializer, "~> 0.12.0"},
+      
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
       
+
       {:ex_aws, "~> 1.1"},
       {:hackney, "~> 1.6"},
       {:poison, "~> 3.1"},
