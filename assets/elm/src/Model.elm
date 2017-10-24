@@ -4,6 +4,7 @@ import Json.Encode as Encode
 import Json.Decode as Decode
 import Json.Decode.Pipeline as Pipeline
 
+import Time exposing (Time)
 
 -- PRODUCT TYPES - COLLECTION
 type alias Collection =
@@ -108,7 +109,7 @@ type alias Model =
     , popupStatus : PopupStatus
     , imageStatus : DrawStatus
 
-    , imageTime : Int 
+    , imageTime : Time 
     , imagerTimerBarProgress : Int 
 
     -- Selection Criteria

@@ -17,8 +17,8 @@ var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
 };
 var _user$project$Msg$ImageTimerBarProgress = {ctor: 'ImageTimerBarProgress'};
-var _user$project$Msg$ImageTimer = function (a) {
-	return {ctor: 'ImageTimer', _0: a};
+var _user$project$Msg$Tick = function (a) {
+	return {ctor: 'Tick', _0: a};
 };
 var _user$project$Msg$ChangeDrawStatus = function (a) {
 	return {ctor: 'ChangeDrawStatus', _0: a};

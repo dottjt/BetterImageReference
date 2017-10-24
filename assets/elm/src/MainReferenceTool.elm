@@ -48,7 +48,7 @@ initialModel =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-      Time.every second ImageTimer
+      Time.every second Tick
 
 
 

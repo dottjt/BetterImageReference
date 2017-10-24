@@ -2,7 +2,6 @@ defmodule Bdr.ApiResources.Image do
   
   use Ecto.Schema  
   use Arc.Ecto.Schema
-  # alias Bdr.Photo
 
   import Ecto.Changeset
 

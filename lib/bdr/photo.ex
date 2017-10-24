@@ -15,6 +15,8 @@ defmodule Bdr.Photo do
     ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
   end
 
+  def __storage, do: Arc.Storage.Local
+  
   # Define a thumbnail transformation:
   # def transform(:thumb, _) do
   #   {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}

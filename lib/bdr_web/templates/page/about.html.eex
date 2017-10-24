@@ -17,23 +17,24 @@
     <p>I am open to suggestions and improving this website to be to the best possible experience for you!</p>
 
     <%= form_for @changeset, email_path(@conn, :create), fn f -> %>
-      <label>
-        Name: <%= text_input f, :name %>
-      </label>
-
-      <label>
-        Email: <%= text_input f, :recipient %>
-      </label>
-
-      <label>
-        Subject: <%= text_input f, :subject %>
-      </label>
       
-      <label>
-        Content: <%= text_input f, :content %>
-      </label>
+      <div class="group">
+        <%= text_input f, :recipient, placeholder: "Email", 
+                          class: "form-control" %>
+      </div>
+
+      <div class="group">
+        <%= text_input f, :name, placeholder: "Name", 
+                          class: "form-control" %>
+      </div>
       
-      <%= submit "Submit" %>
+      <div class="group">
+        <%= textarea f, :content, placeholder: "Message", 
+                        class: "form-control", rows: 10 %>
+      </div>
+      
+      <%= submit "Send Email", class: "btn btn-primary"%>
+    
     <% end %>
 
   </div>

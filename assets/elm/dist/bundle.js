@@ -13339,8 +13339,8 @@ var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
 };
 var _user$project$Msg$ImageTimerBarProgress = {ctor: 'ImageTimerBarProgress'};
-var _user$project$Msg$ImageTimer = function (a) {
-	return {ctor: 'ImageTimer', _0: a};
+var _user$project$Msg$Tick = function (a) {
+	return {ctor: 'Tick', _0: a};
 };
 var _user$project$Msg$ChangeDrawStatus = function (a) {
 	return {ctor: 'ChangeDrawStatus', _0: a};
@@ -14394,19 +14394,96 @@ var _user$project$Component_PopupComponent$userDrawings = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('image'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$userScribbles = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('image'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$userComments = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('avatar'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('comment'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollectionImagesList) {
 	return A2(
@@ -14460,7 +14537,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 							_0: A2(
 								_elm_lang$html$Html$div,
 								{ctor: '[]'},
-								{ctor: '[]'}),
+								A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userScribbles, loadedCollectionImagesList)),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -14484,7 +14561,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 								_0: A2(
 									_elm_lang$html$Html$div,
 									{ctor: '[]'},
-									{ctor: '[]'}),
+									A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userDrawings, loadedCollectionImagesList)),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -14965,10 +15042,12 @@ var _user$project$Update$update = F2(
 						model,
 						{imageStatus: _p0._0}),
 					{ctor: '[]'});
-			case 'ImageTimer':
+			case 'Tick':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{imageTime: _p0._0}),
 					{ctor: '[]'});
 			case 'ImageTimerBarProgress':
 				return A2(
@@ -15027,7 +15106,7 @@ var _user$project$Update$update = F2(
 	});
 
 var _user$project$MainReferenceTool$subscriptions = function (model) {
-	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$ImageTimer);
+	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$Tick);
 };
 var _user$project$MainReferenceTool$initialModel = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],
@@ -15119,11 +15198,11 @@ if (typeof _user$project$Command$main !== 'undefined') {
 }
 Elm['MainReferenceTool'] = Elm['MainReferenceTool'] || {};
 if (typeof _user$project$MainReferenceTool$main !== 'undefined') {
-    _user$project$MainReferenceTool$main(Elm['MainReferenceTool'], 'MainReferenceTool', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ImageTimerBarProgress":[],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"UpdateCustomIntervalInput":["String"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ImageTimer":["Time.Time"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Time.Time":{"args":[],"type":"Float"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$MainReferenceTool$main(Elm['MainReferenceTool'], 'MainReferenceTool', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ImageTimerBarProgress":[],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"Tick":["Time.Time"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"UpdateCustomIntervalInput":["String"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Time.Time":{"args":[],"type":"Float"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
 }
 Elm['MainSearch'] = Elm['MainSearch'] || {};
 if (typeof _user$project$MainSearch$main !== 'undefined') {
-    _user$project$MainSearch$main(Elm['MainSearch'], 'MainSearch', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ImageTimerBarProgress":[],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"UpdateCustomIntervalInput":["String"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ImageTimer":["Time.Time"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Time.Time":{"args":[],"type":"Float"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$MainSearch$main(Elm['MainSearch'], 'MainSearch', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ImageTimerBarProgress":[],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"Tick":["Time.Time"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"UpdateCustomIntervalInput":["String"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Time.Time":{"args":[],"type":"Float"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
 }
 Elm['Model'] = Elm['Model'] || {};
 if (typeof _user$project$Model$main !== 'undefined') {

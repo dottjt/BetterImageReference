@@ -35,8 +35,8 @@ defmodule BdrWeb.UserController do
       # |> put_status(:created)
       # |> put_resp_header("location", user_path(conn, :show, user))
       # |> render("show.json", user: user)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                       
     end
   end
 
@@ -50,8 +50,8 @@ defmodule BdrWeb.UserController do
 
     with {:ok, %User{} = user} <- Account.update_user(user, user_params) do
       # render(conn, "show.json", user: user)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                       
     end
   end
 
@@ -59,8 +59,8 @@ defmodule BdrWeb.UserController do
     user = Account.get_user!(id)
     with {:ok, %User{}} <- Account.delete_user(user) do
       # send_resp(conn, :no_content, "")
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                       
     end
   end
 

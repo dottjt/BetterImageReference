@@ -11,8 +11,14 @@ defmodule BdrWeb.EmailController do
     render(conn, "index.json", emails: emails)
   end
 
-  def create(conn, %{"email" => email_params}) do
+  # def create(conn, %{"email" => email_params}) do
+  def create(conn, %{"email" => email_params, 
+                     "email" => %{"recipient" => recipient, 
+                     "subject" => subject, "content" => content}}) do
+
     with {:ok, %Email{} = email} <- Account.create_email(email_params) do
+      Bdr.Mailer.send_email(recipient, subject, content)
+      
       conn
       |> put_status(:created)
       |> put_resp_header("location", email_path(conn, :show, email))

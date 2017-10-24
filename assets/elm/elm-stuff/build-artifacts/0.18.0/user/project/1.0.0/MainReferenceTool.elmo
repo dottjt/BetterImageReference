@@ -1,5 +1,5 @@
 var _user$project$MainReferenceTool$subscriptions = function (model) {
-	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$ImageTimer);
+	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$Tick);
 };
 var _user$project$MainReferenceTool$initialModel = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],

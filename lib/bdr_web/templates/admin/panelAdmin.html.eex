@@ -119,6 +119,21 @@
     </div>
   </div><!-- end of admin grid -->
 
+
+  <h2>Email history</h2>
+  <%= for email <- @emails do %>
+    <strong>To:</strong> <%= email.recipient %>
+    <strong>Subject:</strong> <%= email.name %>
+    <hr>
+    <p>email.content</p>
+  <% end %>
+
+
+  <%= for image <- @images do %>
+    <img src="<%= Bdr.Photo.url({image.photo, image})%>"><br>
+  <% end %>
+
+
   <div class="image__library__container">
     <div class="image__library__upload__container">
       <%= form_for @image_upload_changeset, image_path(@conn, :create), [multipart: true], fn f -> %>

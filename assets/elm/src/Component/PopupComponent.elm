@@ -24,26 +24,36 @@ popupLeftbar loadedCollectionImagesList =
               ]
         , div [] 
               [ h4 [] [ text "User Scribbles" ]
-              , div [] [] 
+              , div [] (List.map userScribbles loadedCollectionImagesList) 
               ]
         , div [] 
               [ h4 [] [ text "User Drawings" ] -- 
-              , div [] [] 
+              , div [] (List.map userDrawings loadedCollectionImagesList) 
               ]
         ]
 
 
 userComments : CollectionImages -> Html msg
 userComments image =
-    div [] []
+    div [] 
+        [ img [] [ text "avatar"]
+        , h4 [] [ text "username" ]
+        , p [] [ text "comment"]
+        ]
 
 userScribbles : CollectionImages -> Html msg
 userScribbles image =
-    div [] []
+    div [] 
+        [ img [] [ text "image"]
+        , h4 [] [ text "username" ]
+        ]
 
 userDrawings : CollectionImages -> Html msg
 userDrawings image =
-    div [] []
+    div [] 
+        [ img [] [ text "image"]
+        , h4 [] [ text "username" ]
+        ]
 
 
 popupMiddlebar : Model -> Html Msg

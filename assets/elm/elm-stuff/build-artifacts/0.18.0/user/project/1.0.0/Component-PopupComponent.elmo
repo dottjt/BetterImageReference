@@ -202,19 +202,96 @@ var _user$project$Component_PopupComponent$userDrawings = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('image'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$userScribbles = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('image'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$userComments = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('avatar'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('comment'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollectionImagesList) {
 	return A2(
@@ -268,7 +345,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 							_0: A2(
 								_elm_lang$html$Html$div,
 								{ctor: '[]'},
-								{ctor: '[]'}),
+								A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userScribbles, loadedCollectionImagesList)),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -292,7 +369,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 								_0: A2(
 									_elm_lang$html$Html$div,
 									{ctor: '[]'},
-									{ctor: '[]'}),
+									A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userDrawings, loadedCollectionImagesList)),
 								_1: {ctor: '[]'}
 							}
 						}),

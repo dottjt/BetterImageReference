@@ -97,10 +97,12 @@ var _user$project$Update$update = F2(
 						model,
 						{imageStatus: _p0._0}),
 					{ctor: '[]'});
-			case 'ImageTimer':
+			case 'Tick':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{imageTime: _p0._0}),
 					{ctor: '[]'});
 			case 'ImageTimerBarProgress':
 				return A2(

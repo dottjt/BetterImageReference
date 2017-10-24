@@ -7,7 +7,9 @@ use Mix.Config
 
 # General application configuration
 config :bdr,
-  ecto_repos: [Bdr.Repo]
+  ecto_repos: [Bdr.Repo],
+  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
+  mailgun_key: System.get_env("MAILGUN_KEY")
 
 
 # Authentication configuration 
@@ -50,6 +52,25 @@ config :argon2_elixir,
   m_cost: 12
 
 
+# Configure file uploads
+config :arc,
+  storage: Arc.Storage.Local # or Arc.Storage.S3
+  # bucket: {:system, "AWS_S3_BUCKET"} # if using Amazon S3
+  # bucket: "nameofyourbucket",
+  # virtual_host: true
+
+# config :ex_aws,
+#   access_key_id: "accesskey",
+#   secret_access_key: "secretkey",
+#   region: "eu-central-1",
+#   host: "s3.eu-central-1.amazonaws.com",
+#   s3: [
+#   scheme: "https://",
+#   host: "s3.eu-central-1.amazonaws.com",
+#   region: "eu-central-1"
+#   ]
+ 
+
 
 # Configures the endpoint
 config :bdr, BdrWeb.Endpoint,
@@ -67,10 +88,4 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
-
-  
-# Configure file uploads
-config :arc,
-  storage: Arc.Storage.Local # or Arc.Storage.S3
-  # bucket: {:system, "AWS_S3_BUCKET"} # if using Amazon S3
 

@@ -41,9 +41,6 @@ defmodule BdrWeb.Router do
     get "/signup", UserController, :signupPage
     get "/forgot", UserController, :forgotPage     
 
-    get "/contact", EmailController, :contactPage       
-
-
     scope "/admin" do
       get "/", AdminController, :panelPageAdmin      
       get "/login", AdminController, :loginPageAdmin
@@ -78,6 +75,7 @@ defmodule BdrWeb.Router do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]    
     resources "/blog", BlogController, except: [:new, :edit]
+    resources "/email", EmailController, except: [:new, :edit]    
     resources "/collections", CollectionController, except: [:new, :edit]
          get  "/collections_initial", CollectionController, :indexWithTimesDrawn
     

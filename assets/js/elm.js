@@ -9380,8 +9380,8 @@ var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
 };
 var _user$project$Msg$ImageTimerBarProgress = {ctor: 'ImageTimerBarProgress'};
-var _user$project$Msg$ImageTimer = function (a) {
-	return {ctor: 'ImageTimer', _0: a};
+var _user$project$Msg$Tick = function (a) {
+	return {ctor: 'Tick', _0: a};
 };
 var _user$project$Msg$ChangeDrawStatus = function (a) {
 	return {ctor: 'ChangeDrawStatus', _0: a};
@@ -10435,19 +10435,96 @@ var _user$project$Component_PopupComponent$userDrawings = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('image'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$userScribbles = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('image'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$userComments = function (image) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		{ctor: '[]'});
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('avatar'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h4,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('username'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('comment'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
 };
 var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollectionImagesList) {
 	return A2(
@@ -10501,7 +10578,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 							_0: A2(
 								_elm_lang$html$Html$div,
 								{ctor: '[]'},
-								{ctor: '[]'}),
+								A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userScribbles, loadedCollectionImagesList)),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -10525,7 +10602,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 								_0: A2(
 									_elm_lang$html$Html$div,
 									{ctor: '[]'},
-									{ctor: '[]'}),
+									A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userDrawings, loadedCollectionImagesList)),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -11006,10 +11083,12 @@ var _user$project$Update$update = F2(
 						model,
 						{imageStatus: _p0._0}),
 					{ctor: '[]'});
-			case 'ImageTimer':
+			case 'Tick':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{imageTime: _p0._0}),
 					{ctor: '[]'});
 			case 'ImageTimerBarProgress':
 				return A2(
@@ -11068,7 +11147,7 @@ var _user$project$Update$update = F2(
 	});
 
 var _user$project$MainReferenceTool$subscriptions = function (model) {
-	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$ImageTimer);
+	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$Tick);
 };
 var _user$project$MainReferenceTool$initialModel = A2(
 	_elm_lang$core$Platform_Cmd_ops['!'],

@@ -1,7 +1,9 @@
 defmodule BdrWeb.AuthController do
     use BdrWeb, :controller
     plug Ueberauth
-    
+
+    import Ecto.Query
+
     alias Bdr.Account.User
     alias MyApp.UserQuery
 
@@ -47,8 +49,8 @@ defmodule BdrWeb.AuthController do
         # Attempt to retrieve exactly one user from the DB, whose
         # email matches the one provided with the login request
         user = User
-        |> where(email: ^user.email)
-        |> Repo.one!
+          |> where(email: ^user.email)
+          |> Repo.one!
         cond do
           true ->
             # Successful login

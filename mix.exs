@@ -45,7 +45,8 @@ defmodule Bdr.Mixfile do
 
       {:arc, "~> 0.8.0"},
       {:arc_ecto, "~> 0.7.0"},
-      # {:rummage_phoenix, "~> 1.2.0", override: true}
+      # {:rummage_phoenix, "~> 1.2.0", override: true},
+      # {:rummage_phoenix, ">= 0.0.0", override: true},      
       {:guardian, "~> 1.0-beta"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_google, "~> 0.5"},
@@ -54,8 +55,9 @@ defmodule Bdr.Mixfile do
       
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
+      # {:mailgun, "~> 0.1.2", override: true},
+      {:mailgun, ">= 0.0.0", override: true},
       
-
       {:ex_aws, "~> 1.1"},
       {:hackney, "~> 1.6"},
       {:poison, "~> 3.1"},

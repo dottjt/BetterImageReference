@@ -21,7 +21,7 @@ defmodule Bdr.ApiResources do
 
 
   def list_admin_panel_resources do
-    {list_blogs(), list_collections(), list_images(), Account.list_users()}
+    {list_blogs(), list_collections(), list_images(), Account.list_users(), Account.list_emails()}
   end
 
 
@@ -293,7 +293,7 @@ defmodule Bdr.ApiResources do
 
     query = from i in Image,
             join: c in Collection,
-            where: i.collection_id > c.id
+            # where: i.collection_id > c.id
             # preload: c
 
     query = from [i, c] in query,

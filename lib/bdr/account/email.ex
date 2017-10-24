@@ -19,6 +19,6 @@ defmodule Bdr.Account.Email do
   def changeset(%Email{} = email, attrs \\ %{}) do
     email
     |> cast(attrs, [:recipient, :subject, :name, :content])
-    |> validate_required([:recipient, :subject, :name, :content])
+    |> validate_required([:recipient, :name, :content])
   end
 end

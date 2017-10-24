@@ -19,7 +19,7 @@ type Msg
     | ChangePopupStatus PopupStatus
     | ChangeDrawStatus DrawStatus
 
-    | ImageTimer Time
+    | Tick Time
     | ImageTimerBarProgress
 
     | FetchCollectionListFail Error

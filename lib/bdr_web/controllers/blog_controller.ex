@@ -20,8 +20,8 @@ defmodule BdrWeb.BlogController do
       # |> put_status(:created)
       # |> put_resp_header("location", blog_path(conn, :show, blog))
       # |> render("show.json", blog: blog)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                                   
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                                   
     end
   end
 
@@ -35,8 +35,8 @@ defmodule BdrWeb.BlogController do
 
     with {:ok, %Blog{} = blog} <- ApiResources.update_blog(blog, blog_params) do
       # render(conn, "show.json", blog: blog)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)      
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)      
     end
   end
 
@@ -45,8 +45,8 @@ defmodule BdrWeb.BlogController do
     blog = ApiResources.get_blog!(id)
     with {:ok, %Blog{}} <- ApiResources.delete_blog(blog) do
       # send_resp(conn, :no_content, "")
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                       
     end
   end
 

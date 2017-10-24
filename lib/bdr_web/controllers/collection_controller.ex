@@ -23,8 +23,8 @@ defmodule BdrWeb.CollectionController do
       # |> put_status(:created)
       # |> put_resp_header("location", collection_path(conn, :show, collection))
       # |> render("show.json", collection: collection)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                             
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                             
     end
   end
 
@@ -38,8 +38,8 @@ defmodule BdrWeb.CollectionController do
 
     with {:ok, %Collection{} = collection} <- ApiResources.update_collection(collection, collection_params) do
       # render(conn, "show.json", collection: collection)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                             
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                             
     end
   end
 
@@ -47,8 +47,8 @@ defmodule BdrWeb.CollectionController do
     collection = ApiResources.get_collection!(id)
     with {:ok, %Collection{}} <- ApiResources.delete_collection(collection) do
 
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                 
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                 
     end
   end
 

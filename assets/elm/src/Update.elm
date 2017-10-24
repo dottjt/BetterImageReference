@@ -53,8 +53,8 @@ update msg model =
         ChangeDrawStatus status ->
             { model | imageStatus = status } ! []
 
-        ImageTimer time -> 
-            model ! []
+        Tick newTime ->
+            { model | imageTime = newTime} ! []
 
         ImageTimerBarProgress ->
             model ! []

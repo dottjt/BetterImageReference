@@ -17,17 +17,9 @@ defmodule BdrWeb.ImageController do
   def create(conn, %{"image" => image_params}) do
     Logger.info image_params
 
-    # user = Repo.get!(Image, image_params.id)
-    # image_params.image_url = Bdr.Photo.url({user.photo, user}, :original)
-    # To receive a single rendition:
-    
     with {:ok, %Image{} = image} <- ApiResources.create_image(image_params) do
-      # conn
-      # |> put_status(:created)
-      # |> put_resp_header("location", image_path(conn, :show, image))
-      # |> render("show.json", image: image)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                
     end
   end
 
@@ -41,8 +33,8 @@ defmodule BdrWeb.ImageController do
 
     with {:ok, %Image{} = image} <- ApiResources.update_image(image, image_params) do
       # render(conn, "show.json", image: image)
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)      
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)      
     end
   end
 
@@ -50,8 +42,8 @@ defmodule BdrWeb.ImageController do
     image = ApiResources.get_image!(id)
     with {:ok, %Image{}} <- ApiResources.delete_image(image) do
       # send_resp(conn, :no_content, "")
-      {blogs, collections, images, users} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users)                                       
+      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                       
     end
   end
 
