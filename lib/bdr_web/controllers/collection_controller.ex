@@ -79,13 +79,13 @@ defmodule BdrWeb.CollectionController do
 
   def indexPage(conn, _params) do
     collections = ApiResources.list_collections()
-    render conn, "index.html", collections: collections
+    render conn, "indexPage.html", collections: collections
   end
   
   def showPage(conn, %{"name" => name}) do  
     collection = ApiResources.get_collection_name_assoc!(name)
     
-    render conn, "show.html", collection: collection
+    render conn, "showPage.html", collection: collection
   end  
 
 end

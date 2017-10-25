@@ -1,6 +1,7 @@
 defmodule Bdr.Account.User do
   use Ecto.Schema
   import Ecto.Changeset
+  
   alias Bdr.Account.User
   alias Bdr.ApiResources    
   alias Bdr.Blog

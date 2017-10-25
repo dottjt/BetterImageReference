@@ -151,7 +151,7 @@ defmodule Bdr.ApiResources do
 
   """
   def list_collections do
-    Repo.all(Collection)  
+    Repo.all(Collection)
   end
   
   def list_collections_assoc do
@@ -291,15 +291,16 @@ defmodule Bdr.ApiResources do
 
     # collection_id_list = Enum.map(collections, fn(x) -> x.id end)
 
-    query = from i in Image,
-            join: c in Collection,
-            # where: i.collection_id > c.id
+    # query = from i in Image,
+    #         join: c in Collection,
+    #         where: i.collection_id > c.id,
+    #         select: i
             # preload: c
 
-    query = from [i, c] in query,
-            select: {i, c}
+    # query = from [i, c] in query,
+    #         select: [i, c]
             
-    Repo.all(query)
+    Repo.all(Collection)
             
   end
 

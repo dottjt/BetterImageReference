@@ -1,6 +1,6 @@
 <div class="container collectionsIndex">
 
-    <h1>Image Collections</h1>
+    <h1>Collections</h1>
 
         <div class="columns is-multiline">
             <%= Enum.map(@collections, fn(collection) -> %>

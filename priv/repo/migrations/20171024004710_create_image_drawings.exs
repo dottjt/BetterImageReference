@@ -14,8 +14,8 @@ defmodule Bdr.Repo.Migrations.CreateImageDrawings do
 
       timestamps()
     end
-
+    
+    create index(:image_drawings, [:user_id])    
     create index(:image_drawings, [:image_id])
-    create index(:image_drawings, [:user_id])
   end
 end

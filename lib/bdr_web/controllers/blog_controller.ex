@@ -4,6 +4,8 @@ defmodule BdrWeb.BlogController do
   alias Bdr.ApiResources
   alias Bdr.ApiResources.Blog
 
+  alias BdrWeb.AdminView
+
   action_fallback BdrWeb.FallbackController
 
 
