@@ -8,8 +8,10 @@ defmodule Bdr.Repo.Migrations.CreateUsers do
       add :display_name, :string
       add :avatar, :string 
       add :email, :string
+
       add :password, :string
       add :password_hash, :string 
+      
       add :tier, :string
       add :auth_provider, :string
       add :is_admin, :string 

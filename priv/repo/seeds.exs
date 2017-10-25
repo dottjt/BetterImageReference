@@ -31,14 +31,9 @@ alias Bdr.Blog
 
 # {:ok, user_id} = Ecto.UUID.load(Ecto.UUID.bingenerate())
 
-
-Repo.insert!(%User{
-    name: "julius-reade",
-    display_name: "Julius Reade",
-})
+Repo.insert!(%Bdr.Account.User{})
 
 # Repo.insert!(%User{
-#     # id: user_id,
 #     name: "julius-reade",
 #     display_name: "Julius Reade",
 #     avatar: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
