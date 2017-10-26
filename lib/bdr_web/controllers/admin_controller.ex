@@ -20,23 +20,24 @@ defmodule BdrWeb.AdminController do
 
   def panelPageAdmin(conn, _params) do
     {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
-    image_upload_changeset = ApiResources.change_image(%Image{})
 
-    render(conn, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails, image_upload_changeset: image_upload_changeset)
+    render(conn, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)
   end
 
 
  # BLOG ADMIN PAGES
 
   def newBlogAdmin(conn, _params) do
+    blog = %Blog{}
     changeset = ApiResources.change_blog(%Blog{})
     
-    render conn, "newBlogAdmin.html", changeset: changeset
+    render conn, "newBlogAdmin.html", blog: blog, changeset: changeset
   end
 
   def editBlogAdmin(conn, %{"id" => id}) do
     blog = ApiResources.get_blog_assoc!(id)
     changeset = ApiResources.change_blog_assoc(blog)
+    IO.inspect blog
 
     render conn, "editBlogAdmin.html", blog: blog, changeset: changeset
   end
@@ -45,9 +46,10 @@ defmodule BdrWeb.AdminController do
   # COLLECTION ADMIN PAGES
 
   def newCollectionAdmin(conn, _params) do
+    collection = %Collection{}
     changeset = ApiResources.change_collection(%Collection{})
     
-    render conn, "newCollectionAdmin.html", changeset: changeset
+    render conn, "newCollectionAdmin.html", collection: collection, changeset: changeset
   end
 
   def editCollectionAdmin(conn, %{"id" => id}) do
@@ -61,15 +63,17 @@ defmodule BdrWeb.AdminController do
   # IMAGE ADMIN PAGES
 
   def newImageAdmin(conn, _params) do
+    image = %Image{}
     changeset = ApiResources.change_image(%Image{})
     
-    render conn, "newImageAdmin.html", changeset: changeset
+    render conn, "newImageAdmin.html", image: image, changeset: changeset
   end
 
   def editImageAdmin(conn, %{"id" => id}) do
     image = ApiResources.get_image_assoc!(id)
     changeset = ApiResources.change_image_assoc(image)    
-    
+    IO.inspect image.photo
+
     render conn, "editImageAdmin.html", image: image, changeset: changeset
   end  
 
@@ -77,15 +81,17 @@ defmodule BdrWeb.AdminController do
 # USER ADMIN PAGES
 
   def newUserAdmin(conn, _params) do
+    user = %User{}
     changeset = Account.change_user(%User{})
-
-    render conn, "newUserAdmin.html", changeset: changeset
+    
+    render conn, "newUserAdmin.html", user: user, changeset: changeset
   end  
 
   def editUserAdmin(conn, %{"id" => id}) do
     user = Account.get_user_assoc!(id)   
     changeset = Account.change_user_assoc(user)
-    
-    render conn, "editUserAdmin.html", user: user 
+    # IO.inspect user.avatar.file_name
+
+    render conn, "editUserAdmin.html", user: user, changeset: changeset
   end
 end

@@ -12,6 +12,8 @@ defmodule BdrWeb.Router do
   pipeline :api do
     plug :accepts, ["json", "json-api"]
     plug JaSerializer.Deserializer
+    plug :fetch_session
+    plug :fetch_flash        # this has been added to it
   end
 
   pipeline :api_auth do
@@ -20,7 +22,6 @@ defmodule BdrWeb.Router do
     plug Guardian.Plug.LoadResource
     plug JaSerializer.Deserializer
   end
-
 
   scope "/", BdrWeb do
     pipe_through :browser 
@@ -41,7 +42,7 @@ defmodule BdrWeb.Router do
     get "/signup", UserController, :signupPage
     get "/forgot", UserController, :forgotPage     
 
-    scope "/admin" do
+    scope "/admin" do      
       get "/", AdminController, :panelPageAdmin      
       get "/login", AdminController, :loginPageAdmin
       

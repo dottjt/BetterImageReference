@@ -1,4 +1,17 @@
 <div class="container panel__admin__container">
+    <%
+      info = get_flash(@conn, :info)
+      error = get_flash(@conn, :error)
+    %>
+
+    <%= if info do %>
+      <div class="notification is-success">
+        <button class="delete"></button>
+        <%= get_flash(@conn, :info) %>
+      </div>
+    <% end %>
+
+
   <div class="admin__grid">
     <div class="sub_container admin_blog_container">
       <h2>Listing Blog</h2>
@@ -134,21 +147,6 @@
   <% end %>
 
 
-  <div class="image__library__container">
-    <div class="image__library__upload__container">
-      <%= form_for @image_upload_changeset, image_path(@conn, :create), [multipart: true], fn f -> %>
-
-        <div class="field">
-          <%= label f, :photo, class: "label" %>
-          <%= file_input f, :photo, class: "control" %>
-        </div>
-
-        <div class="field">
-          <%= submit "Submit", class: "button is-link" %>
-        </div>
-
-      <% end %>
-    </div>
-  </div><!-- end image library container -->
-
 </div>
+
+   

@@ -21,7 +21,7 @@
 
   <div class="field">
     <%= label f, :description, class: "label" %>
-    <%= text_input f, :description, class: "control" %>
+    <%= textarea f, :description, class: "control" %>
     <%= error_tag f, :description %>
     <p class="help">Required</p>    
   </div>
@@ -33,26 +33,19 @@
     <p class="help">Required</p>    
   </div>
 
-
-  <%#= form_for @image_upload_changeset, image_path(@conn, :create), [multipart: true], fn f -> %>
-    <%# <div class="field"> %>
-      <%#= label f, :image_url, class: "label" %>
-      <%#= file_input f, :image_url, class: "control" %>
-    <%# </div> %>
-
-    <%# <div class="field"> %>
-      <%#= submit "Submit", class: "button is-link" %>
-    <%# </div> %>
-  <%# end %>
-
   <div class="field">
     <%= label f, :image_url, class: "label" %>
     <%= text_input f, :image_url, class: "control" %>
     <%= error_tag f, :image_url %>
-    <p class="help">Required</p>    
+    <p class="help">Required</p>
   </div>
 
   <div class="field">
+    <%= if @image.photo do %>
+      <%= img_tag(@image.photo.file_name, class: "admin_panel_images")  %> 
+    <% end %>
+
+
     <%= label f, :photo, class: "label" %>
     <%= file_input f, :photo, class: "control" %>
     <%= error_tag f, :photo %>
@@ -62,10 +55,9 @@
     <h3 class="admin_title">Image Comments</h3>
       <div class="columns is-multiline">
         <%= inputs_for f, :image_comments, fn fp -> %>
-          <div class="column is-3">
+          <div class="column is-12">
 
             <div class="field">
-              <%= label fp, :text, class: "label" %>
               <%= text_input fp, :text, class: "control" %>
               <%= error_tag fp, :text %>
               <p class="help">Required</p>    

@@ -1,7 +1,8 @@
 <div class="container">
+    <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
     <h2>Edit User</h2>
 
-    <%= render "formBlogAdmin.html", Map.put(assigns, :action, user_path(@conn, :update, @user)) %>
+    <%= render "formUserAdmin.html", Map.put(assigns, :action, user_path(@conn, :update, @user)) %>
 
     <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
 </div>

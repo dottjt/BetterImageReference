@@ -12,7 +12,7 @@ defmodule Bdr.Repo.Migrations.CreateUsers do
       add :password_hash, :string 
       add :tier, :string
       add :auth_provider, :string
-      add :is_admin, :string 
+      add :is_admin, :boolean
 
       timestamps()
     end

@@ -1,7 +1,8 @@
 <div class="container">
-<h2>Edit Image</h2>
+    <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+    <h2>Edit Image</h2>
 
-<%= render "formImageAdmin.html", Map.put(assigns, :action, image_path(@conn, :update, @image)) %>
+    <%= render "formImageAdmin.html", Map.put(assigns, :action, image_path(@conn, :update, @image)) %>
 
-<span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
+    <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
 </div>

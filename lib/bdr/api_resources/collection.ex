@@ -9,6 +9,8 @@ defmodule Bdr.ApiResources.Collection do
   alias Bdr.Collection.Tutorial
   alias Bdr.Account.User
   
+  alias Bdr.Photo.Type    
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "collections" do
@@ -39,7 +41,7 @@ defmodule Bdr.ApiResources.Collection do
   def changeset_assoc(%Collection{} = collection, attrs) do
     collection
     |> cast(attrs, [:name, :display_name, :featured_image, :external_url])
-    |> cast_assoc(:collection_books)
+    # |> cast_assoc(:collection_books)
     |> validate_required([:name, :display_name, :featured_image])
   end
   

@@ -1,4 +1,5 @@
 <div class="container">
+    <span><%= link "Back", to: admin_path(@conn, :panelPageAdmin) %></span>
     <h2>Edit Collection</h2>
 
     <%= render "formCollectionAdmin.html", Map.put(assigns, :action, collection_path(@conn, :update, @collection)) %>

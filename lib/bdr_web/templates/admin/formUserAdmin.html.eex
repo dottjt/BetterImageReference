@@ -1,9 +1,20 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
+
+  <div class="field">
+    <%= if @user.avatar do %>
+      <%= img_tag(@user.avatar, class: "admin_panel_images") %>
+    <%= end %>
+  
+    <%= label f, :avatar, class: "label" %>
+    <%= file_input f, :avatar, class: "control" %>
+    <%= error_tag f, :avatar %>
+    <p class="help">Required</p>
+  </div>
 
   <div class="field">
     <%= label f, :name, class: "label" %>
@@ -27,9 +38,23 @@
   </div>
 
   <div class="field">
-    <%= label f, :password, class: "label" %>
+    <%= label f, :password_hash, class: "label" %>
     <%= text_input f, :password, class: "control" %>
     <%= error_tag f, :password %>
+    <p class="help">Required</p>
+  </div>
+
+  <div class="field">
+    <%= label f, :is_admin, class: "label" %>
+    <%= checkbox f, :is_admin, class: "control" %>
+    <%= error_tag f, :is_admin %>
+    <p class="help">Required</p>
+  </div>
+
+  <div class="field">
+    <%= label f, :auth_provider, class: "label" %>
+    <%= text_input f, :auth_provider, class: "control" %>
+    <%= error_tag f, :auth_provider %>
     <p class="help">Required</p>
   </div>
 
@@ -39,7 +64,6 @@
     <%= error_tag f, :tier %>
     <p class="help">Required</p>
   </div>
-
 
   <h3 class="admin_title">Collections</h3>
     <div class="columns is-multiline">
@@ -52,9 +76,21 @@
             <p class="help">Required</p>
           </div>
           <div class="field">                    
-            <%= label fp, :text, class: "label" %>
-            <%= text_input fp, :text, class: "control" %>
-            <%= error_tag fp, :text %>
+            <%= label fp, :display_name, class: "label" %>
+            <%= text_input fp, :display_name, class: "control" %>
+            <%= error_tag fp, :display_name %>
+            <p class="help">Required</p>
+          </div>
+          <div class="field">                    
+            <%= label fp, :external_url, class: "label" %>
+            <%= text_input fp, :external_url, class: "control" %>
+            <%= error_tag fp, :external_url %>
+            <p class="help">Required</p>
+          </div>
+          <div class="field">                    
+            <%= label fp, :featured_image, class: "label" %>
+            <%= text_input fp, :featured_image, class: "control" %>
+            <%= error_tag fp, :featured_image %>
             <p class="help">Required</p>
           </div>
         </div>

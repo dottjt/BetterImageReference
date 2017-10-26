@@ -21,7 +21,7 @@ defmodule Bdr.Image.Comment do
   @doc false
   def changeset(%Comment{} = comment, attrs) do
     comment
-    |> cast(attrs, [:name, :display_name, :text])
-    |> validate_required([:name, :display_name, :text])
+    |> cast(attrs, [:text])
+    |> validate_required([:text])
   end
 end

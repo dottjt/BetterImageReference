@@ -1,6 +1,6 @@
 defmodule Bdr.ApiResources.Image do
   
-  use Ecto.Schema  
+  use Ecto.Schema
   use Arc.Ecto.Schema
 
   import Ecto.Changeset
@@ -11,7 +11,7 @@ defmodule Bdr.ApiResources.Image do
   alias Bdr.Image.Scribble
   alias Bdr.Image.Tag
 
-  
+  alias Bdr.Photo.Type
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -19,11 +19,11 @@ defmodule Bdr.ApiResources.Image do
     field :name, :string
     field :display_name, :string
     field :description, :string
-    field :image_url, :string    
+    field :image_url, :string
     field :times_drawn, :integer
     # field :collection_id, :binary_id
     
-    field :photo, Bdr.Photo.Type
+    field :photo, Type
     
     has_many :image_comments, Comment
     has_many :image_scribbles, Scribble
@@ -45,7 +45,7 @@ defmodule Bdr.ApiResources.Image do
     image
     |> cast(attrs, [:name, :display_name, :image_url, :times_drawn])
     |> cast_attachments(attrs, [:photo])        
-    |> cast_assoc(:image_comments)
+    # |> cast_assoc(:image_comments)
     |> validate_required([:name, :display_name, :image_url, :times_drawn, :photo])
   end
   

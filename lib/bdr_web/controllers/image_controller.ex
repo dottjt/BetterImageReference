@@ -5,7 +5,7 @@ defmodule BdrWeb.ImageController do
 
   alias Bdr.ApiResources
   alias Bdr.ApiResources.Image
-
+  alias BdrWeb.AdminView
 
   action_fallback BdrWeb.FallbackController
 
@@ -15,12 +15,25 @@ defmodule BdrWeb.ImageController do
   end
 
   def create(conn, %{"image" => image_params}) do
-    Logger.info image_params
 
-    with {:ok, %Image{} = image} <- ApiResources.create_image(image_params) do
-      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                
+    {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+
+    case ApiResources.create_image(image_params) do
+      {:ok, image} ->
+        conn
+        |> put_flash(:info, "Image was added!")
+        |> render(AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)
+      {:error, changeset} ->
+        image = %Image{}
+        conn
+        |> put_flash(:error, "Something went wrong")
+        |> render(AdminView, "newImageAdmin.html", changeset: changeset, image: image)
     end
+  
+    # with {:ok, %Image{} = image} <- ApiResources.create_image(image_params) do
+    #   {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+    #   render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)    
+    # end
   end
 
   def show(conn, %{"id" => id}) do

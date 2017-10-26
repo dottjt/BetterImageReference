@@ -18,14 +18,23 @@ defmodule BdrWeb.CollectionController do
   end
 
   def create(conn, %{"collection" => collection_params}) do
-    with {:ok, %Collection{} = collection} <- ApiResources.create_collection(collection_params) do
-      conn
-      # |> put_status(:created)
-      # |> put_resp_header("location", collection_path(conn, :show, collection))
-      # |> render("show.json", collection: collection)
-      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                             
+
+    {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+    
+    case ApiResources.create_collection(collection_params) do
+      {:ok, collection} ->
+        conn
+        |> put_flash(:info, "Collection was added!")
+        |> render(AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)
+      {:error, changeset} ->
+        collection = %Collection{}
+        conn
+        |> put_flash(:error, "Something went wrong")
+        |> render(AdminView, "newCollectionAdmin.html", changeset: changeset, collection: collection)
     end
+        
+    # with {:ok, %Collection{} = collection} <- ApiResources.create_collection(collection_params) do
+    # end
   end
 
   def show(conn, %{"id" => id}) do

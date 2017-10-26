@@ -30,14 +30,23 @@ defmodule BdrWeb.UserController do
 
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Account.create_user(user_params) do
-      # conn
-      # |> put_status(:created)
-      # |> put_resp_header("location", user_path(conn, :show, user))
-      # |> render("show.json", user: user)
-      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                       
+    
+    {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+    
+    case ApiResources.create_user(user_params) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "User was added!")
+        |> render(AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)
+      {:error, changeset} ->
+        user = %User{}
+        conn
+        |> put_flash(:error, "Something went wrong")
+        |> render(AdminView, "newUserAdmin.html", changeset: changeset, user: user)
     end
+
+    # with {:ok, %User{} = user} <- Account.create_user(user_params) do
+    # end
   end
 
   def show(conn, %{"id" => id}) do

@@ -17,14 +17,22 @@ defmodule BdrWeb.BlogController do
   end
 
   def create(conn, %{"blog" => blog_params}) do
-    with {:ok, %Blog{} = blog} <- ApiResources.create_blog(blog_params) do
-      # conn
-      # |> put_status(:created)
-      # |> put_resp_header("location", blog_path(conn, :show, blog))
-      # |> render("show.json", blog: blog)
-      {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
-      render(conn, AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)                                                   
-    end
+
+    {blogs, collections, images, users, emails} = ApiResources.list_admin_panel_resources()
+    
+      case ApiResources.create_blog(blog_params) do
+        {:ok, image} ->
+          conn
+          |> put_flash(:info, "Blog post was added!")
+          |> render(AdminView, "panelAdmin.html", blogs: blogs, collections: collections, images: images, users: users, emails: emails)
+        {:error, changeset} ->
+          blog = %Blog{}
+          conn
+          |> put_flash(:error, "Something went wrong")
+          |> render(AdminView, "newBlogAdmin.html", changeset: changeset, blog: blog)
+      end
+      # with {:ok, %Blog{} = blog} <- ApiResources.create_blog(blog_params) do
+      # end
   end
 
   def show(conn, %{"id" => id}) do
