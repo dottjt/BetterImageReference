@@ -1,9 +1,9 @@
 var _user$project$Command$startAppFetchImages = function (collectionList) {
 	return A5(
 		_user$project$Helper_HttpHelper$httpPost,
-		'http://localhost:4000/api/collections/load_app',
+		'http://localhost:4000/api/collections_initial_load_app',
 		_elm_lang$http$Http$jsonBody(
-			_user$project$Model$collectionListEncoder(collectionList)),
+			_user$project$Model$selectedCollectionsListEncoder(collectionList)),
 		_user$project$Model$collectionImageListDecoder,
 		_user$project$Msg$FetchCollectionStartAppFail,
 		_user$project$Msg$FetchCollectionStartAppSuccess);
@@ -18,4 +18,4 @@ var _user$project$Command$fetchSearchQuery = function (searchInput) {
 		_user$project$Msg$FetchCollectionListFail,
 		_user$project$Msg$FetchCollectionListSuccess);
 };
-var _user$project$Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections_initial', _user$project$Model$collectionListDecoder, _user$project$Msg$InitialFetchQueryFail, _user$project$Msg$InitialFetchQuerySuccess);
+var _user$project$Command$initialFetchQuery = A4(_user$project$Helper_HttpHelper$httpGet, 'http://localhost:4000/api/collections_initial_load_search', _user$project$Model$collectionListDecoder, _user$project$Msg$InitialFetchQueryFail, _user$project$Msg$InitialFetchQuerySuccess);

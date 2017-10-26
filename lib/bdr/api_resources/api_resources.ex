@@ -159,8 +159,8 @@ defmodule Bdr.ApiResources do
   end
 
   # for homepage 
-  def list_collections_with_times_drawn do
-    Repo.all(Collection) |> Repo.preload(:images)
+  def list_collections_initial_load_search do
+    Repo.all(Collection)
     # Repo.all(Collection) |> Repo.preload(images: [:times_drawn])
   end
 
@@ -188,11 +188,13 @@ defmodule Bdr.ApiResources do
   """
   def get_collection!(id), do: Repo.get!(Collection, id)
   def get_collection_assoc!(id), do: Repo.get!(Collection, id) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])
+  def get_collection_assoc_images!(id), do: Repo.get!(Collection, id) |> Repo.preload(:images)
+  
   def get_collection_name!(name), do: Repo.get_by!(Collection, name: name)
 
   def get_collection_name_assoc!(name), do: Repo.get_by!(Collection, name: name) |> Repo.preload([:images, :collection_books, :collection_tutorials, :collection_tags])         
   
-  def get_collection_name_assoc_images!(name), do: Repo.get_by!(Collection, name: name) |> Repo.preload([:images])         
+  def get_collection_name_assoc_images!(name), do: Repo.get_by!(Collection, name: name) |> Repo.preload(:images)         
 
 
   @doc """
@@ -287,20 +289,26 @@ defmodule Bdr.ApiResources do
 
 
   #images join with collection details, user details.  
-  def list_images_load_app(collections) do 
+  def list_images_load_app(collection_ids) do 
 
-    # collection_id_list = Enum.map(collections, fn(x) -> x.id end)
+    images = collection_ids
+                |> Enum.map(fn(x) -> get_collection_assoc_images!(x["id"]).images end) #return list of images
+                |> Enum.map(&(IO.inspect &1))
+                    
+    IO.inspect images
+    # I have a list of collection ids
+    # with the collection ids, I need to retrieve image ids.
+    # with the image ids, I can than retrieve all relevant images
 
     # query = from i in Image,
-    #         join: c in Collection,
-    #         where: i.collection_id > c.id,
-    #         select: i
-            # preload: c
+    # join: c in Collection
+    # where: i.collection_id == c.id,
+    # select: i
 
     # query = from [i, c] in query,
     #         select: [i, c]
-            
-    Repo.all(Collection)
+    
+    # Repo.all(query)            
             
   end
 

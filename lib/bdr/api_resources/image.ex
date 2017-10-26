@@ -10,7 +10,8 @@ defmodule Bdr.ApiResources.Image do
   alias Bdr.Image.Comment
   alias Bdr.Image.Scribble
   alias Bdr.Image.Tag
-
+  alias Bdr.Image.Drawing
+  
   alias Bdr.Photo.Type
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -28,6 +29,7 @@ defmodule Bdr.ApiResources.Image do
     has_many :image_comments, Comment
     has_many :image_scribbles, Scribble
     has_many :image_tags, Tag
+    has_many :image_drawings, Drawing
     belongs_to :collection, Collection
 
     timestamps()
@@ -36,17 +38,17 @@ defmodule Bdr.ApiResources.Image do
   @doc false
   def changeset(%Image{} = image, attrs) do
     image    
-    |> cast(attrs, [:name, :display_name, :image_url, :times_drawn])
+    |> cast(attrs, [:name, :display_name, :description, :image_url, :times_drawn])
     |> cast_attachments(attrs, [:photo])
-    |> validate_required([:name, :display_name, :image_url, :times_drawn, :photo])
+    |> validate_required([:name, :display_name, :description, :image_url, :times_drawn, :photo])
   end
 
   def changeset_assoc(%Image{} = image, attrs) do
     image
-    |> cast(attrs, [:name, :display_name, :image_url, :times_drawn])
+    |> cast(attrs, [:name, :display_name, :image_url, :description, :times_drawn])
     |> cast_attachments(attrs, [:photo])        
     # |> cast_assoc(:image_comments)
-    |> validate_required([:name, :display_name, :image_url, :times_drawn, :photo])
+    |> validate_required([:name, :display_name, :description, :image_url, :times_drawn, :photo])
   end
   
 end

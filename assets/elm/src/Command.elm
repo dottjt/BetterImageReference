@@ -13,7 +13,7 @@ import Http exposing (..)
 initialFetchQuery : Cmd Msg
 initialFetchQuery =
     httpGet
-        "http://localhost:4000/api/collections_initial"
+        "http://localhost:4000/api/collections_initial_load_search"
         collectionListDecoder
         InitialFetchQueryFail
         InitialFetchQuerySuccess
@@ -34,8 +34,8 @@ fetchSearchQuery searchInput =
 startAppFetchImages : CollectionList -> Cmd Msg
 startAppFetchImages collectionList =
     httpPost
-        ("http://localhost:4000/api/collections/load_app")
-        (Http.jsonBody (collectionListEncoder collectionList))          
+        ("http://localhost:4000/api/collections_initial_load_app")
+        (Http.jsonBody (selectedCollectionsListEncoder collectionList))          
         collectionImageListDecoder
         FetchCollectionStartAppFail
         FetchCollectionStartAppSuccess

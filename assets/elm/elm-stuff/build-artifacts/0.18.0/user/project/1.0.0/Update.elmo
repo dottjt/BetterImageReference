@@ -57,14 +57,32 @@ var _user$project$Update$update = F2(
 						{ctor: '[]'});
 				}
 			case 'SelectCollection':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{
-							selectedCollections: {ctor: '::', _0: _p0._0, _1: model.selectedCollections}
-						}),
-					{ctor: '[]'});
+				var _p6 = _p0._0;
+				var _p5 = _p0._1;
+				if (_p5.ctor === 'AddSelectedCollection') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								selectedCollections: {ctor: '::', _0: _p6, _1: model.selectedCollections}
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								selectedCollections: A2(
+									_elm_lang$core$List$filter,
+									function (x) {
+										return !_elm_lang$core$Native_Utils.eq(x.id, _p6.id);
+									},
+									model.selectedCollections)
+							}),
+						{ctor: '[]'});
+				}
 			case 'SelectUpsideDown':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],

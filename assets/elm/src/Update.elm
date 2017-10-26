@@ -35,8 +35,13 @@ update msg model =
                 Err err ->
                     { model | error = err } ! []
 
-        SelectCollection collection ->
-            { model | selectedCollections = collection :: model.selectedCollections } ! []
+        SelectCollection collection selectAction ->
+            case selectAction of 
+                AddSelectedCollection -> 
+                    { model | selectedCollections = collection :: model.selectedCollections } ! []
+
+                RemoveSelectedCollection ->
+                    { model | selectedCollections = List.filter (\x -> x.id /= collection.id) model.selectedCollections } ! []
 
 
         SelectUpsideDown value ->

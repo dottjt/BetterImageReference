@@ -13,7 +13,7 @@ type Msg
     | UpdateCustomIntervalInput String
     | SelectUpsideDown UpsideDown
     
-    | SelectCollection Collection
+    | SelectCollection Collection SelectCollecitonAction
 
     | ChangeStatus Status
     | ChangePopupStatus PopupStatus

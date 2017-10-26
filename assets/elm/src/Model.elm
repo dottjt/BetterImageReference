@@ -18,6 +18,9 @@ type alias Collection =
 type alias CollectionList = 
     List Collection
 
+type CollectionListType
+    = SearchedCollectionList
+    | SelectedCollectionList
 
 -- PRODUCT TYPES - IMAGE
 
@@ -64,6 +67,10 @@ type DrawStatus
   = Normal
   | Draw 
 
+type SelectCollecitonAction
+  = AddSelectedCollection
+  | RemoveSelectedCollection
+
 
 -- SUM TYPES - Application Settings
 
@@ -92,7 +99,6 @@ type IntervalTiming
   | M5
   | M10 
   | Custom 
-
 
 -- MODEL 
 
@@ -210,6 +216,18 @@ imageEncoder image =
                       , ("image_url", Encode.string image.image_url)
                       , ("id", Encode.string image.id) 
                       , ("display_name", Encode.string image.display_name)]
+
+
+
+-- Selected Collections Encoder 
+
+selectedCollectionsListEncoder : CollectionList -> Encode.Value
+selectedCollectionsListEncoder collectionList =
+        Encode.list (List.map selectedCollectionsEncoder collectionList)
+
+selectedCollectionsEncoder : Collection -> Encode.Value
+selectedCollectionsEncoder collection =
+        Encode.object [ ("id", Encode.string collection.id)]
 
 
 -- Search Input Encoder 

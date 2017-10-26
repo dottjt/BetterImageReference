@@ -32,11 +32,6 @@ alias Bdr.Photo
 
 # {:ok, user_id} = Ecto.UUID.load(Ecto.UUID.bingenerate())
 
-# %Plug.Upload{
-#     content_type: "image/png",
-#     filename: "selfie.png",
-#     path: "/var/folders/q0/dg42x390000gp/T//plug-1434/multipart-765369-5"}
-# }
 
 
 Repo.insert!(%User{
@@ -116,7 +111,10 @@ Repo.insert!(%User{
                     description: "a really good photo of something OR rather",
                     image_url: "https://s-media-cache-ak0.pinimg.com/did-it/750x/90/89/45/908945db5f25216e64c0b466b214162b.jpg",
                     times_drawn: 2,
-                    # photo: %Plug.Upload{content_type: "", filename: "file.jpg", path: "http://example.com/file.jpg"},
+                    # photo: %Plug.Upload{
+                    #     content_type: "image/png",
+                    #     filename: "selfie.png",
+                    #     path: "/var/folders/q0/dg42x390000gp/T//plug-1434/multipart-765369-5"},
                     image_tags: [],
                     image_comments: [
                         %Image.Comment{

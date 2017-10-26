@@ -4,7 +4,8 @@ defmodule BdrWeb.CollectionController do
   use BdrWeb, :controller
 
   alias BdrWeb.AdminView
-  
+  alias BdrWeb.ImageView
+
   alias Bdr.ApiResources
   alias Bdr.ApiResources.Collection
 
@@ -65,15 +66,15 @@ defmodule BdrWeb.CollectionController do
   # CUSTOM API
 
 
-  def indexWithTimesDrawn(conn, _params) do # initial homepage load
-    collections = ApiResources.list_collections_with_times_drawn()
-
+  def initialLoadSearch(conn, _params) do 
+    collections = ApiResources.list_collections_initial_load_search()
     render(conn, "index.json", collections: collections)
   end
 
-  def collectionloadApp(conn, %{"collections" => collections}) do # initial application start
-    images = ApiResources.list_images_load_app(collections)
-    render(conn, "collection_app_load.json", images: images)  
+  def initialLoadApp(conn, %{"_json" => _json}) do # initial application start
+  IO.inspect _json
+  images = ApiResources.list_images_load_app(_json)
+    render(conn, ImageView, "index_with_all_assoc.json", images: images)  
   end
 
   def collectionSearchQuery(conn, %{"search_input" => search_input}) do # query search string

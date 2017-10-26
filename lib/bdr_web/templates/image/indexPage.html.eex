@@ -10,11 +10,10 @@
             <div class="columns"><!-- top three images -->
                 <%= Enum.map(@collection.images, fn(image) -> %>
                     <div class="column is-child is-4">
-                        <a href="<%= image_path @conn, :indexPage, image.name %>"><img class="search__image" src="<%= image.image_url %>"></a>
+                        <a href="<%= image_path @conn, :indexPage, image.name %>"><img class="search__image" src="<%= Bdr.Photo.url({image.photo, image})%>"></a>
                     </div>
                 <% end) %>
             </div>  
-            
         </div>
     </div>
 </div>

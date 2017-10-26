@@ -29,9 +29,10 @@ var _user$project$Msg$ChangePopupStatus = function (a) {
 var _user$project$Msg$ChangeStatus = function (a) {
 	return {ctor: 'ChangeStatus', _0: a};
 };
-var _user$project$Msg$SelectCollection = function (a) {
-	return {ctor: 'SelectCollection', _0: a};
-};
+var _user$project$Msg$SelectCollection = F2(
+	function (a, b) {
+		return {ctor: 'SelectCollection', _0: a, _1: b};
+	});
 var _user$project$Msg$SelectUpsideDown = function (a) {
 	return {ctor: 'SelectUpsideDown', _0: a};
 };

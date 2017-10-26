@@ -78,9 +78,9 @@ defmodule BdrWeb.Router do
     resources "/blog", BlogController, except: [:new, :edit]
     resources "/email", EmailController, except: [:new, :edit]    
     resources "/collections", CollectionController, except: [:new, :edit]
-         get  "/collections_initial", CollectionController, :indexWithTimesDrawn
+         get  "/collections_initial_load_search", CollectionController, :initialLoadSearch
     
-         post "/collections/load_app", CollectionController, :collectionloadApp
+         post "/collections_initial_load_app", CollectionController, :initialLoadApp
          post "/collections/collection_search_query", CollectionController, :collectionSearchQuery
     
     resources "/images", ImageController, except: [:new, :edit]

@@ -8,10 +8,10 @@ defmodule Bdr.Image.Drawing do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "image_drawings" do
-    field :description, :string
-    field :display_name, :string
-    field :image_url, :string
     field :name, :string
+    field :display_name, :string    
+    field :description, :string
+    field :image_url, :string
     # field :image_id, :binary_id
     # field :user_id, :binary_id
 
