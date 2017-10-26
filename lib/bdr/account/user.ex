@@ -3,9 +3,9 @@ defmodule Bdr.Account.User do
   import Ecto.Changeset
   
   alias Bdr.Account.User
-  alias Bdr.ApiResources    
-  alias Bdr.Blog
-  alias Bdr.Image
+  alias Bdr.{Blog, Image, ApiResources} # comment
+  # alias Bdr.ApiResources # collection, blog  
+  # alias Bdr.Image # comment, scribble
   
   alias Bdr.Photo.Type  
 
@@ -35,17 +35,44 @@ defmodule Bdr.Account.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :display_name, :email, :password, :tier])
-    |> validate_required([:name, :display_name, :email, :password, :tier])
+    |> cast(attrs, [:name, :display_name, :email, :password, :tier, :is_admin, :auth_provider])
+    |> validate_required([:name, :display_name, :email, :password, :tier, :is_admin, :auth_provider])
   end
 
-  def changeset_auth(%User{} = user, params \\ %{}) do
-    user
-    |> cast(params, [:email, :auth_provider, :name, :avatar])
-    |> validate_required([:email, :auth_provider, :name, :avatar])
-    |> unique_constraint(:email)
-  end
+  # def changeset_auth(%User{} = user, attrs) do
+  #   user
+  #   |> cast(attrs, [:email, :auth_provider, :name, :avatar])
+  #   |> validate_required([:email, :auth_provider, :name, :avatar])
+  #   |> unique_constraint(:email)
+  # end
 
+  # def signup(struct, params \\ %{}) do
+  #   struct
+  #     |> cast(params, [:email, :password, :password_confirmation])
+  #     |> validate_required([email, :password, :password_confirmation])
+  #     |> validate_format(:email, ~r/@/)
+  #     |> validate_length(:password, min: 5)
+  #     |> password_and_confirmation_matches()
+  #     |> generate_password_hash()
+  # end
+
+  # # ...
+
+  # defp generate_password_hash(changeset) do
+  #   password = get_change(changeset, :password)
+  #   hash = Comeonin.Bcrypt.hashpwsalt(password)
+  #   changeset |> put_change(:password_hash, hash)
+  # end
+
+
+  # def registration_changeset(model, params) do
+  #   model
+  #   |> changeset(params)                  # do other standard validations
+  #   |> cast(params, [:password])          # include :password in the changeset
+  #   |> validate_length(:password, min: 8) # validations
+  #   |> put_pass_hash()                    # transform into :password_digest
+  # end
+  
   def changeset_assoc(%User{} = user, attrs) do
     user
     |> cast(attrs, [:name, :display_name, :email, :password, :tier])

@@ -1,12 +1,13 @@
 defmodule Bdr.ApiResources.Collection do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Bdr.ApiResources.Collection
-  alias Bdr.ApiResources.Image  
-  alias Bdr.Collection.Book
-  alias Bdr.Collection.Tag
-  alias Bdr.Collection.Category  
-  alias Bdr.Collection.Tutorial
+  
+  alias Bdr.ApiResources.{Collection, Image}
+  # alias Bdr.ApiResources.Image  
+  alias Bdr.Collection.{Book, Tag, Category, Tutorial}
+  # alias Bdr.Collection.Tag
+  # alias Bdr.Collection.Category  
+  # alias Bdr.Collection.Tutorial
   alias Bdr.Account.User
   
   alias Bdr.Photo.Type    
