@@ -19,29 +19,43 @@ main =
 
 initialModel : ( Model, Cmd Msg )
 initialModel =
+    -- Search Functions
     { searchedCollections = []
     , selectedCollections = []
+
     , searchInput = ""
     , popularQueries = ["popular", "human figure", "face"]
 
-    , applicationStatus = Stop
+    -- Application Status
+    , applicationStatus = Initial
     , popupStatus = Resume
     , imageStatus = Normal
-    
-    , imageTime = 0
-    , imagerTimerBarProgress = 0
 
+    -- Selection Criteria
     , radioIntervalType = Second
     , radioIntervalTiming = S30
-    
     , radioIntervalCustomInput = 0
+
     , radioUpsideDown = NoUpsideDown
     , radioDistraction = NoMinimalDistraction
 
-    , loadedCollectionImagesList = []
+    -- Popup Component
+    , loadedImageAssocList = []
+    , currentImage = { name = ""
+                     , image_url = ""
+                     , id = ""
+                     , display_name = ""
+                     , times_drawn = 0
+                     , image_comments = []
+                     , image_scribbles = []
+                     , image_tags = []
+                     , image_drawings = []
+    }
+
+    , imageTime = 0
     
     , error = "" 
-    } ! [initialFetchQuery]
+    } ! [ initialFetchQuery ]
 
 
 

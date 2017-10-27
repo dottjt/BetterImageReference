@@ -6,7 +6,9 @@ import Json.Decode.Pipeline as Pipeline
 
 import Time exposing (Time)
 
+
 -- PRODUCT TYPES - COLLECTION
+
 type alias Collection =
     { user_id : String
     , name : String
@@ -21,6 +23,7 @@ type alias CollectionList =
 type CollectionListType
     = SearchedCollectionList
     | SelectedCollectionList
+
 
 -- PRODUCT TYPES - IMAGE
 
@@ -49,6 +52,7 @@ type alias Image =
     , display_name : String
     , times_drawn : Int
     }
+
 
 -- PRODUCT TYPES - IMAGE COMMENT
 
@@ -101,7 +105,6 @@ type alias ImageDrawing =
     }
 
 
-
 -- PRODUCT TYPES - IMAGE & COLLECTION
 
 type alias CollectionImages =
@@ -120,9 +123,9 @@ type alias CollectionImagesList =
 -- SUM TYPES - Application Status
 
 type Status
-  = Start
+  = Initial
   | Loading
-  | Stop
+  | Start
   | Finish
 
 type PopupStatus 
@@ -139,14 +142,6 @@ type SelectCollecitonAction
 
 
 -- SUM TYPES - Application Settings
-
-type UpsideDown 
-  = YesUpsideDown
-  | NoUpsideDown
-
-type MinimalDistraction
-  = YesMinimalDistraction
-  | NoMinimalDistraction
 
 type IntervalTimingType 
   = Second
@@ -166,6 +161,15 @@ type IntervalTiming
   | M10 
   | Custom 
 
+type UpsideDown 
+  = YesUpsideDown
+  | NoUpsideDown
+
+type MinimalDistraction
+  = YesMinimalDistraction
+  | NoMinimalDistraction
+
+
 -- MODEL 
 
 type alias Model = 
@@ -181,9 +185,6 @@ type alias Model =
     , popupStatus : PopupStatus
     , imageStatus : DrawStatus
 
-    , imageTime : Time 
-    , imagerTimerBarProgress : Int 
-
     -- Selection Criteria
     , radioIntervalType : IntervalTimingType
     , radioIntervalTiming : IntervalTiming
@@ -192,9 +193,11 @@ type alias Model =
     , radioUpsideDown : UpsideDown
     , radioDistraction : MinimalDistraction
 
-
     -- Popup Component
-    , loadedCollectionImagesList : CollectionImagesList
+    , loadedImageAssocList : ImageAssocList
+    , currentImage : ImageAssoc 
+
+    , imageTime : Int 
 
     -- Errors 
     , error : String
@@ -240,9 +243,10 @@ imageDecoder =
 
 -- IMAGE ASSOC DECODER 
 
-imageAssocListDecoder : Decode.Decoder ImageList
+
+imageAssocListDecoder : Decode.Decoder ImageAssocList
 imageAssocListDecoder =
-    Decode.list imageDecoder
+    Decode.field "data" (Decode.list imageAssocDecoder)
 
 
 imageAssocDecoder : Decode.Decoder ImageAssoc

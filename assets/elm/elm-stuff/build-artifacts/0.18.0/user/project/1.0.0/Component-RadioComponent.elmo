@@ -1,5 +1,5 @@
-var _user$project$Component_RadioComponent$customInput = F2(
-	function (radioInterval, label_text) {
+var _user$project$Component_RadioComponent$customInput = F3(
+	function (radioInterval, label_text, error) {
 		var _p0 = radioInterval;
 		if (_p0.ctor === 'Custom') {
 			return A2(
@@ -48,7 +48,18 @@ var _user$project$Component_RadioComponent$customInput = F2(
 									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$p,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(error),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				});
 		} else {
@@ -70,9 +81,9 @@ var _user$project$Component_RadioComponent$customInput = F2(
 var _user$project$Component_RadioComponent$customInputComponent = function (model) {
 	var _p1 = model.radioIntervalType;
 	if (_p1.ctor === 'Second') {
-		return A2(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many seconds?');
+		return A3(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many seconds?', model.error);
 	} else {
-		return A2(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many minutes?');
+		return A3(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many minutes?', model.error);
 	}
 };
 var _user$project$Component_RadioComponent$radio = F3(
@@ -152,40 +163,6 @@ var _user$project$Component_RadioComponent$radio = F3(
 				});
 		}
 	});
-var _user$project$Component_RadioComponent$radioComponent = F3(
-	function (model, text, msg) {
-		return A3(
-			_user$project$Component_RadioComponent$radio,
-			text,
-			_elm_lang$core$Native_Utils.eq(model.radioIntervalTiming, msg),
-			_user$project$Msg$SelectIntervalTiming(msg));
-	});
-var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$form,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A3(
-				_user$project$Component_RadioComponent$radio,
-				'Yes',
-				_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$YesUpsideDown),
-				_user$project$Msg$SelectUpsideDown(_user$project$Model$YesUpsideDown)),
-			_1: {
-				ctor: '::',
-				_0: A3(
-					_user$project$Component_RadioComponent$radio,
-					'No',
-					_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$NoUpsideDown),
-					_user$project$Msg$SelectUpsideDown(_user$project$Model$NoUpsideDown)),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$Component_RadioComponent$radioIntervalTypeComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
@@ -212,6 +189,40 @@ var _user$project$Component_RadioComponent$radioIntervalTypeComponent = function
 			}
 		});
 };
+var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$form,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$Component_RadioComponent$radio,
+				'Yes',
+				_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$YesUpsideDown),
+				_user$project$Msg$SelectUpsideDown(_user$project$Model$YesUpsideDown)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_user$project$Component_RadioComponent$radio,
+					'No',
+					_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$NoUpsideDown),
+					_user$project$Msg$SelectUpsideDown(_user$project$Model$NoUpsideDown)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Component_RadioComponent$radioWrapper = F3(
+	function (model, text, msg) {
+		return A3(
+			_user$project$Component_RadioComponent$radio,
+			text,
+			_elm_lang$core$Native_Utils.eq(model.radioIntervalTiming, msg),
+			_user$project$Msg$SelectIntervalTiming(msg));
+	});
 var _user$project$Component_RadioComponent$radioIntervalMinutesComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
@@ -222,25 +233,25 @@ var _user$project$Component_RadioComponent$radioIntervalMinutesComponent = funct
 		},
 		{
 			ctor: '::',
-			_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '1', _user$project$Model$M1),
+			_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '1', _user$project$Model$M1),
 			_1: {
 				ctor: '::',
-				_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '2', _user$project$Model$M2),
+				_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '2', _user$project$Model$M2),
 				_1: {
 					ctor: '::',
-					_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '3', _user$project$Model$M3),
+					_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '3', _user$project$Model$M3),
 					_1: {
 						ctor: '::',
-						_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '4', _user$project$Model$M4),
+						_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '4', _user$project$Model$M4),
 						_1: {
 							ctor: '::',
-							_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '5', _user$project$Model$M5),
+							_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '5', _user$project$Model$M5),
 							_1: {
 								ctor: '::',
-								_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '10', _user$project$Model$M10),
+								_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '10', _user$project$Model$M10),
 								_1: {
 									ctor: '::',
-									_0: A3(_user$project$Component_RadioComponent$radioComponent, model, 'Custom', _user$project$Model$Custom),
+									_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, 'Custom', _user$project$Model$Custom),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Component_RadioComponent$customInputComponent(model),
@@ -264,22 +275,22 @@ var _user$project$Component_RadioComponent$radioIntervalSecondsComponent = funct
 		},
 		{
 			ctor: '::',
-			_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '30', _user$project$Model$S30),
+			_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '30', _user$project$Model$S30),
 			_1: {
 				ctor: '::',
-				_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '45', _user$project$Model$S45),
+				_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '45', _user$project$Model$S45),
 				_1: {
 					ctor: '::',
-					_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '60', _user$project$Model$S60),
+					_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '60', _user$project$Model$S60),
 					_1: {
 						ctor: '::',
-						_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '90', _user$project$Model$S90),
+						_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '90', _user$project$Model$S90),
 						_1: {
 							ctor: '::',
-							_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '120', _user$project$Model$S120),
+							_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '120', _user$project$Model$S120),
 							_1: {
 								ctor: '::',
-								_0: A3(_user$project$Component_RadioComponent$radioComponent, model, 'Custom', _user$project$Model$Custom),
+								_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, 'Custom', _user$project$Model$Custom),
 								_1: {
 									ctor: '::',
 									_0: _user$project$Component_RadioComponent$customInputComponent(model),
@@ -300,7 +311,7 @@ var _user$project$Component_RadioComponent$radioIntervalSecondsOrMinutesComponen
 		return _user$project$Component_RadioComponent$radioIntervalMinutesComponent(model);
 	}
 };
-var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
+var _user$project$Component_RadioComponent$radioComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -309,8 +320,34 @@ var _user$project$Component_RadioComponent$radioIntervalComponent = function (mo
 			_0: _user$project$Component_RadioComponent$radioIntervalTypeComponent(model),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Component_RadioComponent$radioIntervalSecondsOrMinutesComponent(model),
-				_1: {ctor: '[]'}
+				_0: A2(
+					_elm_lang$html$Html$h5,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Image timing'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Component_RadioComponent$radioIntervalSecondsOrMinutesComponent(model),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h5,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Display image upside down?'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
 			}
 		});
 };

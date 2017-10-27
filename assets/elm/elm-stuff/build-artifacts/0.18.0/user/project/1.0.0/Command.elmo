@@ -4,9 +4,9 @@ var _user$project$Command$startAppFetchImages = function (collectionList) {
 		'http://localhost:4000/api/collections_initial_load_app',
 		_elm_lang$http$Http$jsonBody(
 			_user$project$Model$selectedCollectionsListEncoder(collectionList)),
-		_user$project$Model$collectionImageListDecoder,
-		_user$project$Msg$FetchCollectionStartAppFail,
-		_user$project$Msg$FetchCollectionStartAppSuccess);
+		_user$project$Model$imageAssocListDecoder,
+		_user$project$Msg$FetchImageStartAppFail,
+		_user$project$Msg$FetchImageStartAppSuccess);
 };
 var _user$project$Command$fetchSearchQuery = function (searchInput) {
 	return A5(

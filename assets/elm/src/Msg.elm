@@ -20,7 +20,6 @@ type Msg
     | ChangeDrawStatus DrawStatus
 
     | Tick Time
-    | ImageTimerBarProgress
 
     | FetchCollectionListFail Error
     | FetchCollectionListSuccess CollectionList
@@ -28,5 +27,5 @@ type Msg
     | InitialFetchQueryFail Error
     | InitialFetchQuerySuccess CollectionList
 
-    | FetchCollectionStartAppFail Error 
-    | FetchCollectionStartAppSuccess CollectionImagesList
+    | FetchImageStartAppFail Error 
+    | FetchImageStartAppSuccess ImageAssocList

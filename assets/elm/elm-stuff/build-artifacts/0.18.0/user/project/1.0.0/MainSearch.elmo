@@ -20,17 +20,27 @@ var _user$project$MainSearch$initialModel = A2(
 				}
 			}
 		},
-		applicationStatus: _user$project$Model$Stop,
+		applicationStatus: _user$project$Model$Initial,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
-		imageTime: 0,
-		imagerTimerBarProgress: 0,
 		radioIntervalType: _user$project$Model$Second,
 		radioIntervalTiming: _user$project$Model$S30,
 		radioIntervalCustomInput: 0,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
-		loadedCollectionImagesList: {ctor: '[]'},
+		loadedImageAssocList: {ctor: '[]'},
+		currentImage: {
+			name: '',
+			image_url: '',
+			id: '',
+			display_name: '',
+			times_drawn: 0,
+			image_comments: {ctor: '[]'},
+			image_scribbles: {ctor: '[]'},
+			image_tags: {ctor: '[]'},
+			image_drawings: {ctor: '[]'}
+		},
+		imageTime: 0,
 		error: ''
 	},
 	{

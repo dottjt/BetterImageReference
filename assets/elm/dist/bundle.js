@@ -13247,7 +13247,6 @@ var _user$project$Model$imageDecoder = A3(
 					_elm_lang$core$Json_Decode$string,
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$Image))))));
 var _user$project$Model$imageListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageDecoder);
-var _user$project$Model$imageAssocListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageDecoder);
 var _user$project$Model$ImageComment = F2(
 	function (a, b) {
 		return {id: a, text: b};
@@ -13369,6 +13368,10 @@ var _user$project$Model$imageAssocDecoder = A3(
 									'name',
 									_elm_lang$core$Json_Decode$string,
 									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$ImageAssoc))))))))));
+var _user$project$Model$imageAssocListDecoder = A2(
+	_elm_lang$core$Json_Decode$field,
+	'data',
+	_elm_lang$core$Json_Decode$list(_user$project$Model$imageAssocDecoder));
 var _user$project$Model$CollectionImages = F6(
 	function (a, b, c, d, e, f) {
 		return {user_id: a, name: b, id: c, featured_image: d, display_name: e, images: f};
@@ -13418,7 +13421,7 @@ var _user$project$Model$Model = function (a) {
 													return function (n) {
 														return function (o) {
 															return function (p) {
-																return {searchedCollections: a, selectedCollections: b, searchInput: c, popularQueries: d, applicationStatus: e, popupStatus: f, imageStatus: g, imageTime: h, imagerTimerBarProgress: i, radioIntervalType: j, radioIntervalTiming: k, radioIntervalCustomInput: l, radioUpsideDown: m, radioDistraction: n, loadedCollectionImagesList: o, error: p};
+																return {searchedCollections: a, selectedCollections: b, searchInput: c, popularQueries: d, applicationStatus: e, popupStatus: f, imageStatus: g, radioIntervalType: h, radioIntervalTiming: i, radioIntervalCustomInput: j, radioUpsideDown: k, radioDistraction: l, loadedImageAssocList: m, currentImage: n, imageTime: o, error: p};
 															};
 														};
 													};
@@ -13438,19 +13441,15 @@ var _user$project$Model$Model = function (a) {
 var _user$project$Model$SelectedCollectionList = {ctor: 'SelectedCollectionList'};
 var _user$project$Model$SearchedCollectionList = {ctor: 'SearchedCollectionList'};
 var _user$project$Model$Finish = {ctor: 'Finish'};
-var _user$project$Model$Stop = {ctor: 'Stop'};
-var _user$project$Model$Loading = {ctor: 'Loading'};
 var _user$project$Model$Start = {ctor: 'Start'};
+var _user$project$Model$Loading = {ctor: 'Loading'};
+var _user$project$Model$Initial = {ctor: 'Initial'};
 var _user$project$Model$Pause = {ctor: 'Pause'};
 var _user$project$Model$Resume = {ctor: 'Resume'};
 var _user$project$Model$Draw = {ctor: 'Draw'};
 var _user$project$Model$Normal = {ctor: 'Normal'};
 var _user$project$Model$RemoveSelectedCollection = {ctor: 'RemoveSelectedCollection'};
 var _user$project$Model$AddSelectedCollection = {ctor: 'AddSelectedCollection'};
-var _user$project$Model$NoUpsideDown = {ctor: 'NoUpsideDown'};
-var _user$project$Model$YesUpsideDown = {ctor: 'YesUpsideDown'};
-var _user$project$Model$NoMinimalDistraction = {ctor: 'NoMinimalDistraction'};
-var _user$project$Model$YesMinimalDistraction = {ctor: 'YesMinimalDistraction'};
 var _user$project$Model$Minute = {ctor: 'Minute'};
 var _user$project$Model$Second = {ctor: 'Second'};
 var _user$project$Model$Custom = {ctor: 'Custom'};
@@ -13465,12 +13464,16 @@ var _user$project$Model$S90 = {ctor: 'S90'};
 var _user$project$Model$S60 = {ctor: 'S60'};
 var _user$project$Model$S45 = {ctor: 'S45'};
 var _user$project$Model$S30 = {ctor: 'S30'};
+var _user$project$Model$NoUpsideDown = {ctor: 'NoUpsideDown'};
+var _user$project$Model$YesUpsideDown = {ctor: 'YesUpsideDown'};
+var _user$project$Model$NoMinimalDistraction = {ctor: 'NoMinimalDistraction'};
+var _user$project$Model$YesMinimalDistraction = {ctor: 'YesMinimalDistraction'};
 
-var _user$project$Msg$FetchCollectionStartAppSuccess = function (a) {
-	return {ctor: 'FetchCollectionStartAppSuccess', _0: a};
+var _user$project$Msg$FetchImageStartAppSuccess = function (a) {
+	return {ctor: 'FetchImageStartAppSuccess', _0: a};
 };
-var _user$project$Msg$FetchCollectionStartAppFail = function (a) {
-	return {ctor: 'FetchCollectionStartAppFail', _0: a};
+var _user$project$Msg$FetchImageStartAppFail = function (a) {
+	return {ctor: 'FetchImageStartAppFail', _0: a};
 };
 var _user$project$Msg$InitialFetchQuerySuccess = function (a) {
 	return {ctor: 'InitialFetchQuerySuccess', _0: a};
@@ -13484,7 +13487,6 @@ var _user$project$Msg$FetchCollectionListSuccess = function (a) {
 var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
 };
-var _user$project$Msg$ImageTimerBarProgress = {ctor: 'ImageTimerBarProgress'};
 var _user$project$Msg$Tick = function (a) {
 	return {ctor: 'Tick', _0: a};
 };
@@ -13593,9 +13595,9 @@ var _user$project$Command$startAppFetchImages = function (collectionList) {
 		'http://localhost:4000/api/collections_initial_load_app',
 		_elm_lang$http$Http$jsonBody(
 			_user$project$Model$selectedCollectionsListEncoder(collectionList)),
-		_user$project$Model$collectionImageListDecoder,
-		_user$project$Msg$FetchCollectionStartAppFail,
-		_user$project$Msg$FetchCollectionStartAppSuccess);
+		_user$project$Model$imageAssocListDecoder,
+		_user$project$Msg$FetchImageStartAppFail,
+		_user$project$Msg$FetchImageStartAppSuccess);
 };
 var _user$project$Command$fetchSearchQuery = function (searchInput) {
 	return A5(
@@ -13897,8 +13899,8 @@ var _user$project$Component_SearchComponent$searchComponent = function (model) {
 		});
 };
 
-var _user$project$Component_RadioComponent$customInput = F2(
-	function (radioInterval, label_text) {
+var _user$project$Component_RadioComponent$customInput = F3(
+	function (radioInterval, label_text, error) {
 		var _p0 = radioInterval;
 		if (_p0.ctor === 'Custom') {
 			return A2(
@@ -13947,7 +13949,18 @@ var _user$project$Component_RadioComponent$customInput = F2(
 									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$p,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(error),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				});
 		} else {
@@ -13969,9 +13982,9 @@ var _user$project$Component_RadioComponent$customInput = F2(
 var _user$project$Component_RadioComponent$customInputComponent = function (model) {
 	var _p1 = model.radioIntervalType;
 	if (_p1.ctor === 'Second') {
-		return A2(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many seconds?');
+		return A3(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many seconds?', model.error);
 	} else {
-		return A2(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many minutes?');
+		return A3(_user$project$Component_RadioComponent$customInput, model.radioIntervalTiming, 'How many minutes?', model.error);
 	}
 };
 var _user$project$Component_RadioComponent$radio = F3(
@@ -14051,40 +14064,6 @@ var _user$project$Component_RadioComponent$radio = F3(
 				});
 		}
 	});
-var _user$project$Component_RadioComponent$radioComponent = F3(
-	function (model, text, msg) {
-		return A3(
-			_user$project$Component_RadioComponent$radio,
-			text,
-			_elm_lang$core$Native_Utils.eq(model.radioIntervalTiming, msg),
-			_user$project$Msg$SelectIntervalTiming(msg));
-	});
-var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
-	return A2(
-		_elm_lang$html$Html$form,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A3(
-				_user$project$Component_RadioComponent$radio,
-				'Yes',
-				_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$YesUpsideDown),
-				_user$project$Msg$SelectUpsideDown(_user$project$Model$YesUpsideDown)),
-			_1: {
-				ctor: '::',
-				_0: A3(
-					_user$project$Component_RadioComponent$radio,
-					'No',
-					_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$NoUpsideDown),
-					_user$project$Msg$SelectUpsideDown(_user$project$Model$NoUpsideDown)),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$Component_RadioComponent$radioIntervalTypeComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
@@ -14111,6 +14090,40 @@ var _user$project$Component_RadioComponent$radioIntervalTypeComponent = function
 			}
 		});
 };
+var _user$project$Component_RadioComponent$radioUpsideDownComponent = function (model) {
+	return A2(
+		_elm_lang$html$Html$form,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('radio__upsidedown__container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_user$project$Component_RadioComponent$radio,
+				'Yes',
+				_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$YesUpsideDown),
+				_user$project$Msg$SelectUpsideDown(_user$project$Model$YesUpsideDown)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_user$project$Component_RadioComponent$radio,
+					'No',
+					_elm_lang$core$Native_Utils.eq(model.radioUpsideDown, _user$project$Model$NoUpsideDown),
+					_user$project$Msg$SelectUpsideDown(_user$project$Model$NoUpsideDown)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Component_RadioComponent$radioWrapper = F3(
+	function (model, text, msg) {
+		return A3(
+			_user$project$Component_RadioComponent$radio,
+			text,
+			_elm_lang$core$Native_Utils.eq(model.radioIntervalTiming, msg),
+			_user$project$Msg$SelectIntervalTiming(msg));
+	});
 var _user$project$Component_RadioComponent$radioIntervalMinutesComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$form,
@@ -14121,25 +14134,25 @@ var _user$project$Component_RadioComponent$radioIntervalMinutesComponent = funct
 		},
 		{
 			ctor: '::',
-			_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '1', _user$project$Model$M1),
+			_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '1', _user$project$Model$M1),
 			_1: {
 				ctor: '::',
-				_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '2', _user$project$Model$M2),
+				_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '2', _user$project$Model$M2),
 				_1: {
 					ctor: '::',
-					_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '3', _user$project$Model$M3),
+					_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '3', _user$project$Model$M3),
 					_1: {
 						ctor: '::',
-						_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '4', _user$project$Model$M4),
+						_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '4', _user$project$Model$M4),
 						_1: {
 							ctor: '::',
-							_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '5', _user$project$Model$M5),
+							_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '5', _user$project$Model$M5),
 							_1: {
 								ctor: '::',
-								_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '10', _user$project$Model$M10),
+								_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '10', _user$project$Model$M10),
 								_1: {
 									ctor: '::',
-									_0: A3(_user$project$Component_RadioComponent$radioComponent, model, 'Custom', _user$project$Model$Custom),
+									_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, 'Custom', _user$project$Model$Custom),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Component_RadioComponent$customInputComponent(model),
@@ -14163,22 +14176,22 @@ var _user$project$Component_RadioComponent$radioIntervalSecondsComponent = funct
 		},
 		{
 			ctor: '::',
-			_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '30', _user$project$Model$S30),
+			_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '30', _user$project$Model$S30),
 			_1: {
 				ctor: '::',
-				_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '45', _user$project$Model$S45),
+				_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '45', _user$project$Model$S45),
 				_1: {
 					ctor: '::',
-					_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '60', _user$project$Model$S60),
+					_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '60', _user$project$Model$S60),
 					_1: {
 						ctor: '::',
-						_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '90', _user$project$Model$S90),
+						_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '90', _user$project$Model$S90),
 						_1: {
 							ctor: '::',
-							_0: A3(_user$project$Component_RadioComponent$radioComponent, model, '120', _user$project$Model$S120),
+							_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, '120', _user$project$Model$S120),
 							_1: {
 								ctor: '::',
-								_0: A3(_user$project$Component_RadioComponent$radioComponent, model, 'Custom', _user$project$Model$Custom),
+								_0: A3(_user$project$Component_RadioComponent$radioWrapper, model, 'Custom', _user$project$Model$Custom),
 								_1: {
 									ctor: '::',
 									_0: _user$project$Component_RadioComponent$customInputComponent(model),
@@ -14199,7 +14212,7 @@ var _user$project$Component_RadioComponent$radioIntervalSecondsOrMinutesComponen
 		return _user$project$Component_RadioComponent$radioIntervalMinutesComponent(model);
 	}
 };
-var _user$project$Component_RadioComponent$radioIntervalComponent = function (model) {
+var _user$project$Component_RadioComponent$radioComponent = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -14208,19 +14221,39 @@ var _user$project$Component_RadioComponent$radioIntervalComponent = function (mo
 			_0: _user$project$Component_RadioComponent$radioIntervalTypeComponent(model),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Component_RadioComponent$radioIntervalSecondsOrMinutesComponent(model),
-				_1: {ctor: '[]'}
+				_0: A2(
+					_elm_lang$html$Html$h5,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Image timing'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Component_RadioComponent$radioIntervalSecondsOrMinutesComponent(model),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h5,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Display image upside down?'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
 			}
 		});
 };
 
-var _user$project$Component_FinishComponent$relevantUserImages = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{ctor: '[]'});
-};
-var _user$project$Component_FinishComponent$drawnImages = function (image) {
+var _user$project$Component_FinishComponent$displayDrawnImages = function (imageAssoc) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -14235,7 +14268,7 @@ var _user$project$Component_FinishComponent$drawnImages = function (image) {
 						_elm_lang$html$Html$img,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$src(image.image_url),
+							_0: _elm_lang$html$Html_Attributes$src(imageAssoc.name),
 							_1: {ctor: '[]'}
 						},
 						{ctor: '[]'}),
@@ -14258,13 +14291,13 @@ var _user$project$Component_FinishComponent$drawnImages = function (image) {
 			}
 		});
 };
-var _user$project$Component_FinishComponent$displayDrawnImages = function (collectionImages) {
+var _user$project$Component_FinishComponent$displayImageAssoc = function (imageAssoc) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
-		A2(_elm_lang$core$List$map, _user$project$Component_FinishComponent$drawnImages, collectionImages.images));
+		A2(_elm_lang$core$List$map, _user$project$Component_FinishComponent$displayDrawnImages, imageAssoc.image_drawings));
 };
-var _user$project$Component_FinishComponent$displayDrawnCollections = function (loadedCollectionImagesList) {
+var _user$project$Component_FinishComponent$displayDrawnCollections = function (loadedImageAssocList) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -14287,12 +14320,35 @@ var _user$project$Component_FinishComponent$displayDrawnCollections = function (
 				_0: A2(
 					_elm_lang$html$Html$div,
 					{ctor: '[]'},
-					A2(_elm_lang$core$List$map, _user$project$Component_FinishComponent$displayDrawnImages, loadedCollectionImagesList)),
+					A2(_elm_lang$core$List$map, _user$project$Component_FinishComponent$displayImageAssoc, loadedImageAssocList)),
 				_1: {ctor: '[]'}
 			}
 		});
 };
 
+var _user$project$Component_PopupComponent$popupTimingBar = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('timing__bar'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'display', _1: 'none'},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('timing bar'),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Component_PopupComponent$popupPauseResumeButton = function (popupStatus) {
 	var _p0 = popupStatus;
 	if (_p0.ctor === 'Pause') {
@@ -14333,6 +14389,55 @@ var _user$project$Component_PopupComponent$popupPauseResumeButton = function (po
 			});
 	}
 };
+var _user$project$Component_PopupComponent$popupBottomButtons = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('button__row'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('button'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Skip'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Component_PopupComponent$popupPauseResumeButton(model.popupStatus),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('button'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$Msg$ChangeStatus(_user$project$Model$Finish)),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Stop'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
 var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -14352,148 +14457,101 @@ var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('button__row'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('button'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Skip'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Component_PopupComponent$popupPauseResumeButton(model.popupStatus),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('button'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(
-													_user$project$Msg$ChangeStatus(_user$project$Model$Finish)),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Stop'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
+					_0: _user$project$Component_PopupComponent$popupBottomButtons(model),
 					_1: {
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('timing__bar'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('this is where the timing bar goes'),
-								_1: {ctor: '[]'}
-							}),
+						_0: _user$project$Component_PopupComponent$popupTimingBar(model),
 						_1: {ctor: '[]'}
 					}
 				}),
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Component_PopupComponent$popupMiddlebar = function (model) {
-	var _p1 = model.popupStatus;
-	if (_p1.ctor === 'Resume') {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('image__container'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$img,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('image'),
-								_1: {
+var _user$project$Component_PopupComponent$popupMiddlebar = F2(
+	function (popupStatus, currentImage) {
+		var _p1 = popupStatus;
+		if (_p1.ctor === 'Resume') {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('image__container'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$img,
+								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$src(''),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	} else {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('image__container image__container--pause'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$img,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('image'),
-								_1: {
+									_0: _elm_lang$html$Html_Attributes$class('image'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src(currentImage.image_url),
+										_1: {ctor: '[]'}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				});
+		} else {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('image__container image__container--pause'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$img,
+								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$src(''),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	}
-};
-var _user$project$Component_PopupComponent$userDrawings = function (image) {
+									_0: _elm_lang$html$Html_Attributes$class('image'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src(currentImage.image_url),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'display', _1: 'none'},
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				});
+		}
+	});
+var _user$project$Component_PopupComponent$userDrawings = function (imageDrawing) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -14504,7 +14562,7 @@ var _user$project$Component_PopupComponent$userDrawings = function (image) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('image'),
+					_0: _elm_lang$html$Html$text(imageDrawing.image_url),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -14514,14 +14572,25 @@ var _user$project$Component_PopupComponent$userDrawings = function (image) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('username'),
+						_0: _elm_lang$html$Html$text(imageDrawing.display_name),
 						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h4,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(imageDrawing.description),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
-var _user$project$Component_PopupComponent$userScribbles = function (image) {
+var _user$project$Component_PopupComponent$userScribbles = function (imageScribble) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -14532,7 +14601,7 @@ var _user$project$Component_PopupComponent$userScribbles = function (image) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('image'),
+					_0: _elm_lang$html$Html$text(''),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -14542,14 +14611,14 @@ var _user$project$Component_PopupComponent$userScribbles = function (image) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('username'),
+						_0: _elm_lang$html$Html$text(imageScribble.display_name),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _user$project$Component_PopupComponent$userComments = function (image) {
+var _user$project$Component_PopupComponent$userComments = function (imageComment) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -14570,7 +14639,7 @@ var _user$project$Component_PopupComponent$userComments = function (image) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('username'),
+						_0: _elm_lang$html$Html$text('I guess it would be the username?'),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -14580,7 +14649,7 @@ var _user$project$Component_PopupComponent$userComments = function (image) {
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('comment'),
+							_0: _elm_lang$html$Html$text(imageComment.text),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -14588,7 +14657,7 @@ var _user$project$Component_PopupComponent$userComments = function (image) {
 			}
 		});
 };
-var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollectionImagesList) {
+var _user$project$Component_PopupComponent$popupLeftbar = function (imageAssoc) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -14616,7 +14685,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 						_0: A2(
 							_elm_lang$html$Html$div,
 							{ctor: '[]'},
-							A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userComments, loadedCollectionImagesList)),
+							A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userComments, imageAssoc.image_comments)),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -14640,7 +14709,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 							_0: A2(
 								_elm_lang$html$Html$div,
 								{ctor: '[]'},
-								A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userScribbles, loadedCollectionImagesList)),
+								A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userScribbles, imageAssoc.image_scribbles)),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -14664,7 +14733,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 								_0: A2(
 									_elm_lang$html$Html$div,
 									{ctor: '[]'},
-									A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userDrawings, loadedCollectionImagesList)),
+									A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userDrawings, imageAssoc.image_drawings)),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -14673,7 +14742,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 			}
 		});
 };
-var _user$project$Component_PopupComponent$popupNavbar = function (model) {
+var _user$project$Component_PopupComponent$popupNavbar = function (imageAssoc) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -14703,6 +14772,312 @@ var _user$project$Component_PopupComponent$popupNavbar = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
+
+var _user$project$Update$calculateIntervalTiming = function (model) {
+	var customTime = model.radioIntervalCustomInput;
+	var imageTime = model.imageTime;
+	var _p0 = model.radioIntervalTiming;
+	switch (_p0.ctor) {
+		case 'S30':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 30}),
+				{ctor: '[]'});
+		case 'S45':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 45}),
+				{ctor: '[]'});
+		case 'S60':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 60}),
+				{ctor: '[]'});
+		case 'S90':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 90}),
+				{ctor: '[]'});
+		case 'S120':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 120}),
+				{ctor: '[]'});
+		case 'M1':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 60}),
+				{ctor: '[]'});
+		case 'M2':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 120}),
+				{ctor: '[]'});
+		case 'M3':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 180}),
+				{ctor: '[]'});
+		case 'M4':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 240}),
+				{ctor: '[]'});
+		case 'M5':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 300}),
+				{ctor: '[]'});
+		case 'M10':
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: 600}),
+				{ctor: '[]'});
+		default:
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{imageTime: customTime}),
+				{ctor: '[]'});
+	}
+};
+var _user$project$Update$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'ChangeSearchInput':
+				var _p2 = _p1._0;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchInput: _p2}),
+					{
+						ctor: '::',
+						_0: _user$project$Command$fetchSearchQuery(_p2),
+						_1: {ctor: '[]'}
+					});
+			case 'SelectCollection':
+				var _p4 = _p1._0;
+				var _p3 = _p1._1;
+				if (_p3.ctor === 'AddSelectedCollection') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								selectedCollections: {ctor: '::', _0: _p4, _1: model.selectedCollections}
+							}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								selectedCollections: A2(
+									_elm_lang$core$List$filter,
+									function (x) {
+										return !_elm_lang$core$Native_Utils.eq(x.id, _p4.id);
+									},
+									model.selectedCollections)
+							}),
+						{ctor: '[]'});
+				}
+			case 'SelectIntervalTimingType':
+				var _p6 = _p1._0;
+				var _p5 = _p6;
+				if (_p5.ctor === 'Minute') {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{radioIntervalType: _p6, radioIntervalTiming: _user$project$Model$M1, radioIntervalCustomInput: 0}),
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{radioIntervalType: _p6, radioIntervalTiming: _user$project$Model$S30, radioIntervalCustomInput: 0}),
+						{ctor: '[]'});
+				}
+			case 'SelectIntervalTiming':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{radioIntervalTiming: _p1._0}),
+					{ctor: '[]'});
+			case 'UpdateCustomIntervalInput':
+				var _p10 = _p1._0;
+				var _p7 = model.radioIntervalType;
+				if (_p7.ctor === 'Second') {
+					var _p8 = _elm_lang$core$String$toInt(_p10);
+					if (_p8.ctor === 'Ok') {
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{radioIntervalCustomInput: _p8._0}),
+							{ctor: '[]'});
+					} else {
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{error: _p8._0}),
+							{ctor: '[]'});
+					}
+				} else {
+					var _p9 = _elm_lang$core$String$toInt(_p10);
+					if (_p9.ctor === 'Ok') {
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{radioIntervalCustomInput: _p9._0 * 60}),
+							{ctor: '[]'});
+					} else {
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{error: _p9._0}),
+							{ctor: '[]'});
+					}
+				}
+			case 'SelectUpsideDown':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{radioUpsideDown: _p1._0}),
+					{ctor: '[]'});
+			case 'ChangeStatus':
+				var _p12 = _p1._0;
+				var _p11 = _p12;
+				switch (_p11.ctor) {
+					case 'Start':
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{applicationStatus: _p12}),
+							{
+								ctor: '::',
+								_0: _user$project$Command$startAppFetchImages(model.selectedCollections),
+								_1: {ctor: '[]'}
+							});
+					case 'Finish':
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{applicationStatus: _p12}),
+							{ctor: '[]'});
+					default:
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{applicationStatus: _p12}),
+							{ctor: '[]'});
+				}
+			case 'ChangePopupStatus':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{popupStatus: _p1._0}),
+					{ctor: '[]'});
+			case 'ChangeDrawStatus':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{imageStatus: _p1._0}),
+					{ctor: '[]'});
+			case 'Tick':
+				return _elm_lang$core$Native_Utils.eq(model.imageTime, 0) ? A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{imageTime: model.imageTime - 1}),
+					{ctor: '[]'}) : _user$project$Update$calculateIntervalTiming(model);
+			case 'InitialFetchQuerySuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchedCollections: _p1._0}),
+					{ctor: '[]'});
+			case 'InitialFetchQueryFail':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p1._0)
+						}),
+					{ctor: '[]'});
+			case 'FetchCollectionListSuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{searchedCollections: _p1._0}),
+					{ctor: '[]'});
+			case 'FetchCollectionListFail':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p1._0)
+						}),
+					{ctor: '[]'});
+			case 'FetchImageStartAppSuccess':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{loadedImageAssocList: _p1._0}),
+					{ctor: '[]'});
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							error: _elm_lang$core$Basics$toString(_p1._0)
+						}),
+					{ctor: '[]'});
+		}
+	});
 
 var _user$project$Component_ReferenceSearchComponent$searchTile = F3(
 	function (collection, selectCollectionMsg, selectedText) {
@@ -14896,6 +15271,40 @@ var _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent
 var _user$project$Component_ReferenceComponent$referenceComponent = function (model) {
 	var _p0 = model.applicationStatus;
 	switch (_p0.ctor) {
+		case 'Initial':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_RadioComponent$radioComponent(model),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_SearchComponent$submitComponent,
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+		case 'Loading':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__loading'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Fetching images, please wait'),
+					_1: {ctor: '[]'}
+				});
 		case 'Start':
 			return A2(
 				_elm_lang$html$Html$div,
@@ -14910,87 +15319,29 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('outer'),
+							_0: _elm_lang$html$Html_Attributes$class('inner'),
 							_1: {ctor: '[]'}
 						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('inner'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _user$project$Component_PopupComponent$popupNavbar(model),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Component_PopupComponent$popupLeftbar(model.loadedCollectionImagesList),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
-										_1: {
-											ctor: '::',
-											_0: _user$project$Component_PopupComponent$popupBottombar(model),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				});
-		case 'Stop':
-			return A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$h5,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Image timing'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
+						{
 							ctor: '::',
-							_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
+							_0: _user$project$Component_PopupComponent$popupNavbar(model.currentImage),
 							_1: {
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$h5,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Display image upside down?'),
-										_1: {ctor: '[]'}
-									}),
+								_0: _user$project$Component_PopupComponent$popupLeftbar(model.currentImage),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+									_0: A2(_user$project$Component_PopupComponent$popupMiddlebar, model.popupStatus, model.currentImage),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Component_SearchComponent$submitComponent,
+										_0: _user$project$Component_PopupComponent$popupBottombar(model),
 										_1: {ctor: '[]'}
 									}
 								}
 							}
-						}
-					}
+						}),
+					_1: {ctor: '[]'}
 				});
-		case 'Finish':
+		default:
 			return A2(
 				_elm_lang$html$Html$div,
 				{
@@ -15000,25 +15351,12 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_FinishComponent$displayDrawnCollections(model.loadedCollectionImagesList),
+					_0: _user$project$Component_FinishComponent$displayDrawnCollections(model.loadedImageAssocList),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
 						_1: {ctor: '[]'}
 					}
-				});
-		default:
-			return A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('reference__tool__loading'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Fetching images, please wait'),
-					_1: {ctor: '[]'}
 				});
 	}
 };
@@ -15044,186 +15382,6 @@ var _user$project$View$viewSearch = function (model) {
 		});
 };
 
-var _user$project$Update$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'ChangeSearchInput':
-				var _p1 = _p0._0;
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{searchInput: _p1}),
-					{
-						ctor: '::',
-						_0: _user$project$Command$fetchSearchQuery(_p1),
-						_1: {ctor: '[]'}
-					});
-			case 'SelectIntervalTimingType':
-				var _p3 = _p0._0;
-				var _p2 = _p3;
-				if (_p2.ctor === 'Minute') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{radioIntervalType: _p3, radioIntervalTiming: _user$project$Model$M1}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{radioIntervalType: _p3, radioIntervalTiming: _user$project$Model$S30}),
-						{ctor: '[]'});
-				}
-			case 'SelectIntervalTiming':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{radioIntervalTiming: _p0._0}),
-					{ctor: '[]'});
-			case 'UpdateCustomIntervalInput':
-				var _p4 = _elm_lang$core$String$toInt(_p0._0);
-				if (_p4.ctor === 'Ok') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{radioIntervalCustomInput: _p4._0}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{error: _p4._0}),
-						{ctor: '[]'});
-				}
-			case 'SelectCollection':
-				var _p6 = _p0._0;
-				var _p5 = _p0._1;
-				if (_p5.ctor === 'AddSelectedCollection') {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								selectedCollections: {ctor: '::', _0: _p6, _1: model.selectedCollections}
-							}),
-						{ctor: '[]'});
-				} else {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								selectedCollections: A2(
-									_elm_lang$core$List$filter,
-									function (x) {
-										return !_elm_lang$core$Native_Utils.eq(x.id, _p6.id);
-									},
-									model.selectedCollections)
-							}),
-						{ctor: '[]'});
-				}
-			case 'SelectUpsideDown':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{radioUpsideDown: _p0._0}),
-					{ctor: '[]'});
-			case 'ChangeStatus':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{applicationStatus: _p0._0}),
-					{
-						ctor: '::',
-						_0: _user$project$Command$startAppFetchImages(model.selectedCollections),
-						_1: {ctor: '[]'}
-					});
-			case 'ChangePopupStatus':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{popupStatus: _p0._0}),
-					{ctor: '[]'});
-			case 'ChangeDrawStatus':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{imageStatus: _p0._0}),
-					{ctor: '[]'});
-			case 'Tick':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{imageTime: _p0._0}),
-					{ctor: '[]'});
-			case 'ImageTimerBarProgress':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{ctor: '[]'});
-			case 'InitialFetchQuerySuccess':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{searchedCollections: _p0._0}),
-					{ctor: '[]'});
-			case 'InitialFetchQueryFail':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{
-							error: _elm_lang$core$Basics$toString(_p0._0)
-						}),
-					{ctor: '[]'});
-			case 'FetchCollectionListSuccess':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{searchedCollections: _p0._0}),
-					{ctor: '[]'});
-			case 'FetchCollectionListFail':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{
-							error: _elm_lang$core$Basics$toString(_p0._0)
-						}),
-					{ctor: '[]'});
-			case 'FetchCollectionStartAppSuccess':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{loadedCollectionImagesList: _p0._0}),
-					{ctor: '[]'});
-			default:
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{
-							error: _elm_lang$core$Basics$toString(_p0._0)
-						}),
-					{ctor: '[]'});
-		}
-	});
-
 var _user$project$MainReferenceTool$subscriptions = function (model) {
 	return A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second, _user$project$Msg$Tick);
 };
@@ -15246,17 +15404,27 @@ var _user$project$MainReferenceTool$initialModel = A2(
 				}
 			}
 		},
-		applicationStatus: _user$project$Model$Stop,
+		applicationStatus: _user$project$Model$Initial,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
-		imageTime: 0,
-		imagerTimerBarProgress: 0,
 		radioIntervalType: _user$project$Model$Second,
 		radioIntervalTiming: _user$project$Model$S30,
 		radioIntervalCustomInput: 0,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
-		loadedCollectionImagesList: {ctor: '[]'},
+		loadedImageAssocList: {ctor: '[]'},
+		currentImage: {
+			name: '',
+			image_url: '',
+			id: '',
+			display_name: '',
+			times_drawn: 0,
+			image_comments: {ctor: '[]'},
+			image_scribbles: {ctor: '[]'},
+			image_tags: {ctor: '[]'},
+			image_drawings: {ctor: '[]'}
+		},
+		imageTime: 0,
 		error: ''
 	},
 	{
@@ -15289,17 +15457,27 @@ var _user$project$MainSearch$initialModel = A2(
 				}
 			}
 		},
-		applicationStatus: _user$project$Model$Stop,
+		applicationStatus: _user$project$Model$Initial,
 		popupStatus: _user$project$Model$Resume,
 		imageStatus: _user$project$Model$Normal,
-		imageTime: 0,
-		imagerTimerBarProgress: 0,
 		radioIntervalType: _user$project$Model$Second,
 		radioIntervalTiming: _user$project$Model$S30,
 		radioIntervalCustomInput: 0,
 		radioUpsideDown: _user$project$Model$NoUpsideDown,
 		radioDistraction: _user$project$Model$NoMinimalDistraction,
-		loadedCollectionImagesList: {ctor: '[]'},
+		loadedImageAssocList: {ctor: '[]'},
+		currentImage: {
+			name: '',
+			image_url: '',
+			id: '',
+			display_name: '',
+			times_drawn: 0,
+			image_comments: {ctor: '[]'},
+			image_scribbles: {ctor: '[]'},
+			image_tags: {ctor: '[]'},
+			image_drawings: {ctor: '[]'}
+		},
+		imageTime: 0,
 		error: ''
 	},
 	{
@@ -15317,11 +15495,11 @@ if (typeof _user$project$Command$main !== 'undefined') {
 }
 Elm['MainReferenceTool'] = Elm['MainReferenceTool'] || {};
 if (typeof _user$project$MainReferenceTool$main !== 'undefined') {
-    _user$project$MainReferenceTool$main(Elm['MainReferenceTool'], 'MainReferenceTool', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ImageTimerBarProgress":[],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"Tick":["Time.Time"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"UpdateCustomIntervalInput":["String"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection","Model.SelectCollecitonAction"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}},"Model.SelectCollecitonAction":{"args":[],"tags":{"AddSelectedCollection":[],"RemoveSelectedCollection":[]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Time.Time":{"args":[],"type":"Float"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$MainReferenceTool$main(Elm['MainReferenceTool'], 'MainReferenceTool', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"Tick":["Time.Time"],"FetchImageStartAppFail":["Http.Error"],"UpdateCustomIntervalInput":["String"],"FetchImageStartAppSuccess":["Model.ImageAssocList"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection","Model.SelectCollecitonAction"],"ChangeSearchInput":["String"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Initial":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}},"Model.SelectCollecitonAction":{"args":[],"tags":{"AddSelectedCollection":[],"RemoveSelectedCollection":[]}}},"aliases":{"Model.ImageTag":{"args":[],"type":"{ id : String, name : String, display_name : String }"},"Model.ImageScribble":{"args":[],"type":"{ id : String , name : String , display_name : String , description : String , data : String }"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.ImageAssoc":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int , image_comments : Model.ImageCommentList , image_scribbles : Model.ImageScribbleList , image_tags : Model.ImageTagList , image_drawings : Model.ImageDrawingList }"},"Model.ImageDrawing":{"args":[],"type":"{ id : String , name : String , display_name : String , description : String , image_url : String }"},"Model.ImageAssocList":{"args":[],"type":"List Model.ImageAssoc"},"Model.ImageDrawingList":{"args":[],"type":"List Model.ImageDrawing"},"Model.ImageCommentList":{"args":[],"type":"List Model.ImageComment"},"Model.ImageComment":{"args":[],"type":"{ id : String, text : String }"},"Time.Time":{"args":[],"type":"Float"},"Model.ImageTagList":{"args":[],"type":"List Model.ImageTag"},"Model.ImageScribbleList":{"args":[],"type":"List Model.ImageScribble"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
 }
 Elm['MainSearch'] = Elm['MainSearch'] || {};
 if (typeof _user$project$MainSearch$main !== 'undefined') {
-    _user$project$MainSearch$main(Elm['MainSearch'], 'MainSearch', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"ImageTimerBarProgress":[],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"Tick":["Time.Time"],"FetchCollectionStartAppSuccess":["Model.CollectionImagesList"],"UpdateCustomIntervalInput":["String"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection","Model.SelectCollecitonAction"],"ChangeSearchInput":["String"],"FetchCollectionStartAppFail":["Http.Error"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Stop":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}},"Model.SelectCollecitonAction":{"args":[],"tags":{"AddSelectedCollection":[],"RemoveSelectedCollection":[]}}},"aliases":{"Model.ImageList":{"args":[],"type":"List Model.Image"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.CollectionImages":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String , images : Model.ImageList }"},"Model.CollectionImagesList":{"args":[],"type":"List Model.CollectionImages"},"Time.Time":{"args":[],"type":"Float"},"Model.Image":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int }"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$MainSearch$main(Elm['MainSearch'], 'MainSearch', {"types":{"unions":{"Dict.LeafColor":{"args":[],"tags":{"LBBlack":[],"LBlack":[]}},"Model.PopupStatus":{"args":[],"tags":{"Pause":[],"Resume":[]}},"Model.UpsideDown":{"args":[],"tags":{"NoUpsideDown":[],"YesUpsideDown":[]}},"Model.DrawStatus":{"args":[],"tags":{"Normal":[],"Draw":[]}},"Dict.Dict":{"args":["k","v"],"tags":{"RBNode_elm_builtin":["Dict.NColor","k","v","Dict.Dict k v","Dict.Dict k v"],"RBEmpty_elm_builtin":["Dict.LeafColor"]}},"Model.IntervalTiming":{"args":[],"tags":{"M2":[],"M5":[],"Custom":[],"M4":[],"M10":[],"M1":[],"S45":[],"S90":[],"S60":[],"S30":[],"S120":[],"M3":[]}},"Msg.Msg":{"args":[],"tags":{"SelectUpsideDown":["Model.UpsideDown"],"SelectIntervalTimingType":["Model.IntervalTimingType"],"ChangeDrawStatus":["Model.DrawStatus"],"Tick":["Time.Time"],"FetchImageStartAppFail":["Http.Error"],"UpdateCustomIntervalInput":["String"],"FetchImageStartAppSuccess":["Model.ImageAssocList"],"SelectIntervalTiming":["Model.IntervalTiming"],"ChangeStatus":["Model.Status"],"InitialFetchQueryFail":["Http.Error"],"FetchCollectionListFail":["Http.Error"],"ChangePopupStatus":["Model.PopupStatus"],"InitialFetchQuerySuccess":["Model.CollectionList"],"FetchCollectionListSuccess":["Model.CollectionList"],"SelectCollection":["Model.Collection","Model.SelectCollecitonAction"],"ChangeSearchInput":["String"]}},"Dict.NColor":{"args":[],"tags":{"BBlack":[],"Red":[],"NBlack":[],"Black":[]}},"Model.Status":{"args":[],"tags":{"Start":[],"Finish":[],"Loading":[],"Initial":[]}},"Http.Error":{"args":[],"tags":{"BadUrl":["String"],"NetworkError":[],"Timeout":[],"BadStatus":["Http.Response String"],"BadPayload":["String","Http.Response String"]}},"Model.IntervalTimingType":{"args":[],"tags":{"Second":[],"Minute":[]}},"Model.SelectCollecitonAction":{"args":[],"tags":{"AddSelectedCollection":[],"RemoveSelectedCollection":[]}}},"aliases":{"Model.ImageTag":{"args":[],"type":"{ id : String, name : String, display_name : String }"},"Model.ImageScribble":{"args":[],"type":"{ id : String , name : String , display_name : String , description : String , data : String }"},"Model.Collection":{"args":[],"type":"{ user_id : String , name : String , id : String , featured_image : String , display_name : String }"},"Http.Response":{"args":["body"],"type":"{ url : String , status : { code : Int, message : String } , headers : Dict.Dict String String , body : body }"},"Model.CollectionList":{"args":[],"type":"List Model.Collection"},"Model.ImageAssoc":{"args":[],"type":"{ name : String , image_url : String , id : String , display_name : String , times_drawn : Int , image_comments : Model.ImageCommentList , image_scribbles : Model.ImageScribbleList , image_tags : Model.ImageTagList , image_drawings : Model.ImageDrawingList }"},"Model.ImageDrawing":{"args":[],"type":"{ id : String , name : String , display_name : String , description : String , image_url : String }"},"Model.ImageAssocList":{"args":[],"type":"List Model.ImageAssoc"},"Model.ImageDrawingList":{"args":[],"type":"List Model.ImageDrawing"},"Model.ImageCommentList":{"args":[],"type":"List Model.ImageComment"},"Model.ImageComment":{"args":[],"type":"{ id : String, text : String }"},"Time.Time":{"args":[],"type":"Float"},"Model.ImageTagList":{"args":[],"type":"List Model.ImageTag"},"Model.ImageScribbleList":{"args":[],"type":"List Model.ImageScribble"}},"message":"Msg.Msg"},"versions":{"elm":"0.18.0"}});
 }
 Elm['Model'] = Elm['Model'] || {};
 if (typeof _user$project$Model$main !== 'undefined') {

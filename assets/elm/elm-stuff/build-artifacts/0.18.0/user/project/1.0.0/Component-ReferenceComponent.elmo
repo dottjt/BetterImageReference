@@ -1,6 +1,40 @@
 var _user$project$Component_ReferenceComponent$referenceComponent = function (model) {
 	var _p0 = model.applicationStatus;
 	switch (_p0.ctor) {
+		case 'Initial':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Component_RadioComponent$radioComponent(model),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Component_SearchComponent$submitComponent,
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+		case 'Loading':
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reference__tool__loading'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Fetching images, please wait'),
+					_1: {ctor: '[]'}
+				});
 		case 'Start':
 			return A2(
 				_elm_lang$html$Html$div,
@@ -15,87 +49,29 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('outer'),
+							_0: _elm_lang$html$Html_Attributes$class('inner'),
 							_1: {ctor: '[]'}
 						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('inner'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _user$project$Component_PopupComponent$popupNavbar(model),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Component_PopupComponent$popupLeftbar(model.loadedCollectionImagesList),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Component_PopupComponent$popupMiddlebar(model),
-										_1: {
-											ctor: '::',
-											_0: _user$project$Component_PopupComponent$popupBottombar(model),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				});
-		case 'Stop':
-			return A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('reference__tool__stop'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$h5,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Image timing'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
+						{
 							ctor: '::',
-							_0: _user$project$Component_RadioComponent$radioIntervalComponent(model),
+							_0: _user$project$Component_PopupComponent$popupNavbar(model.currentImage),
 							_1: {
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$h5,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Display image upside down?'),
-										_1: {ctor: '[]'}
-									}),
+								_0: _user$project$Component_PopupComponent$popupLeftbar(model.currentImage),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Component_RadioComponent$radioUpsideDownComponent(model),
+									_0: A2(_user$project$Component_PopupComponent$popupMiddlebar, model.popupStatus, model.currentImage),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Component_SearchComponent$submitComponent,
+										_0: _user$project$Component_PopupComponent$popupBottombar(model),
 										_1: {ctor: '[]'}
 									}
 								}
 							}
-						}
-					}
+						}),
+					_1: {ctor: '[]'}
 				});
-		case 'Finish':
+		default:
 			return A2(
 				_elm_lang$html$Html$div,
 				{
@@ -105,25 +81,12 @@ var _user$project$Component_ReferenceComponent$referenceComponent = function (mo
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Component_FinishComponent$displayDrawnCollections(model.loadedCollectionImagesList),
+					_0: _user$project$Component_FinishComponent$displayDrawnCollections(model.loadedImageAssocList),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Component_ReferenceSearchComponent$selectionReferenceComponent(model),
 						_1: {ctor: '[]'}
 					}
-				});
-		default:
-			return A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('reference__tool__loading'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Fetching images, please wait'),
-					_1: {ctor: '[]'}
 				});
 	}
 };

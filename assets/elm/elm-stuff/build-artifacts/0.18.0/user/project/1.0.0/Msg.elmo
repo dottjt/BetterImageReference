@@ -1,8 +1,8 @@
-var _user$project$Msg$FetchCollectionStartAppSuccess = function (a) {
-	return {ctor: 'FetchCollectionStartAppSuccess', _0: a};
+var _user$project$Msg$FetchImageStartAppSuccess = function (a) {
+	return {ctor: 'FetchImageStartAppSuccess', _0: a};
 };
-var _user$project$Msg$FetchCollectionStartAppFail = function (a) {
-	return {ctor: 'FetchCollectionStartAppFail', _0: a};
+var _user$project$Msg$FetchImageStartAppFail = function (a) {
+	return {ctor: 'FetchImageStartAppFail', _0: a};
 };
 var _user$project$Msg$InitialFetchQuerySuccess = function (a) {
 	return {ctor: 'InitialFetchQuerySuccess', _0: a};
@@ -16,7 +16,6 @@ var _user$project$Msg$FetchCollectionListSuccess = function (a) {
 var _user$project$Msg$FetchCollectionListFail = function (a) {
 	return {ctor: 'FetchCollectionListFail', _0: a};
 };
-var _user$project$Msg$ImageTimerBarProgress = {ctor: 'ImageTimerBarProgress'};
 var _user$project$Msg$Tick = function (a) {
 	return {ctor: 'Tick', _0: a};
 };

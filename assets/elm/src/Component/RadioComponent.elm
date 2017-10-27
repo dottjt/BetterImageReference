@@ -9,14 +9,18 @@ import Model exposing (..)
 
 
 
-radioIntervalComponent : Model -> Html Msg 
-radioIntervalComponent model =
-    div [] [ radioIntervalTypeComponent model
-           , radioIntervalSecondsOrMinutesComponent model 
-           ]
 
 -- SECOND/MINUTE RADIO COMPONENTS
 
+radioComponent : Model -> Html Msg 
+radioComponent model =
+    div [] 
+        [ radioIntervalTypeComponent model
+        , h5 [] [ text "Image timing" ]
+        , radioIntervalSecondsOrMinutesComponent model 
+        , h5 [] [ text "Display image upside down?" ]            
+        , radioUpsideDownComponent model
+        ]
 
 radioIntervalSecondsOrMinutesComponent : Model -> Html Msg
 radioIntervalSecondsOrMinutesComponent model =
@@ -30,12 +34,12 @@ radioIntervalSecondsOrMinutesComponent model =
 radioIntervalSecondsComponent : Model -> Html Msg 
 radioIntervalSecondsComponent model =
     Html.form [ class "radio__interval__timing__container" ]
-        [ radioComponent model "30" S30
-        , radioComponent model "45" S45
-        , radioComponent model "60" S60
-        , radioComponent model "90" S90
-        , radioComponent model "120" S120
-        , radioComponent model "Custom" Custom
+        [ radioWrapper model "30" S30
+        , radioWrapper model "45" S45
+        , radioWrapper model "60" S60
+        , radioWrapper model "90" S90
+        , radioWrapper model "120" S120
+        , radioWrapper model "Custom" Custom
         , customInputComponent model
         ]
 
@@ -43,37 +47,18 @@ radioIntervalSecondsComponent model =
 radioIntervalMinutesComponent : Model -> Html Msg
 radioIntervalMinutesComponent model =
     Html.form [ class "radio__interval__timing__container" ]
-        [ radioComponent model "1" M1 
-        , radioComponent model "2" M2 
-        , radioComponent model "3" M3 
-        , radioComponent model "4" M4 
-        , radioComponent model "5" M5 
-        , radioComponent model "10" M10 
-        , radioComponent model "Custom" Custom
+        [ radioWrapper model "1" M1 
+        , radioWrapper model "2" M2 
+        , radioWrapper model "3" M3 
+        , radioWrapper model "4" M4 
+        , radioWrapper model "5" M5 
+        , radioWrapper model "10" M10 
+        , radioWrapper model "Custom" Custom
         , customInputComponent model
         ]
 
-
-radioIntervalTypeComponent : Model -> Html Msg
-radioIntervalTypeComponent model =
-    Html.form [ class "radio__interval__type__container" ]
-        [ radio "Second" (model.radioIntervalType == Second) (SelectIntervalTimingType Second)
-        , radio "Minute" (model.radioIntervalType == Minute) (SelectIntervalTimingType Minute)
-        ]
-
-radioUpsideDownComponent : Model -> Html Msg
-radioUpsideDownComponent model =
-    Html.form [ class "radio__upsidedown__container" ]
-        [ radio "Yes" (model.radioUpsideDown == YesUpsideDown) (SelectUpsideDown YesUpsideDown)
-        , radio "No" (model.radioUpsideDown == NoUpsideDown) (SelectUpsideDown NoUpsideDown) 
-        ]
-
-
--- RADIO UPSIDE DOWN COMPONENT
-
-
-radioComponent : Model -> String -> IntervalTiming -> Html Msg
-radioComponent model text msg = 
+radioWrapper : Model -> String -> IntervalTiming -> Html Msg
+radioWrapper model text msg = 
     radio text (model.radioIntervalTiming == msg) (SelectIntervalTiming msg)
 
 radio : String -> Bool -> Msg -> Html Msg
@@ -92,19 +77,37 @@ radio value isChecked msg =
             ]
 
 
+
+-- INTERVAL TYPE/UPSIDE DOWN RADIO COMPONENTS
+
+radioIntervalTypeComponent : Model -> Html Msg
+radioIntervalTypeComponent model =
+    Html.form [ class "radio__interval__type__container" ]
+        [ radio "Second" (model.radioIntervalType == Second) (SelectIntervalTimingType Second)
+        , radio "Minute" (model.radioIntervalType == Minute) (SelectIntervalTimingType Minute)
+        ]
+
+radioUpsideDownComponent : Model -> Html Msg
+radioUpsideDownComponent model =
+    Html.form [ class "radio__upsidedown__container" ]
+        [ radio "Yes" (model.radioUpsideDown == YesUpsideDown) (SelectUpsideDown YesUpsideDown)
+        , radio "No" (model.radioUpsideDown == NoUpsideDown) (SelectUpsideDown NoUpsideDown) 
+        ]
+
+
 -- CUSTOM INPUT COMPONENTS
 
 customInputComponent : Model -> Html Msg 
 customInputComponent model =
     case model.radioIntervalType of 
         Second ->
-            customInput model.radioIntervalTiming "How many seconds?"
+            customInput model.radioIntervalTiming "How many seconds?" model.error
         Minute ->
-            customInput model.radioIntervalTiming "How many minutes?"
+            customInput model.radioIntervalTiming "How many minutes?" model.error
         
 
-customInput : IntervalTiming -> String -> Html Msg
-customInput radioInterval label_text =
+customInput : IntervalTiming -> String -> String -> Html Msg
+customInput radioInterval label_text error =
     case radioInterval of
         Custom -> 
             div [ class "field" ] 
@@ -112,6 +115,7 @@ customInput radioInterval label_text =
                 , div [ class "control" ]
                       [ input [ class "input", type_ "text", onInput UpdateCustomIntervalInput ] [] 
                       ]
+                , p [] [ text error ]
                 ]
         _ ->
             div [ style [("display", "none")] ] []          

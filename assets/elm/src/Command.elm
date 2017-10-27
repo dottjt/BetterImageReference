@@ -36,9 +36,8 @@ startAppFetchImages collectionList =
     httpPost
         ("http://localhost:4000/api/collections_initial_load_app")
         (Http.jsonBody (selectedCollectionsListEncoder collectionList))          
-        collectionImageListDecoder
-        FetchCollectionStartAppFail
-        FetchCollectionStartAppSuccess
-
+        imageAssocListDecoder
+        FetchImageStartAppFail
+        FetchImageStartAppSuccess
 
 

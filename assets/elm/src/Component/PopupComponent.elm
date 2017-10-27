@@ -8,87 +8,103 @@ import Msg exposing (..)
 import Model exposing (..)
 
 
-popupNavbar : Model -> Html Msg
-popupNavbar model =
+
+-- POPUP NAVBAR
+
+popupNavbar : ImageAssoc -> Html Msg
+popupNavbar imageAssoc =
     div [ class "popup__navbar"] 
         [ button [ class "draw__button", onClick (ChangeDrawStatus Draw) ] [ text "draw" ] 
         ]
 
 
-popupLeftbar : CollectionImagesList -> Html msg 
-popupLeftbar loadedCollectionImagesList =
+
+-- POPUP LEFTBAR
+
+popupLeftbar : ImageAssoc -> Html msg 
+popupLeftbar imageAssoc =
     div [ class "popup__leftbar"] 
         [ div [] 
               [ h4 [] [ text "User Comments" ] -- Image Comments
-              , div [] (List.map userComments loadedCollectionImagesList) 
+              , div [] (List.map userComments imageAssoc.image_comments) 
               ]
         , div [] 
               [ h4 [] [ text "User Scribbles" ]
-              , div [] (List.map userScribbles loadedCollectionImagesList) 
+              , div [] (List.map userScribbles imageAssoc.image_scribbles) 
               ]
         , div [] 
               [ h4 [] [ text "User Drawings" ] -- 
-              , div [] (List.map userDrawings loadedCollectionImagesList) 
+              , div [] (List.map userDrawings imageAssoc.image_drawings) 
               ]
         ]
 
 
-userComments : CollectionImages -> Html msg
-userComments image =
+userComments : ImageComment -> Html msg
+userComments imageComment =
     div [] 
         [ img [] [ text "avatar"]
-        , h4 [] [ text "username" ]
-        , p [] [ text "comment"]
+        , h4 [] [ text "I guess it would be the username?" ]
+        , p [] [ text imageComment.text ]
         ]
 
-userScribbles : CollectionImages -> Html msg
-userScribbles image =
+userScribbles : ImageScribble -> Html msg
+userScribbles imageScribble =
     div [] 
-        [ img [] [ text "image"]
-        , h4 [] [ text "username" ]
+        [ img [] [ text "" ]
+        , h4 [] [ text imageScribble.display_name ]
         ]
 
-userDrawings : CollectionImages -> Html msg
-userDrawings image =
+userDrawings : ImageDrawing -> Html msg
+userDrawings imageDrawing =
     div [] 
-        [ img [] [ text "image"]
-        , h4 [] [ text "username" ]
+        [ img [] [ text imageDrawing.image_url ]
+        , h4 [] [ text imageDrawing.display_name ]
+        , h4 [] [ text imageDrawing.description ]
+        
         ]
 
 
-popupMiddlebar : Model -> Html Msg
-popupMiddlebar model =
-      case model.popupStatus of
+
+-- POPUP MIDDLEBAR
+
+popupMiddlebar : PopupStatus -> ImageAssoc -> Html Msg
+popupMiddlebar popupStatus currentImage =
+      case popupStatus of
             Resume ->
                 div [ class "popup__middlebar"]
                     [ div [ class "image__container"]
-                        [ img [ class "image", src "" ] []
+                        [ img [ class "image", src currentImage.image_url ] []
                         ]
                     ]
             Pause ->
                 div [ class "popup__middlebar"]
                     [ div [ class "image__container image__container--pause"]
-                        [ img [ class "image", src "" ] []
+                        [ img [ class "image", src currentImage.image_url , style [("display", "none")] ] []
                         ]
                     ]
 
 
 
-
+-- POPUP BOTTOMBAR
 
 popupBottombar : Model -> Html Msg 
 popupBottombar model =
-    div [ class "popup__bottombar"] 
-        [ div [ class "skip__pause__stop__container"]
-              [ div [ class "button__row"]
-                    [ button [ class "button" ] [ text "Skip" ]
-                    , popupPauseResumeButton model.popupStatus
-                    , button [ class "button", onClick (ChangeStatus Finish) ] [ text "Stop" ]                    
-              ]
-              , div [ class "timing__bar"]
-                    [ text "this is where the timing bar goes"]
+    div [ class "popup__bottombar" ] 
+        [ div [ class "skip__pause__stop__container" ]
+              [ popupBottomButtons model
+              , popupTimingBar model
               ]
         ]
+        
+
+popupBottomButtons : Model -> Html Msg 
+popupBottomButtons model =
+    div [ class "button__row"]
+        [ button [ class "button" ] [ text "Skip" ]
+        , popupPauseResumeButton model.popupStatus
+        , button [ class "button", onClick (ChangeStatus Finish) ] [ text "Stop" ]
+        ]
+
 
 
 popupPauseResumeButton : PopupStatus -> Html Msg
@@ -99,3 +115,10 @@ popupPauseResumeButton popupStatus =
 
         Resume ->
             button [ class "button", onClick (ChangePopupStatus Pause) ] [ text "Resume" ]
+
+
+
+popupTimingBar : Model -> Html Msg
+popupTimingBar model = 
+    div [ class "timing__bar", style [("display", "none")] ]
+        [ text "timing bar" ]

@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 
 import Msg exposing (..)
 import Model exposing (..)
+import Update exposing (..)
 
 import Component.RadioComponent exposing (..)
 import Component.ReferenceSearchComponent exposing (..)
@@ -13,40 +14,39 @@ import Component.PopupComponent exposing (..)
 import Component.FinishComponent exposing (..)
 
 
+
+
 referenceComponent : Model -> Html Msg
 referenceComponent model =
-  case model.applicationStatus of
-      Start ->
-        div [ class "reference__tool__start" ]
-            [ div [ class "outer"]
-                  [ ]
-            , div [ class "inner"]
-                  [ popupNavbar model
-                  , popupLeftbar model.loadedCollectionImagesList
-                  , popupMiddlebar model
-                  , popupBottombar model
-                  ]
-            ]
+    case model.applicationStatus of
 
-      Stop -> 
+      Initial -> 
         div [ class "reference__tool__stop"]
             [ selectionReferenceComponent model
-            , h5 [] [ text "Image timing" ]
-            , radioIntervalComponent model
-            , h5 [] [ text "Display image upside down?" ]            
-            , radioUpsideDownComponent model 
+            , radioComponent model
             , submitComponent
-            ]
-
-      Finish -> 
-        div [ class "reference__tool__finish"]
-            [ displayDrawnCollections model.loadedCollectionImagesList
-            , selectionReferenceComponent model
             ]
 
       Loading ->
         div [ class "reference__tool__loading"]
             [ text "Fetching images, please wait" ]
+
+      Start ->
+        div [ class "reference__tool__start" ]
+            [ div [ class "inner" ]
+                  [ popupNavbar model.currentImage
+                  , popupLeftbar model.currentImage
+                  , popupMiddlebar model.popupStatus model.currentImage
+                  , popupBottombar model
+                  ]
+            ]
+
+      Finish -> 
+        div [ class "reference__tool__finish"]
+            [ displayDrawnCollections model.loadedImageAssocList
+            , selectionReferenceComponent model
+            ]
+
 
 
 

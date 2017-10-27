@@ -1,3 +1,26 @@
+var _user$project$Component_PopupComponent$popupTimingBar = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('timing__bar'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'display', _1: 'none'},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('timing bar'),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Component_PopupComponent$popupPauseResumeButton = function (popupStatus) {
 	var _p0 = popupStatus;
 	if (_p0.ctor === 'Pause') {
@@ -38,6 +61,55 @@ var _user$project$Component_PopupComponent$popupPauseResumeButton = function (po
 			});
 	}
 };
+var _user$project$Component_PopupComponent$popupBottomButtons = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('button__row'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('button'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Skip'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Component_PopupComponent$popupPauseResumeButton(model.popupStatus),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('button'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$Msg$ChangeStatus(_user$project$Model$Finish)),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Stop'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
 var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -57,148 +129,101 @@ var _user$project$Component_PopupComponent$popupBottombar = function (model) {
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('button__row'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('button'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Skip'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Component_PopupComponent$popupPauseResumeButton(model.popupStatus),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('button'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(
-													_user$project$Msg$ChangeStatus(_user$project$Model$Finish)),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Stop'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
+					_0: _user$project$Component_PopupComponent$popupBottomButtons(model),
 					_1: {
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('timing__bar'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('this is where the timing bar goes'),
-								_1: {ctor: '[]'}
-							}),
+						_0: _user$project$Component_PopupComponent$popupTimingBar(model),
 						_1: {ctor: '[]'}
 					}
 				}),
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Component_PopupComponent$popupMiddlebar = function (model) {
-	var _p1 = model.popupStatus;
-	if (_p1.ctor === 'Resume') {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('image__container'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$img,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('image'),
-								_1: {
+var _user$project$Component_PopupComponent$popupMiddlebar = F2(
+	function (popupStatus, currentImage) {
+		var _p1 = popupStatus;
+		if (_p1.ctor === 'Resume') {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('image__container'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$img,
+								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$src(''),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	} else {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('image__container image__container--pause'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$img,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('image'),
-								_1: {
+									_0: _elm_lang$html$Html_Attributes$class('image'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src(currentImage.image_url),
+										_1: {ctor: '[]'}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				});
+		} else {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('popup__middlebar'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('image__container image__container--pause'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$img,
+								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$src(''),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	}
-};
-var _user$project$Component_PopupComponent$userDrawings = function (image) {
+									_0: _elm_lang$html$Html_Attributes$class('image'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src(currentImage.image_url),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'display', _1: 'none'},
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				});
+		}
+	});
+var _user$project$Component_PopupComponent$userDrawings = function (imageDrawing) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -209,7 +234,7 @@ var _user$project$Component_PopupComponent$userDrawings = function (image) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('image'),
+					_0: _elm_lang$html$Html$text(imageDrawing.image_url),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -219,14 +244,25 @@ var _user$project$Component_PopupComponent$userDrawings = function (image) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('username'),
+						_0: _elm_lang$html$Html$text(imageDrawing.display_name),
 						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h4,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(imageDrawing.description),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
-var _user$project$Component_PopupComponent$userScribbles = function (image) {
+var _user$project$Component_PopupComponent$userScribbles = function (imageScribble) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -237,7 +273,7 @@ var _user$project$Component_PopupComponent$userScribbles = function (image) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('image'),
+					_0: _elm_lang$html$Html$text(''),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -247,14 +283,14 @@ var _user$project$Component_PopupComponent$userScribbles = function (image) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('username'),
+						_0: _elm_lang$html$Html$text(imageScribble.display_name),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _user$project$Component_PopupComponent$userComments = function (image) {
+var _user$project$Component_PopupComponent$userComments = function (imageComment) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -275,7 +311,7 @@ var _user$project$Component_PopupComponent$userComments = function (image) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('username'),
+						_0: _elm_lang$html$Html$text('I guess it would be the username?'),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -285,7 +321,7 @@ var _user$project$Component_PopupComponent$userComments = function (image) {
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('comment'),
+							_0: _elm_lang$html$Html$text(imageComment.text),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -293,7 +329,7 @@ var _user$project$Component_PopupComponent$userComments = function (image) {
 			}
 		});
 };
-var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollectionImagesList) {
+var _user$project$Component_PopupComponent$popupLeftbar = function (imageAssoc) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -321,7 +357,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 						_0: A2(
 							_elm_lang$html$Html$div,
 							{ctor: '[]'},
-							A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userComments, loadedCollectionImagesList)),
+							A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userComments, imageAssoc.image_comments)),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -345,7 +381,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 							_0: A2(
 								_elm_lang$html$Html$div,
 								{ctor: '[]'},
-								A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userScribbles, loadedCollectionImagesList)),
+								A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userScribbles, imageAssoc.image_scribbles)),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -369,7 +405,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 								_0: A2(
 									_elm_lang$html$Html$div,
 									{ctor: '[]'},
-									A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userDrawings, loadedCollectionImagesList)),
+									A2(_elm_lang$core$List$map, _user$project$Component_PopupComponent$userDrawings, imageAssoc.image_drawings)),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -378,7 +414,7 @@ var _user$project$Component_PopupComponent$popupLeftbar = function (loadedCollec
 			}
 		});
 };
-var _user$project$Component_PopupComponent$popupNavbar = function (model) {
+var _user$project$Component_PopupComponent$popupNavbar = function (imageAssoc) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{

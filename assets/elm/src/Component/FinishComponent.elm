@@ -11,31 +11,25 @@ import Component.SearchComponent exposing (..)
 import Component.RadioComponent exposing (..)
 
 
-displayDrawnCollections : CollectionImagesList -> Html Msg 
-displayDrawnCollections loadedCollectionImagesList =
+displayDrawnCollections : ImageAssocList -> Html Msg 
+displayDrawnCollections loadedImageAssocList =
     div [ class "display__drawn__collections" ]
         [ h1 [] [ text "Upload and save your drawings!" ]
-        , div [] ( List.map displayDrawnImages loadedCollectionImagesList )        
+        , div [] ( List.map displayImageAssoc loadedImageAssocList )        
         ]
 
-displayDrawnImages : CollectionImages -> Html Msg
-displayDrawnImages collectionImages =
+displayImageAssoc : ImageAssoc -> Html Msg
+displayImageAssoc imageAssoc =
     div []
-        ( List.map drawnImages collectionImages.images )
-        
+        ( List.map displayDrawnImages imageAssoc.image_drawings )
 
-drawnImages : Image -> Html Msg 
-drawnImages image = 
+
+displayDrawnImages : ImageDrawing -> Html Msg
+displayDrawnImages imageAssoc =
     div [] 
         [ div []
-              [ img [ src image.image_url] []
+              [ img [ src imageAssoc.name ] []
               ]
         , div [] 
               [ Html.form [] [] ]
         ]
-
-
-relevantUserImages : Model -> Html Msg
-relevantUserImages model =
-    div []
-        []
