@@ -24,6 +24,24 @@ type CollectionListType
 
 -- PRODUCT TYPES - IMAGE
 
+type alias ImageAssocList =
+    List ImageAssoc
+
+type alias ImageList =
+    List Image 
+
+type alias ImageAssoc =
+    { name : String
+    , image_url : String
+    , id : String
+    , display_name : String
+    , times_drawn : Int
+    , image_comments : ImageCommentList
+    , image_scribbles : ImageScribbleList
+    , image_tags : ImageTagList
+    , image_drawings : ImageDrawingList
+    }
+
 type alias Image =
     { name : String
     , image_url : String
@@ -32,8 +50,56 @@ type alias Image =
     , times_drawn : Int
     }
 
-type alias ImageList =
-    List Image 
+-- PRODUCT TYPES - IMAGE COMMENT
+
+type alias ImageCommentList = 
+    List ImageComment
+
+type alias ImageComment =
+    { id : String
+    , text : String
+    }
+
+
+-- PRODUCT TYPES - IMAGE SCRIBBLE
+
+type alias ImageScribbleList = 
+    List ImageScribble
+
+type alias ImageScribble =
+    { id : String
+    , name : String
+    , display_name : String
+    , description : String
+    , data : String
+    }
+
+
+-- PRODUCT TYPES - IMAGE TAG
+
+type alias ImageTagList = 
+    List ImageTag
+
+type alias ImageTag =
+    { id : String
+    , name : String
+    , display_name : String
+    }
+
+
+-- PRODUCT TYPES - IMAGE DRAWING
+
+type alias ImageDrawingList = 
+    List ImageDrawing
+
+type alias ImageDrawing =
+    { id : String
+    , name : String
+    , display_name : String
+    , description : String
+    , image_url : String
+    }
+
 
 
 -- PRODUCT TYPES - IMAGE & COLLECTION
@@ -153,7 +219,7 @@ collectionDecoder =
         |> Pipeline.required "display_name" Decode.string
 
 
--- Image Decoder
+-- IMAGE DECODER 
 
 imageListDecoder : Decode.Decoder ImageList
 imageListDecoder =
@@ -168,6 +234,100 @@ imageDecoder =
         |> Pipeline.required "id" Decode.string        
         |> Pipeline.required "display_name" Decode.string
         |> Pipeline.required "times_drawn" Decode.int
+        -- |> Pipeline.required "photo" Decode.string
+
+
+
+-- IMAGE ASSOC DECODER 
+
+imageAssocListDecoder : Decode.Decoder ImageList
+imageAssocListDecoder =
+    Decode.list imageDecoder
+
+
+imageAssocDecoder : Decode.Decoder ImageAssoc
+imageAssocDecoder =
+    Pipeline.decode ImageAssoc
+        |> Pipeline.required "name" Decode.string        
+        |> Pipeline.required "image_url" Decode.string
+        |> Pipeline.required "id" Decode.string        
+        |> Pipeline.required "display_name" Decode.string
+        |> Pipeline.required "times_drawn" Decode.int
+        |> Pipeline.required "image_comments" imageCommentListDecoder
+        |> Pipeline.required "image_scribbles" imageScribbleListDecoder
+        |> Pipeline.required "image_tags" imageTagListDecoder
+        |> Pipeline.required "image_drawings" imageDrawingListDecoder
+
+
+
+-- IMAGE ASSOC DECODER -- IMAGE COMMENTS
+
+imageCommentListDecoder : Decode.Decoder ImageCommentList
+imageCommentListDecoder =
+    Decode.list imageCommentDecoder
+
+imageCommentDecoder : Decode.Decoder ImageComment  
+imageCommentDecoder =
+    Pipeline.decode ImageComment
+        |> Pipeline.required "id" Decode.string            
+        |> Pipeline.required "text" Decode.string
+        -- |> Pipeline.required "user_id" Decode.string        
+        -- |> Pipeline.required "image_id" Decode.string        
+
+
+
+-- IMAGE ASSOC DECODER -- IMAGE COMMENT
+
+imageScribbleListDecoder : Decode.Decoder ImageScribbleList
+imageScribbleListDecoder =
+    Decode.list imageScribbleDecoder
+
+imageScribbleDecoder : Decode.Decoder ImageScribble
+imageScribbleDecoder =
+    Pipeline.decode ImageScribble
+        |> Pipeline.required "id" Decode.string        
+        |> Pipeline.required "name" Decode.string        
+        |> Pipeline.required "display_name" Decode.string
+        |> Pipeline.required "description" Decode.string
+        |> Pipeline.required "data" Decode.string
+        -- |> Pipeline.required "user_id" Decode.string
+        -- |> Pipeline.required "image_id" Decode.string
+
+
+
+-- IMAGE ASSOC DECODER -- IMAGE TAG
+
+imageTagListDecoder : Decode.Decoder ImageTagList
+imageTagListDecoder =
+    Decode.list imageTagDecoder
+
+
+imageTagDecoder : Decode.Decoder ImageTag
+imageTagDecoder =
+    Pipeline.decode ImageTag
+        |> Pipeline.required "id" Decode.string        
+        |> Pipeline.required "name" Decode.string        
+        |> Pipeline.required "display_name" Decode.string
+
+
+-- IMAGE ASSOC DECODER -- IMAGE DRAWING
+
+imageDrawingListDecoder : Decode.Decoder ImageDrawingList
+imageDrawingListDecoder =
+    Decode.list imageDrawingDecoder
+
+imageDrawingDecoder : Decode.Decoder ImageDrawing
+imageDrawingDecoder =
+    Pipeline.decode ImageDrawing
+        |> Pipeline.required "id" Decode.string        
+        |> Pipeline.required "name" Decode.string        
+        |> Pipeline.required "display_name" Decode.string
+        |> Pipeline.required "description" Decode.string
+        |> Pipeline.required "image_url" Decode.string
+        -- |> Pipeline.required "image_id" Decode.string
+        -- |> Pipeline.required "user_id" Decode.string
+
+
 
 
 -- Collection Image Decoder

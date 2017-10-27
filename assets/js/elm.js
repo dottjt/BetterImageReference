@@ -9258,6 +9258,10 @@ var _user$project$Model$collectionListDecoder = A2(
 	_elm_lang$core$Json_Decode$field,
 	'data',
 	_elm_lang$core$Json_Decode$list(_user$project$Model$collectionDecoder));
+var _user$project$Model$ImageAssoc = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {name: a, image_url: b, id: c, display_name: d, times_drawn: e, image_comments: f, image_scribbles: g, image_tags: h, image_drawings: i};
+	});
 var _user$project$Model$Image = F5(
 	function (a, b, c, d, e) {
 		return {name: a, image_url: b, id: c, display_name: d, times_drawn: e};
@@ -9284,6 +9288,128 @@ var _user$project$Model$imageDecoder = A3(
 					_elm_lang$core$Json_Decode$string,
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$Image))))));
 var _user$project$Model$imageListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageDecoder);
+var _user$project$Model$imageAssocListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageDecoder);
+var _user$project$Model$ImageComment = F2(
+	function (a, b) {
+		return {id: a, text: b};
+	});
+var _user$project$Model$imageCommentDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'text',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'id',
+		_elm_lang$core$Json_Decode$string,
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$ImageComment)));
+var _user$project$Model$imageCommentListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageCommentDecoder);
+var _user$project$Model$ImageScribble = F5(
+	function (a, b, c, d, e) {
+		return {id: a, name: b, display_name: c, description: d, data: e};
+	});
+var _user$project$Model$imageScribbleDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'data',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'description',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'display_name',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'id',
+					_elm_lang$core$Json_Decode$string,
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$ImageScribble))))));
+var _user$project$Model$imageScribbleListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageScribbleDecoder);
+var _user$project$Model$ImageTag = F3(
+	function (a, b, c) {
+		return {id: a, name: b, display_name: c};
+	});
+var _user$project$Model$imageTagDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'display_name',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'name',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'id',
+			_elm_lang$core$Json_Decode$string,
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$ImageTag))));
+var _user$project$Model$imageTagListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageTagDecoder);
+var _user$project$Model$ImageDrawing = F5(
+	function (a, b, c, d, e) {
+		return {id: a, name: b, display_name: c, description: d, image_url: e};
+	});
+var _user$project$Model$imageDrawingDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'image_url',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'description',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'display_name',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'name',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'id',
+					_elm_lang$core$Json_Decode$string,
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$ImageDrawing))))));
+var _user$project$Model$imageDrawingListDecoder = _elm_lang$core$Json_Decode$list(_user$project$Model$imageDrawingDecoder);
+var _user$project$Model$imageAssocDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'image_drawings',
+	_user$project$Model$imageDrawingListDecoder,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'image_tags',
+		_user$project$Model$imageTagListDecoder,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'image_scribbles',
+			_user$project$Model$imageScribbleListDecoder,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'image_comments',
+				_user$project$Model$imageCommentListDecoder,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'times_drawn',
+					_elm_lang$core$Json_Decode$int,
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'display_name',
+						_elm_lang$core$Json_Decode$string,
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'id',
+							_elm_lang$core$Json_Decode$string,
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'image_url',
+								_elm_lang$core$Json_Decode$string,
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'name',
+									_elm_lang$core$Json_Decode$string,
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Model$ImageAssoc))))))))));
 var _user$project$Model$CollectionImages = F6(
 	function (a, b, c, d, e, f) {
 		return {user_id: a, name: b, id: c, featured_image: d, display_name: e, images: f};

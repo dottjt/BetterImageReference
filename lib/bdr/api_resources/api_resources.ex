@@ -282,7 +282,7 @@ defmodule Bdr.ApiResources do
   end
 
   def list_images_assoc do
-    Repo.all(Image) |> Repo.preload([:image_comments, :image_scribbles, :image_tags])
+    Repo.all(Image) |> Repo.preload([:image_comments, :image_scribbles, :image_tags, :image_drawings])
   end
 
 
@@ -291,9 +291,10 @@ defmodule Bdr.ApiResources do
   #images join with collection details, user details.  
   def list_images_load_app(collection_ids) do 
 
-    images = collection_ids
-                |> Enum.map(fn(x) -> get_collection_assoc_images!(x["id"]).images end) #return list of images
-                |> Enum.map(&(IO.inspect &1))
+    IO.inspect collection_ids
+
+    [images] = collection_ids
+                |> Enum.map(fn(x) -> get_collection_assoc_images!(x["id"]).images |> Repo.preload([:image_comments, :image_scribbles, :image_tags, :image_drawings]) end) #return list of images
                     
     IO.inspect images
     # I have a list of collection ids
@@ -328,9 +329,9 @@ defmodule Bdr.ApiResources do
 
   """
   def get_image!(id), do: Repo.get!(Image, id)
-  def get_image_assoc!(id), do: Repo.get!(Image, id) |> Repo.preload([:image_comments, :image_scribbles, :image_tags])  
+  def get_image_assoc!(id), do: Repo.get!(Image, id) |> Repo.preload([:image_comments, :image_scribbles, :image_tags, :image_drawings])  
   def get_image_name!(name), do: Repo.get_by!(Image, name: name)
-  def get_image_name_assoc!(name), do: Repo.get_by!(Image, name: name) |> Repo.preload([:image_comments, :image_scribbles, :image_tags]) 
+  def get_image_name_assoc!(name), do: Repo.get_by!(Image, name: name) |> Repo.preload([:image_comments, :image_scribbles, :image_tags, :image_drawings]) 
   
   
 

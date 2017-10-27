@@ -79,7 +79,7 @@ defmodule BdrWeb.CollectionController do
 
   def collectionSearchQuery(conn, %{"search_input" => search_input}) do # query search string
     collections = ApiResources.query_search_collection_list(search_input)                   
-    render(conn, "index.json", collections: collections)        
+    render(conn, "index.json", collections: collections)
   end
 
 
