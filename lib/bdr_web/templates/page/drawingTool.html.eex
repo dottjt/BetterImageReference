@@ -1,5 +1,14 @@
 <div class="container">
-    <h1>Timed Drawing Practice Tool</h1>
-    <h2>Type what you want to draw!</h2>
-    <div id="elm-app-one"></div>
+        <div class="columns is-tablet">
+            <div class="column is-3 is-offset-1">
+                <h1>Timed Drawing Practice Tool</h1>
+                    <a href="<%= page_path @conn, :indexPage %>">View all images</a>
+            </div>
+
+        <div class="column is-8">
+            <h1>Timed Drawing Practice Tool</h1>
+            <h2>Type what you want to draw!</h2>
+            <div id="elm-app-one"></div>
+        </div>
+
 </div>

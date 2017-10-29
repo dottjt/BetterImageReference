@@ -1,8 +1,12 @@
 <div class="container collectionsIndex">
 
-    <h1>Collections</h1>
+    <div class="columns is-tablet">
+        <div class="column is-3 is-offset-1">
+            <h1>Collections</h1>
+                <a href="<%= image_path @conn, :indexPage, @collection.name %>">View all images</a>
+        </div>
 
-        <div class="columns is-multiline">
+        <div class="column is-8">
             <%= Enum.map(@collections, fn(collection) -> %>
                 <div class="column is-child is-4">
                     <a href="<%= collection_path @conn, :showPage, collection.name %>"><img class="search__image" src="/images/phoenix.png"></a>
@@ -17,8 +21,9 @@
                     </div>
                 </div>
             <% end) %>
-        </div>        
 
+        </div>
+    </div>
 </div>
 
 

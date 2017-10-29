@@ -79,18 +79,6 @@ update msg model =
             { model | imageStatus = status } ! []
 
 
-
-        -- TIME UPDATES
-
-        Tick newTime ->
-            -- okay, you need to create a function that grabs the current imageList and then sends it the next one. 
-            if model.imageTime == 0 then 
-                { model | imageTime = (model.imageTime - 1) } ! []            
-            else 
-                calculateIntervalTiming model
-
-
-
         -- INITIAL FETCH
 
         InitialFetchQuerySuccess response ->
@@ -110,20 +98,48 @@ update msg model =
             { model | error = toString error } ! []
 
 
-
         -- START APPLICATION IMAGE FETCH
 
         FetchImageStartAppSuccess response ->
-            { model | loadedImageAssocList = response } ! []        
-
+            { model | loadedImageAssocList = response, currentImage = (List.head response) } ! []        
+                                                        -- how to deal with maybe values. 
         FetchImageStartAppFail error ->
             { model | error = toString error } ! []
+
+        -- TIME UPDATES
+
+        Tick newTime ->
+            if model.imageTime == 0 then  
+                { model | imageTime = (model.imageTime - 1) } ! []
+            else 
+                  model ! [loadCurrentImageResponse model]
+                
+
+     
+            
+loadCurrentImageResponse : Model -> (Model, Cmd Msg)
+loadCurrentImageResponse model =
+    let 
+        imageAssocList = model.loadedImageAssocList
+        currentImage = model.currentImage
+        imageTime = model.imageTime
+    in
+        if imageAssocList == [] then
+            calculateIntervalTiming model
+        else if imageTime /= 0 then -- subtract function.
+            { model | currentImage = (List.head imageAssocList) } ! []
+        else
+            { model | currentImage = loadCurrentImageResponse (List.tail model) } ! []       
+
+
+currentImageRecursive : ImageAssocList -> ImageAssoc 
+currentImageRecursive imageAssocList = 
 
 
 
 
 calculateIntervalTiming : Model -> (Model, Cmd Msg)
-calculateIntervalTiming model = 
+calculateIntervalTiming model =
     let 
         imageTime = model.imageTime
         customTime = model.radioIntervalCustomInput 

@@ -11063,11 +11063,11 @@ var _user$project$Update$update = F2(
 						{imageStatus: _p1._0}),
 					{ctor: '[]'});
 			case 'Tick':
-				return _elm_lang$core$Native_Utils.eq(model.imageTime, 0) ? A2(
+				return (!_elm_lang$core$Native_Utils.eq(model.imageTime, 0)) ? A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{imageTime: model.imageTime - 1}),
+						{imageTime: model.imageTime}),
 					{ctor: '[]'}) : _user$project$Update$calculateIntervalTiming(model);
 			case 'InitialFetchQuerySuccess':
 				return A2(

@@ -51,4 +51,26 @@ defmodule Bdr.ApiResources.Image do
     |> validate_required([:name, :display_name, :description, :image_url, :times_drawn, :photo])
   end
   
+  
+  # def put_name(changeset) do
+  #   case changeset do
+  #     %Ecto.Changeset{
+  #       valid?: true,
+  #       changes: %{upload: %Plug.Upload{content_type: "image/" <> _, filename: name}}
+  #     } ->
+  #       put_change(changeset, :name, name)
+  #     _ ->
+  #       changeset
+  #   end
+  # end
+
+  # def store(%Plug.Upload{} = upload, image) do
+  #   Bdr.Photo.store({upload, image})
+  # end
+
+  # def url(image, version) do
+  #   Bdr.Photo.url({image.name, image}, version)
+  # end
+
+
 end
